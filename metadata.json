@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Funnel-v0.2",
+  "description": "An AI-powered art curation platform turning empty walls into gallery masterpieces.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
