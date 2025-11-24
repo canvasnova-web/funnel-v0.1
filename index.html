@@ -1,77 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
-    <title>CanvasNova | The Future of Wall Art</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              serif: ['"Cormorant Garamond"', 'serif'],
-              sans: ['"Manrope"', 'sans-serif'],
-            },
-            colors: {
-              'gallery-black': '#121212',
-              'gallery-white': '#FAFAFA',
-              'int-orange': '#FF4F00',
-              'int-orange-hover': '#CC3F00',
-              'stone-gray': '#F2F2F2',
-            },
-            boxShadow: {
-              'ambient': '0 20px 40px -10px rgba(0, 0, 0, 0.05), 0 0 20px -5px rgba(0, 0, 0, 0.02)',
-              'sharp': '8px 8px 0px 0px rgba(0,0,0,1)',
-            },
-            backgroundImage: {
-              'grain': "url('https://grainy-gradients.vercel.app/noise.svg')",
-            }
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <title>CanvasNova | The Future of Wall Art</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Manrope:wght@200;300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            sans: ['"Manrope"', 'sans-serif'],
+          },
+          colors: {
+            'gallery-black': '#121212',
+            'gallery-white': '#FAFAFA',
+            'int-orange': '#FF4F00',
+            'int-orange-hover': '#CC3F00',
+            'stone-gray': '#F2F2F2',
+          },
+          boxShadow: {
+            'ambient': '0 20px 40px -10px rgba(0, 0, 0, 0.05), 0 0 20px -5px rgba(0, 0, 0, 0.02)',
+            'sharp': '8px 8px 0px 0px rgba(0,0,0,1)',
+          },
+          backgroundImage: {
+            'grain': "url('https://grainy-gradients.vercel.app/noise.svg')",
           }
         }
       }
-    </script>
-    <style>
-      body {
-        background-color: #FAFAFA;
-        color: #121212;
-        overflow-x: hidden;
-      }
-      /* Custom scrollbar for webkit */
-      ::-webkit-scrollbar {
-        width: 6px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #FAFAFA;
-      }
-      ::-webkit-scrollbar-thumb {
-        background: #FF4F00;
-        border-radius: 3px;
-      }
-      .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
-    </style>
-  <script type="importmap">
-{
-  "imports": {
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.23.24",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
-  }
-}
-</script>
-</head>
-  <body>
-    <div id="root"></div>
-  </body>
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAFAFA;
+      color: #121212;
+      overflow-x: hidden;
+    }
+
+    /* Custom scrollbar for webkit */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #FAFAFA;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #FF4F00;
+      border-radius: 3px;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+
 </html>
