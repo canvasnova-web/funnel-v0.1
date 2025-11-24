@@ -49,14 +49,14 @@ const CONTENT = {
       lang_en: "EN"
     },
     hero: {
-      badge: "CanvasNova",
+      badge: "canvasnova",
       headline_1: "Die Zukunft der Kunst",
       headline_2: "gehört Ihnen.",
       sub_1: "Erschaffen Sie",
       sub_2: "Meisterwerke.",
-      cta: "Raum Visualisieren",
-      before: "Vorher: Realität",
-      after: "Nachher: CanvasNova"
+      cta: "Ihren Raum Analysieren",
+      before: "Vorher:",
+      after: "Nachher: canvasnova"
     },
     explainer: [
       { title: "Der Co-Pilot", text: "Kein Stöbern in generischen Postern. Erschaffen Sie exakt das, was Sie fühlen. Einzigartig, jedes Mal." },
@@ -65,7 +65,7 @@ const CONTENT = {
     ],
     comparison: {
       badge: "Marktpositionierung",
-      headline: "Warum CanvasNova?",
+      headline: "Warum canvasnova?",
       features: {
         uniqueness: "Einzigartigkeit",
         material: "Material",
@@ -73,7 +73,7 @@ const CONTENT = {
         price: "Preismodell"
       },
       col1: { title: "Massenmarkt", sub: "Poster & Drucke", val1: "1 von 1.000.000", val2: "Posterpapier", val3: "Sofort", val4: "Wertlos", price: "€50", impact: "Geringer Effekt" },
-      col2: { title: "CanvasNova", sub: "Smart Luxury", badge: "Empfehlung", val1: "1 von 1 (Unikat)", val2: "Museums-Acrylglas", val3: "Kuratiert (5 Tage)", val4: "Erschwinglicher Luxus", price: "€140", impact: "Durchschn. Preis / Unikat", cta: "Kuratieren" },
+      col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "1 von 1 (Unikat)", val2: "Museums-Acrylglas", val3: "Kuratiert (5 Tage)", val4: "Erschwinglicher Luxus", price: "€140", impact: "Durchschn. Preis / Unikat", cta: "Kuratieren" },
       col3: { title: "Galerie", sub: "Traditionell", val1: "1 von 1 (Original)", val2: "Leinwand / Öl", val3: "Langwierig (3 Mo+)", val4: "Investition", price: "€3.000+", impact: "Hohe Hürde" }
     },
     scanner: {
@@ -103,7 +103,7 @@ const CONTENT = {
     },
     timeline: {
       badge: "Der Manufaktur-Prozess",
-      headline: "Vom Datenpunkt zum Objekt",
+      headline: "Von der Idee zum Kunst-Objekt",
       steps: [
         { title: "Vision & Stil", desc: "Definieren Sie Ihren Geschmack. Wählen Sie eine Stilrichtung oder beschreiben Sie Ihren Wunsch. Keine Vorkenntnisse nötig." },
         { title: "KI-Kreation", desc: "Unsere Engine generiert 3 einzigartige, hochauflösende Kunstwerke. Optimiert für großformatigen Druck." },
@@ -115,21 +115,21 @@ const CONTENT = {
     },
     offer: {
       badge: "Angebot endet in:",
-      title: "Gründungsmitglied Pass",
-      sub: "Zugang Limitiert",
+      title: "Launch Angebot",
+      sub: "Zeitlich Limitiert",
       item1: "3x Einzigartige KI-Designs",
-      item2: "Wand-Analyse (Lidar)",
+      item2: "Wand-Analyse",
       item3: "Druck-Guthaben",
       free: "GRATIS",
       total: "Gesamt",
       vat: "INKL. MWST",
-      cta_idle: "Creator Pass Sichern",
+      cta_idle: "Launch Angebot Sichern",
       cta_loading: "Aktiviere Zugang...",
-      code_text: "Code {code} automatisch angewendet"
+      code_text: "Code {code} wird automatisch angewendet"
     },
     footer: {
       desc: "Die Brücke zwischen künstlicher Intelligenz und menschlicher Emotion durch das Medium des Innenraums.",
-      rights: "© 2024 CanvasNova Inc. Alle Rechte vorbehalten."
+      rights: "2025 canvasnova.com by Berberich & Hühn GbR"
     }
   },
   en: {
@@ -139,14 +139,14 @@ const CONTENT = {
       lang_en: "EN"
     },
     hero: {
-      badge: "CanvasNova",
+      badge: "canvasnova",
       headline_1: "The Future of Fine Art",
       headline_2: "is Yours to Command.",
       sub_1: "Create",
       sub_2: "Masterpieces.",
       cta: "Analyze My Room",
       before: "Before: Reality",
-      after: "After: CanvasNova"
+      after: "After: canvasnova"
     },
     explainer: [
       { title: "The Co-Pilot", text: "No browsing through thousands of generic posters. Create exactly what you want. Unique, every time." },
@@ -155,7 +155,7 @@ const CONTENT = {
     ],
     comparison: {
       badge: "Market Positioning",
-      headline: "Why CanvasNova?",
+      headline: "Why canvasnova?",
       features: {
         uniqueness: "Uniqueness",
         material: "Material",
@@ -163,7 +163,7 @@ const CONTENT = {
         price: "Price Model"
       },
       col1: { title: "Mass Market", sub: "Posters & Prints", val1: "1 of 1,000,000", val2: "Poster Paper", val3: "Instant", val4: "Depreciating", price: "€50", impact: "Low Impact" },
-      col2: { title: "CanvasNova", sub: "Smart Luxury", badge: "Recommended", val1: "1 of 1 (Original)", val2: "Museum-Grade (WhiteWall)", val3: "Curated (5 Days)", val4: "Accessible Luxury", price: "€140", impact: "Avg. Price / Unique Piece", cta: "Start Curating" },
+      col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Recommended", val1: "1 of 1 (Original)", val2: "Museum-Grade (WhiteWall)", val3: "Curated (5 Days)", val4: "Accessible Luxury", price: "€140", impact: "Avg. Price / Unique Piece", cta: "Start Curating" },
       col3: { title: "Traditional Gallery", sub: "Traditional", val1: "1 of 1 (Original)", val2: "Canvas / Oil", val3: "Negotiated (3 Mo+)", val4: "Investment Only", price: "€3,000+", impact: "High Barrier" }
     },
     scanner: {
@@ -219,7 +219,7 @@ const CONTENT = {
     },
     footer: {
       desc: "Bridging the gap between artificial intelligence and human emotion through the medium of interior space.",
-      rights: "© 2024 CanvasNova Inc. All rights reserved."
+      rights: "© 2024 canvasnova Inc. All rights reserved."
     }
   }
 };
@@ -369,9 +369,9 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
         >
           <div className="absolute inset-0 bg-black">
             <img
-              src="https://images.unsplash.com/photo-1541963463532-d68292c34b19?q=80&w=2560&auto=format&fit=crop"
+              src="/images/hero-art.jpg"
               alt="Artistic Room"
-              className="w-full h-full object-cover scale-110 saturate-[1.25] contrast-[1.15]"
+              className="w-full h-full object-cover saturate-[1.25] contrast-[1.15]"
             />
             <div className="absolute bottom-8 right-8 bg-black/60 backdrop-blur-xl text-white px-6 py-2.5 rounded-full font-mono text-xs tracking-widest uppercase border border-white/10 shadow-lg drop-shadow-md">
               {t.after}
@@ -383,7 +383,7 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
             style={{ width: `${sliderPosition}%` }}
           >
             <img
-              src="https://images.unsplash.com/photo-1595846519845-68e298c2edd8?q=80&w=2560&auto=format&fit=crop"
+              src="/images/hero-empty.jpg"
               alt="Empty Room"
               className="w-full h-full object-cover max-w-none grayscale brightness-[0.9] contrast-[1.1]"
               style={{ width: containerRef.current?.offsetWidth || '100vw' }}
@@ -560,7 +560,7 @@ const ComparisonSection = ({ lang }: { lang: Lang }) => {
               </div>
 
               <div className="mb-10 text-center">
-                <h3 className="font-serif text-4xl text-gallery-black mb-2 tracking-tight font-semibold">CanvasNova</h3>
+                <h3 className="font-serif text-4xl text-gallery-black mb-2 tracking-tight font-semibold">canvasnova</h3>
                 <div className="h-0.5 w-8 bg-int-orange mx-auto opacity-80" />
               </div>
 
@@ -627,6 +627,7 @@ const Scanner = ({ id, lang }: { id: string, lang: Lang }) => {
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [rationale, setRationale] = useState<{ reason: string, ratio: string } | null>(null);
   const [terminalLog, setTerminalLog] = useState<string[]>([]);
+  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const intervalRef = useRef<number | null>(null);
@@ -709,6 +710,7 @@ const Scanner = ({ id, lang }: { id: string, lang: Lang }) => {
       const reader = new FileReader();
       reader.onload = (event) => {
         if (event.target?.result) {
+          setPreviewImage(event.target.result as string);
           runSimulation();
         }
       };
@@ -783,29 +785,58 @@ const Scanner = ({ id, lang }: { id: string, lang: Lang }) => {
             {state === 'scanning' && (
               <motion.div
                 key="scanning"
-                className="absolute inset-0 bg-neutral-900 relative flex flex-col items-center justify-center"
+                className="absolute inset-0 bg-white overflow-hidden"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="relative">
-                  <div className="w-24 h-24 rounded-full border-2 border-white/10" />
-                  <div className="absolute inset-0 w-24 h-24 rounded-full border-2 border-t-white animate-spin" />
-                </div>
-                <div className="h-20 flex flex-col items-center justify-center mt-8">
-                  <AnimatePresence mode="wait">
-                    {terminalLog.slice(-1).map((log, i) => (
-                      <motion.div
-                        key={`${log}-${i}`}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="font-mono text-sm text-white/80 tracking-wide"
-                      >
-                        &gt; {log}
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
+                {/* Background Image with Elegant Blur */}
+                {previewImage && (
+                  <div className="absolute inset-0 z-0">
+                    <img src={previewImage} alt="Scanning" className="w-full h-full object-cover opacity-20 blur-xl scale-110" />
+                    <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px]" />
+                  </div>
+                )}
+
+                {/* Soft Scanning Bar */}
+                <motion.div
+                  className="absolute left-0 right-0 h-32 bg-gradient-to-b from-transparent via-int-orange/10 to-transparent z-10"
+                  animate={{ top: ['-20%', '120%'] }}
+                  transition={{ duration: 3, ease: "easeInOut", repeat: Infinity }}
+                />
+
+                {/* Center Content */}
+                <div className="absolute inset-0 z-20 flex flex-col items-center justify-center">
+                  {/* Minimalist Loader */}
+                  <div className="relative mb-12">
+                    <div className="w-24 h-24 rounded-full border border-gray-100" />
+                    <motion.div
+                      className="absolute inset-0 w-24 h-24 rounded-full border-t border-int-orange"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1.5, ease: "linear", repeat: Infinity }}
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <Scan className="w-6 h-6 text-int-orange/80" />
+                    </div>
+                  </div>
+
+                  {/* Elegant Text Logs */}
+                  <div className="h-12 flex items-center justify-center">
+                    <AnimatePresence mode="wait">
+                      {terminalLog.slice(-1).map((log, i) => (
+                        <motion.div
+                          key={`${log}-${i}`}
+                          initial={{ opacity: 0, y: 10, filter: 'blur(4px)' }}
+                          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                          exit={{ opacity: 0, y: -10, filter: 'blur(4px)' }}
+                          transition={{ duration: 0.5 }}
+                          className="font-serif text-xl text-gallery-black tracking-tight"
+                        >
+                          {log}
+                        </motion.div>
+                      ))}
+                    </AnimatePresence>
+                  </div>
                 </div>
               </motion.div>
             )}
@@ -998,12 +1029,12 @@ const Timeline = ({ lang }: { lang: Lang }) => {
     ...step,
     icon: icons[i],
     image: [
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1507643179173-61b066058d5b?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1586075010923-2dd45eeed875?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1562654501-a0ccc0fc3fb1?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1566576912321-158fa7599045?q=80&w=800&auto=format&fit=crop"
+      "/images/step1.png",
+      "/images/step2.jpg",
+      "/images/step3.jpg",
+      "/images/step4.jpg",
+      "/images/step5.jpg",
+      "/images/step6.jpg"
     ][i]
   }));
 
@@ -1089,7 +1120,7 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
       setStatus('redirecting');
       // Actual redirect
       setTimeout(() => {
-        window.location.href = "https://app.canvasnova.com/create?promo=ART-LAUNCH";
+        window.location.href = "https://canvasnova.com/create?promo=christmas";
       }, 800);
     }, 1500);
 
@@ -1280,9 +1311,10 @@ const App = () => {
       {/* Header */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-white/80 backdrop-blur-md border-b border-gray-100' : 'py-8 bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-          <div className="text-2xl font-serif font-bold tracking-tighter flex items-center gap-2">
-            <span className="w-2 h-2 bg-int-orange rounded-full" />
-            CanvasNova.
+          <div className="flex items-center">
+            <a href="https://canvasnova.com">
+              <img src="/logo.png" alt="canvasnova" className="h-8 w-auto" />
+            </a>
           </div>
 
           <div className="flex items-center gap-6">
@@ -1322,13 +1354,25 @@ const App = () => {
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 text-center border-t border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col items-center gap-6">
-          <h4 className="font-serif text-2xl">CanvasNova</h4>
+          <h4 className="font-serif text-2xl">canvasnova</h4>
           <p className="text-gray-500 text-sm max-w-sm">
             {CONTENT[lang].footer.desc}
           </p>
           <div className="flex gap-4">
-            {['Instagram', 'Twitter', 'LinkedIn'].map(social => (
-              <a key={social} href="#" className="text-xs text-gray-400 hover:text-white uppercase tracking-widest transition-colors">{social}</a>
+            {[
+              { name: 'Instagram', url: 'https://www.instagram.com/canvasnova_com/' },
+              { name: 'Tik-Tok', url: 'https://www.tiktok.com/@canvasnova.com' },
+              { name: 'Impressum', url: 'https://www.canvasnova.com/imprint' }
+            ].map(social => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gray-400 hover:text-white uppercase tracking-widest transition-colors"
+              >
+                {social.name}
+              </a>
             ))}
           </div>
           <p className="text-gray-700 text-xs mt-8">{CONTENT[lang].footer.rights}</p>
