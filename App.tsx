@@ -72,9 +72,9 @@ const CONTENT = {
         acquisition: "Erwerb",
         price: "Preismodell"
       },
-      col1: { title: "Massenmarkt", sub: "Poster & Drucke", val1: "1 von 1.000.000", val2: "Posterpapier", val3: "Sofort", val4: "Wertlos", price: "€50", impact: "Geringer Effekt" },
-      col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "1 von 1 (Unikat)", val2: "Museums-Acrylglas", val3: "Kuratiert (5 Tage)", val4: "Erschwinglicher Luxus", price: "€140", impact: "Durchschn. Preis / Unikat", cta: "Kuratieren" },
-      col3: { title: "Galerie", sub: "Traditionell", val1: "1 von 1 (Original)", val2: "Leinwand / Öl", val3: "Langwierig (3 Mo+)", val4: "Investition", price: "€3.000+", impact: "Hohe Hürde" }
+      col1: { title: "Massenmarkt", sub: "Poster & Drucke", val1: "1 von 1.000.000", val2: "Posterpapier", val3: "Print on Demand", val4: "Wertmindernd", price: "€50", impact: "Geringer Effekt" },
+      col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "1 von 1 (Unikat)", val2: "Galerie-Material", val3: "Kuratiert (5 Tage)", val4: "Erschwinglicher Luxus", price: "€140", impact: "Durchschn. Preis / Unikat", cta: "Kuratieren" },
+      col3: { title: "Galerie", sub: "Traditionell", val1: "1 von 1 (Original)", val2: "Leinwand / Öl", val3: "Langwierig", val4: "Investition", price: "€3.000+", impact: "Hohe Hürde" }
     },
     scanner: {
       badge: "Sofort-Analyse • 100% Kostenlos",
@@ -115,7 +115,7 @@ const CONTENT = {
     },
     offer: {
       badge: "Angebot endet in:",
-      title: "Launch Angebot",
+      title: "EARLY ACCESS",
       sub: "Zeitlich Limitiert",
       item1: "3x Einzigartige KI-Designs",
       item2: "Wand-Analyse",
@@ -1083,11 +1083,20 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
   const t = CONTENT[lang].offer;
   const [status, setStatus] = useState<'idle' | 'claiming' | 'redirecting'>('idle');
   const [particles, setParticles] = useState<{ id: number, x: number, y: number, color: string }[]>([]);
-  const [timeLeft, setTimeLeft] = useState(15179);
+
+  // Calculate seconds until the first day of the next month
+  const calculateTimeLeft = () => {
+    const now = new Date();
+    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0, 0);
+    const diff = Math.floor((nextMonth.getTime() - now.getTime()) / 1000);
+    return Math.max(0, diff);
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+      setTimeLeft(calculateTimeLeft());
     }, 1000);
     return () => clearInterval(timer);
   }, []);
@@ -1172,7 +1181,7 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                 </div>
                 <div className="text-right">
                   <span className="font-mono text-[10px] text-gray-500 tracking-widest uppercase block mb-1">Batch</span>
-                  <span className="font-mono text-white text-sm">CN-2024-X</span>
+                  <span className="font-mono text-white text-sm">2025</span>
                 </div>
               </div>
             </div>
