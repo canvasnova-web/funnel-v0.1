@@ -1,30 +1,78 @@
 import React, { useState, useEffect } from 'react';
-import { Infinity as InfinityIcon, MoveRight, Loader2 } from 'lucide-react';
+import { Infinity as InfinityIcon, MoveRight, Loader2, Percent, Euro } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONTENT } from '../data/content';
 import { Lang } from '../types';
+import { getVoucherFromURL, getVoucherFromBackendAPI, getRedirectURL, getVoucherValidUntil, formatSavingsAmount } from '../utils/voucher';
+import { VoucherConfig } from '../data/vouchers';
 
 const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
     const t = CONTENT[lang].offer;
     const [status, setStatus] = useState<'idle' | 'claiming' | 'redirecting'>('idle');
     const [particles, setParticles] = useState<{ id: number, x: number, y: number, color: string }[]>([]);
+    const [currentVoucher, setCurrentVoucher] = useState<VoucherConfig>(getVoucherFromURL());
+    const [isLoading, setIsLoading] = useState(true);
 
-    // Calculate seconds until the first day of the next month
+    // Calculate seconds until voucher expiry date
     const calculateTimeLeft = () => {
         const now = new Date();
-        const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1, 0, 0, 0, 0);
-        const diff = Math.floor((nextMonth.getTime() - now.getTime()) / 1000);
+        const endDate = getVoucherValidUntil(currentVoucher);
+        const diff = Math.floor((endDate.getTime() - now.getTime()) / 1000);
         return Math.max(0, diff);
     };
 
     const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
+    // Load voucher from Backend API on mount and URL change
+    useEffect(() => {
+        const loadVoucherFromAPI = async () => {
+            setIsLoading(true);
+            try {
+                const voucherFromAPI = await getVoucherFromBackendAPI();
+                setCurrentVoucher(voucherFromAPI);
+            } catch (error) {
+                console.error('Error loading voucher from API:', error);
+                // Fallback zu statischen Daten
+                setCurrentVoucher(getVoucherFromURL());
+            } finally {
+                setIsLoading(false);
+            }
+        };
+
+        loadVoucherFromAPI();
+
+        // Listen for URL changes (popstate for browser back/forward)
+        const handleURLChange = () => {
+            loadVoucherFromAPI();
+        };
+
+        window.addEventListener('popstate', handleURLChange);
+
+        // Check URL periodically (in case it's changed programmatically)
+        const urlCheckInterval = setInterval(() => {
+            const params = new URLSearchParams(window.location.search);
+            const currentPromo = params.get('promo') || params.get('campaign');
+
+            // Nur neu laden wenn sich tatsächlich etwas geändert hat
+            if (currentPromo && currentPromo !== currentVoucher.promoId) {
+                loadVoucherFromAPI();
+            }
+        }, 1000);
+
+        return () => {
+            window.removeEventListener('popstate', handleURLChange);
+            clearInterval(urlCheckInterval);
+        };
+    }, []);
+
+    // Update countdown timer
     useEffect(() => {
         const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft());
         }, 1000);
         return () => clearInterval(timer);
-    }, []);
+    }, [currentVoucher]);
+
 
     const formatTime = (seconds: number) => {
         const h = Math.floor(seconds / 3600);
@@ -34,7 +82,8 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
     };
 
     const handleClaim = () => {
-        navigator.clipboard.writeText("ART-LAUNCH");
+        // Copy the dynamic voucher code to clipboard
+        navigator.clipboard.writeText(currentVoucher.code);
 
         // Trigger visual feedback
         setStatus('claiming');
@@ -52,9 +101,9 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
         // Transition to redirecting state after "processing"
         setTimeout(() => {
             setStatus('redirecting');
-            // Actual redirect
+            // Actual redirect with dynamic voucher
             setTimeout(() => {
-                window.location.href = "https://canvasnova.com/create?promo=christmas";
+                window.location.href = getRedirectURL(currentVoucher);
             }, 800);
         }, 1500);
 
@@ -89,10 +138,14 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                             <div className="flex justify-between items-start mb-6">
                                 <div>
                                     <span className="font-mono text-[10px] text-gray-500 tracking-widest uppercase block mb-1">Pass Type</span>
-                                    <h3 className="text-2xl font-serif font-bold text-white tracking-tight">{t.title}</h3>
+                                    <h3 className="text-2xl font-serif font-bold text-white tracking-tight">{currentVoucher.title}</h3>
                                 </div>
                                 <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center">
-                                    <InfinityIcon className="w-4 h-4 text-int-orange" />
+                                    {currentVoucher.type === 'percentage' ? (
+                                        <Percent className="w-4 h-4 text-int-orange" />
+                                    ) : (
+                                        <Euro className="w-4 h-4 text-int-orange" />
+                                    )}
                                 </div>
                             </div>
 
@@ -155,7 +208,7 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                                             </span>
                                         </motion.div>
                                         <span className="font-mono text-[10px] text-int-orange uppercase tracking-widest mt-2 block">
-                                            {t.vat} • Launch Special
+                                            {t.vat} • {formatSavingsAmount(currentVoucher)}
                                         </span>
                                     </div>
                                 </div>
@@ -213,7 +266,7 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                             <div className="flex items-center justify-center gap-3 opacity-40 pt-2">
                                 <div className="h-px w-8 bg-white" />
                                 <p className="text-center font-mono text-[10px] text-white tracking-widest">
-                                    {t.code_text.replace('{code}', 'ART-LAUNCH')}
+                                    {t.code_text.replace('{code}', currentVoucher.code)}
                                 </p>
                                 <div className="h-px w-8 bg-white" />
                             </div>
