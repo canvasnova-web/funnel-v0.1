@@ -125,14 +125,18 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                     className={`relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 ${status !== 'idle' ? 'scale-[0.98] brightness-110' : ''}`}
                 >
 
-                    {/* Animated Border Beam */}
+                    {/* Animated Border Beam with Metallic Gradient */}
                     <div className="absolute inset-0 p-[1px] rounded-3xl overflow-hidden">
-                        <div className="absolute inset-0 bg-neutral-800/80 rounded-3xl" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-neutral-700 via-neutral-800 to-neutral-900 rounded-3xl" />
                         <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#FF4F00_360deg)] animate-[spin_4s_linear_infinite] opacity-50" />
                     </div>
 
-                    {/* Card Content Container */}
-                    <div className="relative bg-neutral-950 rounded-[23px] overflow-hidden h-full">
+                    {/* Card Content Container with Holographic Sheen */}
+                    <div className="relative bg-neutral-950 rounded-[23px] overflow-hidden h-full group/card">
+                        {/* Holographic Sheen on Hover */}
+                        <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent translate-x-[-100%] group-hover/card:translate-x-[100%] transition-transform duration-1000 ease-out" style={{ transform: 'skewX(-20deg)' }} />
+                        </div>
                         {/* Header Section */}
                         <div className="bg-neutral-900 p-8 pb-10 relative border-b border-white/5">
                             <div className="flex justify-between items-start mb-6">
@@ -153,8 +157,8 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                                 <div>
                                     <span className="font-mono text-[10px] text-gray-500 tracking-widest uppercase block mb-1">{t.badge}</span>
                                     <div className="flex items-center gap-2">
-                                        <div className="w-1.5 h-1.5 bg-int-orange rounded-full animate-pulse" />
-                                        <span className="text-white tracking-widest font-mono font-bold">{formatTime(timeLeft)}</span>
+                                        <div className="w-2 h-2 bg-int-orange rounded-full animate-pulse shadow-[0_0_8px_rgba(255,79,0,0.8)]" style={{ animationDuration: '0.8s' }} />
+                                        <span className="text-white tracking-widest font-mono font-bold tabular-nums" style={{ fontVariantNumeric: 'tabular-nums', textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>{formatTime(timeLeft)}</span>
                                     </div>
                                 </div>
                                 <div className="text-right">
@@ -164,11 +168,20 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                             </div>
                         </div>
 
-                        {/* Perforated Tear Line */}
+                        {/* Perforated Tear Line with Zigzag and Shadows */}
                         <div className="relative h-0 flex items-center justify-between px-3 z-20">
-                            <div className="w-6 h-6 rounded-full bg-gallery-black -ml-6" />
-                            <div className="w-full border-t-2 border-dashed border-neutral-800 mx-2" />
-                            <div className="w-6 h-6 rounded-full bg-gallery-black -mr-6" />
+                            <div className="w-6 h-6 rounded-full bg-gallery-black -ml-6 shadow-inner" />
+                            <div className="w-full mx-2 relative">
+                                {/* Zigzag Perforation */}
+                                <div className="w-full h-[2px] relative" style={{
+                                    backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 8px, #404040 8px, #404040 10px)',
+                                    backgroundSize: '18px 2px'
+                                }} />
+                                {/* Inner Shadow Effect */}
+                                <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-b from-black/40 to-transparent" />
+                                <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-t from-black/40 to-transparent" />
+                            </div>
+                            <div className="w-6 h-6 rounded-full bg-gallery-black -mr-6 shadow-inner" />
                         </div>
 
                         {/* Body Section */}
@@ -219,7 +232,7 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                                 <button
                                     onClick={handleClaim}
                                     disabled={status !== 'idle'}
-                                    className="group w-full bg-white text-black py-5 rounded-xl font-mono text-sm font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-3 hover:bg-gray-100 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-80 disabled:scale-100 relative overflow-hidden"
+                                    className="group w-full bg-white text-black py-5 rounded-xl font-mono text-sm font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-3 hover:bg-gray-100 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-80 disabled:scale-100 relative overflow-hidden shadow-[0_0_20px_rgba(255,79,0,0.2)] hover:shadow-[0_0_30px_rgba(255,79,0,0.4)]"
                                 >
                                     <AnimatePresence mode="wait">
                                         {status === 'idle' ? (

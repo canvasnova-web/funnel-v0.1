@@ -104,7 +104,7 @@ const translations: Record<Language, Translations> = {
             specs: { color: "Farbraum", res: "Auflösung", mat: "Basismaterial", weight: "Gewicht" }
         },
         process: {
-            tag: "Der Beweis", l1: "VON DEINER IDEE", l2: "ZUM MEISTERWERK.",
+            tag: "Der Beweis", l1: "SO EINFACH ENTSTEHT", l2: "IHR UNIKAT.",
             step0: "DEINE EINGABE",
             step1: "BASIS-PARAMETER",
             step2: "MEDIUM WÄHLEN",
@@ -168,9 +168,9 @@ const translations: Record<Language, Translations> = {
                 }
             },
             bullets: [
-                { title: "Co-Kreation", desc: "Unser AI-Kurator führt dich durch den Prozess. Aus deinen Antworten entsteht der perfekte Prompt." },
-                { title: "Ultra HD Auflösung.", desc: "Gestochen scharf für Großformate. Pixel-perfektes Upscaling." },
-                { title: "Museumsqualität.", desc: "Echte physische Produktion, keine bloße Datei. Handmade in Germany." }
+                { title: "Intuitiver Kurator", desc: "Kein Fachwissen nötig. Unser Assistent führt Sie Schritt für Schritt zum perfekten Ergebnis." },
+                { title: "Gigapixel-Schärfe", desc: "Speziell für Großformate entwickelt. Gestochen scharf, auch auf 2 Metern Breite." },
+                { title: "Handmade in Germany", desc: "Echte Manufaktur-Arbeit. Aufgezogen auf Alu-Dibond oder unter Acrylglas." }
             ],
             cta: "Jetzt Ausprobieren"
         },

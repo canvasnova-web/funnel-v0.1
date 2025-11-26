@@ -6,38 +6,37 @@ export const CONTENT = {
             lang_en: "EN"
         },
         hero: {
-            badge: "canvasnova",
-            headline_1: "Die Zukunft der Kunst",
-            headline_2: "gehört Ihnen.",
-            sub_1: "Erschaffen Sie",
-            sub_2: "Meisterwerke.",
-            cta: "Ihren Raum Analysieren",
+            badge: "DAS ENDE DER LEEREN WÄNDE",
+            headline_1: "Kein Poster,",
+            headline_2: "das jeder hat.",
+            sub_headline: "Erschaffen Sie echte Galerie-Unikate, die es weltweit nur einmal gibt. Perfekt auf Ihren Raum abgestimmt.",
+            cta: "JETZT UNIKAT ENTWERFEN →",
             before: "Vorher:",
             after: "Nachher: canvasnova"
         },
         explainer: [
-            { title: "Der Co-Pilot", text: "Kein Stöbern in generischen Postern. Erschaffen Sie exakt das, was Sie fühlen. Einzigartig, jedes Mal." },
-            { title: "Sie führen Regie", text: "Zu bunt? Zu abstrakt? Sie entscheiden. Verfeinern Sie das Ergebnis, bis es perfekt passt." },
-            { title: "Die Manufaktur", text: "Wir verkaufen keine JPEGs. Wir liefern physische Meisterwerke. Handgefertigt in Deutschland." }
+            { title: "Nie wieder endlos suchen.", text: "Vergessen Sie generische Poster-Shops. Unsere KI erschafft exakt das Bild, das Sie im Kopf haben – aber nirgends kaufen können." },
+            { title: "Sie haben das letzte Wort.", text: "Kein Zufallsprodukt. Ändern Sie Farben, Stil oder Stimmung mit einem Klick, bis das Werk 100% Ihrer Vision entspricht." },
+            { title: "Keine Pixel. Echte Kunst.", text: "Wir verkaufen keine JPEGs. Wir liefern physische Meisterwerke auf Galerie-Materialien (Acryl, Alu-Dibond, Canvas). Handgefertigt in Deutschland." }
         ],
         comparison: {
             badge: "Marktpositionierung",
-            headline: "Warum canvasnova?",
+            headline: "Der Unterschied.",
             features: {
                 uniqueness: "Einzigartigkeit",
                 material: "Material",
                 acquisition: "Erwerb",
                 price: "Preismodell"
             },
-            col1: { title: "Massenmarkt", sub: "Poster & Drucke", val1: "1 von 1.000.000", val2: "Posterpapier", val3: "Print on Demand", val4: "Wertmindernd", price: "€50", impact: "Geringer Effekt" },
-            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "1 von 1 (Unikat)", val2: "Galerie-Material", val3: "Kuratiert (5 Tage)", val4: "Erschwinglicher Luxus", price: "€140", impact: "Durchschn. Preis / Unikat", cta: "Kuratieren" },
-            col3: { title: "Galerie", sub: "Traditionell", val1: "1 von 1 (Original)", val2: "Leinwand / Öl", val3: "Langwierig", val4: "Investition", price: "€3.000+", impact: "Hohe Hürde" }
+            col1: { title: "Industrie-Poster", sub: "Poster & Drucke", val1: "Massenware (1 Mio. Kopien)", val2: "Dünnes Poster-Papier", val3: "Von der Stange", val4: "Wegwerf-Deko", price: "~ €40", impact: "Billig" },
+            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Museums-Qualität (Hahnemühle/Alu)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €140", impact: "Fair", cta: "Kuratieren" },
+            col3: { title: "Galerie", sub: "Traditionell", val1: "Original", val2: "Leinwand / Öl", val3: "Exklusiver Zugang nötig", val4: "Kapitalanlage", price: "€3.000+", impact: "Überteuert" }
         },
         scanner: {
-            badge: "Sofort-Analyse • 100% Kostenlos",
-            headline: "Perfektion nach Maß.",
-            sub: "Laden Sie ein Foto Ihres Raumes hoch. Wir empfehlen sofort die ideale Größe, Rahmung und das Material.",
-            upload: { title: "Raum-Foto hochladen", sub: "JPG, PNG, HEIC akzeptiert" },
+            badge: "Sofort-Visualisierung • 100% Kostenlos",
+            headline: "Wie sieht es an Ihrer Wand aus?",
+            sub: "Kein Rätselraten mehr. Sehen Sie das Ergebnis, bevor Sie bestellen. Wir zeigen Ihnen sofort die perfekte Größe und Wirkung.",
+            upload: { title: "Foto auswählen & anprobieren", sub: "JPG, PNG, HEIC akzeptiert" },
             loading_logs: [
                 "Initialisiere Geometrie-Engine...",
                 "Kalibriere Raumhelligkeit...",
@@ -60,33 +59,33 @@ export const CONTENT = {
         },
         timeline: {
             badge: "Der Manufaktur-Prozess",
-            headline: "Von der Idee zum Kunst-Objekt",
+            headline: "Ihr Weg zum Unikat.",
             steps: [
-                { title: "Vision & Stil", desc: "Definieren Sie Ihren Geschmack. Wählen Sie eine Stilrichtung oder beschreiben Sie Ihren Wunsch. Keine Vorkenntnisse nötig." },
-                { title: "KI-Kreation", desc: "Unsere Engine generiert 3 einzigartige, hochauflösende Kunstwerke. Optimiert für großformatigen Druck." },
-                { title: "Kuratieren & Verfeinern", desc: "Wählen Sie Ihren Favoriten. Fordern Sie Anpassungen an oder lassen Sie neu generieren. Sie haben die Kontrolle." },
-                { title: "Material & Rahmen", desc: "Wählen Sie Museums-Acrylglas, Alu-Dibond oder Leinwand. Ergänzen Sie einen handgefertigten Schattenfugenrahmen." },
-                { title: "Experten-Check", desc: "Manuelle Qualitätsprüfung durch Druckexperten. Produziert in Deutschland mit 12-Farben-Archivtinten." },
-                { title: "Sicherer Versand", desc: "Spezialisierte Kunstverpackung garantiert sichere Ankunft. Sofort bereit zum Aufhängen." }
+                { title: "Ihre Vision.", desc: "Wählen Sie eine Richtung oder beschreiben Sie ein Gefühl. Kein Fachwissen nötig – nur Ihr Geschmack." },
+                { title: "Die Entstehung.", desc: "Unser Algorithmus erschafft 3 exklusive Entwürfe. Hochauflösend und perfekt auf Großdruck optimiert." },
+                { title: "Der Feinschliff.", desc: "Sie haben die Kontrolle. Wählen Sie Ihren Favoriten und verfeinern Sie Details, bis es 'Klick' macht." },
+                { title: "Die Veredelung.", desc: "Museums-Acrylglas, Alu-Dibond oder Leinen? Wählen Sie das Finish, das Ihr Werk zum Strahlen bringt." },
+                { title: "Das 4-Augen-Prinzip.", desc: "Bevor wir drucken, prüft ein Experte jede Datei manuell auf Farbechtheit und Auflösung." },
+                { title: "Die Ankunft.", desc: "Sicher verpackt in unserer Spezial-Box. Auspacken, aufhängen, staunen." }
             ]
         },
         offer: {
             badge: "Angebot endet in:",
             title: "EARLY ACCESS",
             sub: "Zeitlich Limitiert",
-            item1: "Endlich individuelle Kunst",
-            item2: "Nie wieder langweilige Wände",
-            item3: "Ihr persönliches Unikat",
+            item1: "3x Design-Entwürfe (High-Res)",
+            item2: "Raum-Visualisierung Pro",
+            item3: "Produktions-Guthaben",
             free: "GRATIS",
             total: "Gesamt",
             vat: "INKL. MWST",
-            cta_idle: "Launch Angebot Sichern",
+            cta_idle: "JETZT KOSTENLOS EINLÖSEN →",
             cta_loading: "Aktiviere Zugang...",
-            code_text: "Code {code} wird automatisch angewendet"
+            code_text: "Ihr Vorteilscode ist bereits hinterlegt."
         },
         footer: {
-            desc: "Die Brücke zwischen künstlicher Intelligenz und menschlicher Emotion durch das Medium des Innenraums.",
-            rights: "2025 canvasnova.com by Berberich & Hühn GbR"
+            desc: "Technologie trifft Handwerk. Made in München.",
+            rights: "© 2025 canvasnova. Eine Marke der Berberich & Hühn GbR."
         }
     },
     en: {
@@ -99,8 +98,7 @@ export const CONTENT = {
             badge: "canvasnova",
             headline_1: "The Future of Fine Art",
             headline_2: "is Yours to Command.",
-            sub_1: "Create",
-            sub_2: "Masterpieces.",
+            sub_headline: "Create true gallery originals that exist only once worldwide. Perfectly tailored to your room.",
             cta: "Analyze My Room",
             before: "Before: Reality",
             after: "After: canvasnova"

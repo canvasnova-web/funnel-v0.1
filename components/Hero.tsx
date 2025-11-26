@@ -55,19 +55,9 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
             <div className="absolute inset-0 bg-grain opacity-30 pointer-events-none z-0" />
 
             <div className={`relative z-10 flex flex-col items-center text-center max-w-6xl px-6 mb-16 transition-all duration-700 ${isDragging ? 'blur-[2px] opacity-80' : 'blur-0 opacity-100'}`}>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="mb-8"
-                >
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gray-200/60 bg-white/40 backdrop-blur-md text-[10px] uppercase tracking-[0.25em] text-gray-600 font-sans font-bold shadow-sm">
-                        <span className="w-1.5 h-1.5 rounded-full bg-int-orange" />
-                        {t.badge}
-                    </span>
-                </motion.div>
+                {/* Badge removed for visual clarity - Rams principle: less but better */}
 
-                <h1 className="text-6xl md:text-9xl font-serif font-bold leading-[0.9] tracking-tighter text-gallery-black mb-10 drop-shadow-sm">
+                <h1 className="text-6xl md:text-9xl font-serif font-bold leading-[0.9] tracking-[-0.02em] text-gallery-black mb-10 drop-shadow-sm">
                     {t.headline_1.split("").map((char, i) => (
                         <motion.span
                             key={i}
@@ -89,6 +79,15 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                         {t.headline_2}
                     </motion.span>
                 </h1>
+
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.9 }}
+                    className="text-lg md:text-xl text-neutral-500 max-w-2xl mx-auto mb-10 font-sans leading-relaxed"
+                >
+                    {t.sub_headline}
+                </motion.p>
 
                 <motion.button
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -138,7 +137,7 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                         <img
                             src="/images/hero-empty.jpg"
                             alt="Empty Room"
-                            className="w-full h-full object-cover max-w-none grayscale brightness-[0.9] contrast-[1.1]"
+                            className="w-full h-full object-cover max-w-none grayscale brightness-[0.75] contrast-[1.05] saturate-[0.8]"
                             style={{ width: containerRef.current?.offsetWidth || '100vw' }}
                         />
                         <div className="absolute inset-0 bg-grain opacity-50 mix-blend-multiply pointer-events-none" />
@@ -153,9 +152,9 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                         style={{ left: `${sliderPosition}%` }}
                     >
                         <div className="relative pointer-events-auto cursor-ew-resize group-active:scale-95 transition-transform">
-                            <div className="absolute inset-0 -m-6 bg-int-orange blur-3xl opacity-20 rounded-full animate-pulse" />
-                            <div className="relative w-16 h-16 rounded-full bg-white/10 backdrop-blur-md border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] flex items-center justify-center z-30 ring-1 ring-white/30">
-                                <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_rgba(255,255,255,0.8)]" />
+                            <div className="absolute inset-0 -m-8 bg-int-orange blur-3xl opacity-30 rounded-full animate-pulse" style={{ animationDuration: '2s' }} />
+                            <div className="relative w-20 h-20 rounded-full bg-white/20 backdrop-blur-md border-2 border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.2)] flex items-center justify-center z-30 ring-2 ring-white/40 animate-pulse" style={{ animationDuration: '2s' }}>
+                                <div className="w-3 h-3 rounded-full bg-white shadow-[0_0_15px_rgba(255,255,255,1)]" />
                             </div>
                         </div>
                     </div>

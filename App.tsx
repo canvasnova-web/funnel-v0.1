@@ -54,7 +54,7 @@ const App = () => {
 
             <button
               onClick={scrollToScanner}
-              className="hidden md:block bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-int-orange transition-colors shadow-lg shadow-black/10"
+              className="hidden md:block text-neutral-500 hover:text-black px-5 py-2 text-sm font-medium transition-colors"
             >
               {CONTENT[lang].nav.cta}
             </button>
@@ -80,8 +80,9 @@ const App = () => {
           <div className="flex gap-4">
             {[
               { name: 'Instagram', url: 'https://www.instagram.com/canvasnova_com/' },
-              { name: 'Tik-Tok', url: 'https://www.tiktok.com/@canvasnova.com' },
-              { name: 'Impressum', url: 'https://www.canvasnova.com/imprint' }
+              { name: 'TikTok', url: 'https://www.tiktok.com/@canvasnova.com' },
+              { name: 'Impressum', url: 'https://www.canvasnova.com/imprint' },
+              { name: 'Datenschutz', url: 'https://www.canvasnova.com/privacy' }
             ].map(social => (
               <a
                 key={social.name}
