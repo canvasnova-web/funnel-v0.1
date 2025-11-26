@@ -4,6 +4,7 @@ import { Lang } from './types';
 import Hero from './components/Hero';
 import ExplainerSection from './components/ExplainerSection';
 import ComparisonSection from './components/ComparisonSection';
+import Process from './components/Process';
 import Scanner from './components/Scanner';
 import Timeline from './components/Timeline';
 import OfferSection from './components/OfferSection';
@@ -64,6 +65,7 @@ const App = () => {
       <Hero onAnalyzeClick={scrollToScanner} lang={lang} />
       <ExplainerSection lang={lang} />
       <ComparisonSection lang={lang} />
+      <Process />
       <Scanner id="scanner" lang={lang} />
       <Timeline lang={lang} />
       <OfferSection id="offer" lang={lang} />

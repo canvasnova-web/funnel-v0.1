@@ -40,14 +40,14 @@ const ComparisonSection = ({ lang }: { lang: Lang }) => {
     ];
 
     return (
-        <section className="py-32 px-4 md:px-6 bg-[#FAFAFA] relative overflow-hidden">
+        <section className="py-24 px-4 md:px-6 bg-[#FAFAFA] relative overflow-hidden">
             <div
                 className="absolute inset-0 opacity-[0.03] pointer-events-none"
                 style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}
             />
 
             <div className="max-w-7xl mx-auto relative z-10">
-                <div className="text-center mb-20">
+                <div className="text-center mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -68,109 +68,142 @@ const ComparisonSection = ({ lang }: { lang: Lang }) => {
                     </motion.h2>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                {/* Desktop Table Layout */}
+                <div className="hidden md:grid grid-cols-4 gap-4 items-stretch">
+                    {/* Header Column (Empty top-left) */}
+                    <div className="flex flex-col justify-end pb-8">
+                        <span className="text-xs font-bold uppercase tracking-widest text-gray-400">Features</span>
+                    </div>
 
-                    <motion.div
-                        className={`relative p-8 rounded-[2rem] border border-neutral-100 bg-neutral-50 transition-all duration-500 ${hoveredCard === 'cn' ? 'opacity-40 blur-[1px]' : 'opacity-100'}`}
-                        onMouseEnter={() => setHoveredCard('mass')}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        <div className="mb-8 opacity-60 text-center">
-                            <h3 className="font-serif text-xl text-neutral-600">{t.col1.title}</h3>
-                            <p className="text-[10px] font-mono text-neutral-400 mt-2 uppercase tracking-widest">{t.col1.sub}</p>
+                    {/* Mass Market Header */}
+                    <div className="text-center pb-8 px-4 opacity-50">
+                        <h3 className="font-serif text-xl text-neutral-600">{t.col1.title}</h3>
+                        <p className="text-[10px] font-mono text-neutral-400 mt-1 uppercase tracking-widest">{t.col1.sub}</p>
+                    </div>
+
+                    {/* CanvasNova Header */}
+                    <div className="relative text-center pb-8 px-4 z-10">
+                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
+                            <span className="bg-int-orange text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md">
+                                {t.col2.badge}
+                            </span>
                         </div>
+                        <h3 className="font-serif text-2xl text-gallery-black font-bold">{t.col2.title}</h3>
+                        <p className="text-[10px] font-mono text-int-orange mt-1 uppercase tracking-widest font-bold">{t.col2.sub}</p>
+                    </div>
 
-                        <div className="space-y-6">
-                            {features.map((f, i) => (
-                                <div key={i} className="flex flex-col items-center text-center gap-1 py-3 border-b border-gray-100 last:border-0">
-                                    <span className="text-[10px] uppercase font-bold text-neutral-400 tracking-widest">{f.label}</span>
-                                    <span className="text-sm font-sans font-medium text-neutral-500">{f.mass}</span>
-                                </div>
-                            ))}
-                            <div className="pt-6 text-center">
-                                <p className="font-serif text-2xl text-neutral-400 line-through decoration-red-400/30">{t.col1.price}</p>
-                                <p className="text-[10px] text-neutral-400 uppercase tracking-widest mt-1">{t.col1.impact}</p>
-                            </div>
-                        </div>
-                    </motion.div>
+                    {/* Gallery Header */}
+                    <div className="text-center pb-8 px-4 opacity-50">
+                        <h3 className="font-serif text-xl text-neutral-600">{t.col3.title}</h3>
+                        <p className="text-[10px] font-mono text-neutral-400 mt-1 uppercase tracking-widest">{t.col3.sub}</p>
+                    </div>
 
-                    <motion.div
-                        className="relative p-10 rounded-[2.5rem] bg-white z-20 md:-my-8 ring-1 ring-black/5"
-                        initial={{ y: 0 }}
-                        whileInView={{ scale: 1.02 }}
-                        viewport={{ once: true }}
-                        onMouseEnter={() => setHoveredCard('cn')}
-                        onMouseLeave={() => setHoveredCard(null)}
-                        style={{
-                            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0,0,0,0.01)'
-                        }}
-                    >
-                        <div className="absolute inset-0 bg-gradient-to-tr from-orange-50/40 via-purple-50/10 to-transparent opacity-60 rounded-[2.5rem] pointer-events-none" />
-
-                        <div className="relative z-10">
-                            <div className="absolute -top-14 left-1/2 -translate-x-1/2">
-                                <span className="bg-gradient-to-b from-gray-800 to-black text-white px-5 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-xl flex items-center gap-2 ring-1 ring-white/20">
-                                    <Sparkles className="w-3 h-3 text-orange-400" />
-                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-gray-200 to-gray-400">{t.col2.sub}</span>
-                                </span>
-                            </div>
-
-                            <div className="mb-10 text-center">
-                                <h3 className="font-serif text-4xl text-gallery-black mb-2 tracking-tight font-semibold">canvasnova</h3>
-                                <div className="h-0.5 w-8 bg-int-orange mx-auto opacity-80" />
-                            </div>
-
-                            <div className="space-y-2">
-                                {features.map((f, i) => (
-                                    <div key={i} className="flex justify-between items-center py-4 border-b border-gray-50 last:border-0 group px-2 rounded-lg transition-colors hover:bg-gray-50/50">
-                                        <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-full bg-orange-50 flex items-center justify-center text-int-orange">
-                                                <f.icon className="w-4 h-4" strokeWidth={2.5} />
-                                            </div>
-                                            <span className="text-[10px] uppercase font-bold text-gray-400 tracking-widest">{f.label}</span>
-                                        </div>
-                                        <span className="text-sm font-bold text-gallery-black text-right">{f.cn}</span>
-                                    </div>
-                                ))}
-
-                                <div className="pt-8 mt-4 text-center">
-                                    <div className="flex flex-col items-center gap-1">
-                                        <p className="font-serif text-5xl text-int-orange font-medium tracking-tight">{t.col2.price}</p>
-                                        <p className="text-[10px] text-gray-400 uppercase tracking-widest font-bold">{t.col2.impact}</p>
-                                    </div>
-                                    <button className="w-full mt-6 bg-gallery-black text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-int-orange hover:shadow-lg hover:shadow-int-orange/20 transition-all duration-300 flex items-center justify-center gap-2 group">
-                                        {t.col2.cta}
-                                        <MoveRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                                    </button>
+                    {/* Rows */}
+                    {features.map((f, i) => (
+                        <React.Fragment key={i}>
+                            {/* Label */}
+                            <div className="flex items-center py-6 border-b border-gray-100">
+                                <div className="flex items-center gap-3">
+                                    <f.icon className="w-5 h-5 text-gray-300" />
+                                    <span className="text-sm font-bold text-gray-500 uppercase tracking-wide">{f.label}</span>
                                 </div>
                             </div>
-                        </div>
-                    </motion.div>
 
-                    <motion.div
-                        className={`relative p-8 rounded-[2rem] border border-neutral-100 bg-neutral-50 transition-all duration-500 ${hoveredCard === 'cn' ? 'opacity-40 blur-[1px]' : 'opacity-100'}`}
-                        onMouseEnter={() => setHoveredCard('trad')}
-                        onMouseLeave={() => setHoveredCard(null)}
-                    >
-                        <div className="mb-8 opacity-60 text-center">
-                            <h3 className="font-serif text-xl text-neutral-600">{t.col3.title}</h3>
-                            <p className="text-[10px] font-mono text-neutral-400 mt-2 uppercase tracking-widest">{t.col3.sub}</p>
-                        </div>
-                        <div className="space-y-6">
-                            {features.map((f, i) => (
-                                <div key={i} className="flex flex-col items-center text-center gap-1 py-3 border-b border-gray-100 last:border-0">
-                                    <span className="text-[10px] uppercase font-bold text-neutral-400 tracking-widest">{f.label}</span>
-                                    <span className="text-sm font-sans font-medium text-neutral-500">{f.trad}</span>
-                                </div>
-                            ))}
-                            <div className="pt-6 text-center">
-                                <p className="font-serif text-2xl text-neutral-800">{t.col3.price}</p>
-                                <p className="text-[10px] text-neutral-400 uppercase tracking-widest mt-1">{t.col3.impact}</p>
+                            {/* Mass Value */}
+                            <div className="flex items-center justify-center py-6 border-b border-gray-100 bg-gray-50/30 text-center">
+                                <span className="text-sm text-gray-500 font-medium">{f.mass}</span>
                             </div>
-                        </div>
-                    </motion.div>
 
+                            {/* CanvasNova Value */}
+                            <div className="relative flex items-center justify-center py-6 border-b border-gray-100 bg-white shadow-sm z-10 -mx-2 rounded-lg ring-1 ring-black/5">
+                                <span className="text-base text-gallery-black font-bold">{f.cn}</span>
+                            </div>
+
+                            {/* Gallery Value */}
+                            <div className="flex items-center justify-center py-6 border-b border-gray-100 bg-gray-50/30 text-center">
+                                <span className="text-sm text-gray-500 font-medium">{f.trad}</span>
+                            </div>
+                        </React.Fragment>
+                    ))}
+
+                    {/* Price Row */}
+                    <div className="flex items-center py-8">
+                        <div className="flex items-center gap-3">
+                            <Coins className="w-5 h-5 text-gray-300" />
+                            <span className="text-sm font-bold text-gray-500 uppercase tracking-wide">{t.features.price}</span>
+                        </div>
+                    </div>
+                    <div className="flex flex-col items-center justify-center py-8 bg-gray-50/30">
+                        <span className="text-lg font-serif text-gray-400 line-through decoration-red-400/30">{t.col1.price}</span>
+                        <span className="text-[10px] text-gray-400 uppercase tracking-widest">{t.col1.impact}</span>
+                    </div>
+                    <div className="relative flex flex-col items-center justify-center py-8 bg-white shadow-lg z-10 -mx-2 rounded-xl ring-1 ring-int-orange/20 border-t-4 border-int-orange">
+                        <span className="text-3xl font-serif text-int-orange font-bold">{t.col2.price}</span>
+                        <span className="text-[10px] text-gray-500 uppercase tracking-widest font-bold mb-4">{t.col2.impact}</span>
+                        <button className="bg-gallery-black text-white px-6 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-int-orange transition-colors">
+                            {t.col2.cta}
+                        </button>
+                    </div>
+                    <div className="flex flex-col items-center justify-center py-8 bg-gray-50/30">
+                        <span className="text-lg font-serif text-gray-600">{t.col3.price}</span>
+                        <span className="text-[10px] text-gray-400 uppercase tracking-widest">{t.col3.impact}</span>
+                    </div>
                 </div>
+
+                {/* Mobile Stacked Layout */}
+                <div className="md:hidden space-y-8">
+                    {features.map((f, i) => (
+                        <div key={i} className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-gray-50">
+                                <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400">
+                                    <f.icon className="w-4 h-4" />
+                                </div>
+                                <span className="text-xs font-bold uppercase tracking-widest text-gray-500">{f.label}</span>
+                            </div>
+
+                            <div className="space-y-4">
+                                {/* CanvasNova (Highlighted) */}
+                                <div className="flex justify-between items-center p-3 rounded-lg bg-orange-50/50 border border-int-orange/10">
+                                    <span className="text-xs font-bold text-int-orange">canvasnova</span>
+                                    <span className="text-sm font-bold text-gallery-black">{f.cn}</span>
+                                </div>
+
+                                {/* Others */}
+                                <div className="flex justify-between items-center px-3 opacity-60">
+                                    <span className="text-xs font-medium text-gray-400">{t.col1.title}</span>
+                                    <span className="text-sm text-gray-500">{f.mass}</span>
+                                </div>
+                                <div className="flex justify-between items-center px-3 opacity-60">
+                                    <span className="text-xs font-medium text-gray-400">{t.col3.title}</span>
+                                    <span className="text-sm text-gray-500">{f.trad}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+
+                    {/* Price Block Mobile */}
+                    <div className="bg-gallery-black text-white rounded-2xl p-8 shadow-xl text-center relative overflow-hidden">
+                        <div className="absolute inset-0 bg-gradient-to-tr from-int-orange/20 to-transparent opacity-50" />
+                        <h3 className="relative z-10 text-2xl font-serif mb-1">{t.col2.price}</h3>
+                        <p className="relative z-10 text-[10px] text-gray-400 uppercase tracking-widest mb-6">{t.col2.impact}</p>
+
+                        <div className="relative z-10 flex justify-center gap-8 text-xs text-gray-500 mb-8">
+                            <div className="flex flex-col">
+                                <span className="line-through decoration-white/30">{t.col1.price}</span>
+                                <span className="text-[8px] uppercase">{t.col1.title}</span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span>{t.col3.price}</span>
+                                <span className="text-[8px] uppercase">{t.col3.title}</span>
+                            </div>
+                        </div>
+
+                        <button className="relative z-10 w-full bg-white text-gallery-black py-3 rounded-full font-bold uppercase tracking-widest text-xs hover:bg-int-orange hover:text-white transition-colors">
+                            {t.col2.cta}
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </section>
     );

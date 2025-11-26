@@ -232,29 +232,397 @@ const Scanner = ({ id, lang }: { id: string, lang: Lang }) => {
                                 transition={{ duration: 0.8 }}
                                 className="w-full flex flex-col md:flex-row bg-[#FAFAFA]"
                             >
-                                <div className="w-full md:w-1/2 relative min-h-[400px] bg-gray-100 flex items-center justify-center border-r border-gray-200">
-                                    <div className="absolute top-4 left-4 px-3 py-1 bg-white rounded-full border border-gray-200 text-[10px] font-bold uppercase tracking-widest text-gray-400">{t.result.scale_ref}</div>
-                                    <div className="relative w-full h-full max-w-[400px] max-h-[400px] p-8">
-                                        <svg viewBox="0 0 300 250" className="w-full h-full drop-shadow-xl">
-                                            <line x1="0" y1="250" x2="300" y2="250" stroke="#E5E5E5" strokeWidth="2" />
-                                            <circle cx="60" cy="90" r="10" fill="#D4D4D4" />
-                                            <path d="M60,100 L60,170 M60,170 L45,250 M60,170 L75,250 M60,115 L40,140 M60,115 L80,140" stroke="#D4D4D4" strokeWidth="4" strokeLinecap="round" />
-                                            <text x="30" y="240" className="text-[10px] fill-gray-400 font-mono">1.7m</text>
-                                            <motion.rect
-                                                initial={{ opacity: 0, scale: 0.9 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ delay: 0.2, duration: 0.5 }}
-                                                {...getArtRectProps(result.width, result.height)}
-                                                fill="#FFFFFF"
-                                                stroke="#121212"
-                                                strokeWidth="2"
-                                                className="shadow-lg"
+                                <div className="w-full md:w-1/2 relative min-h-[500px] bg-gradient-to-br from-[#F8F8F8] via-white to-[#F0F0F0] flex items-center justify-center border-r border-gray-200 overflow-hidden">
+                                    <div className="absolute top-4 left-4 px-4 py-1.5 bg-white/90 backdrop-blur-sm rounded-full border border-gray-200/60 text-[10px] font-bold uppercase tracking-[0.15em] text-gray-400 shadow-lg z-10">{t.result.scale_ref}</div>
+
+                                    {/* Elegant Background with Subtle Noise */}
+                                    <div
+                                        className="absolute inset-0 opacity-[0.015]"
+                                        style={{
+                                            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")'
+                                        }}
+                                    />
+
+                                    <div className="relative w-full h-full max-w-[550px] max-h-[550px] p-6 flex items-center justify-center">
+                                        <svg viewBox="0 0 500 450" className="w-full h-full" style={{ filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.08))' }}>
+                                            <defs>
+                                                {/* Premium Shadow Filters */}
+                                                <filter id="artworkShadowPremium" x="-50%" y="-50%" width="200%" height="200%">
+                                                    <feGaussianBlur in="SourceAlpha" stdDeviation="12" />
+                                                    <feOffset dx="0" dy="18" result="offsetblur" />
+                                                    <feComponentTransfer>
+                                                        <feFuncA type="linear" slope="0.35" />
+                                                    </feComponentTransfer>
+                                                    <feMerge>
+                                                        <feMergeNode />
+                                                        <feMergeNode in="SourceGraphic" />
+                                                    </feMerge>
+                                                </filter>
+
+                                                <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                                    <feGaussianBlur stdDeviation="20" result="blur" />
+                                                    <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.15 0" />
+                                                    <feMerge>
+                                                        <feMergeNode />
+                                                        <feMergeNode in="SourceGraphic" />
+                                                    </feMerge>
+                                                </filter>
+
+                                                {/* Luxury Wall Gradient */}
+                                                <linearGradient id="wallGradientPremium" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style={{ stopColor: '#FFFFFF', stopOpacity: 1 }} />
+                                                    <stop offset="50%" style={{ stopColor: '#FAFAFA', stopOpacity: 1 }} />
+                                                    <stop offset="100%" style={{ stopColor: '#F5F5F5', stopOpacity: 1 }} />
+                                                </linearGradient>
+
+                                                {/* Sophisticated Floor Gradient */}
+                                                <linearGradient id="floorGradientPremium" x1="0%" y1="0%" x2="0%" y2="100%">
+                                                    <stop offset="0%" style={{ stopColor: '#E8E8E8', stopOpacity: 1 }} />
+                                                    <stop offset="100%" style={{ stopColor: '#D4D4D4', stopOpacity: 1 }} />
+                                                </linearGradient>
+
+                                                {/* Parquet Pattern */}
+                                                <pattern id="parquetPattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                                                    <rect x="0" y="0" width="20" height="40" fill="#DDD" opacity="0.3" />
+                                                    <rect x="20" y="0" width="20" height="40" fill="#CCC" opacity="0.2" />
+                                                    <line x1="0" y1="20" x2="40" y2="20" stroke="#BBB" strokeWidth="0.5" opacity="0.4" />
+                                                </pattern>
+
+                                                {/* Gallery Spotlight */}
+                                                <radialGradient id="spotlight" cx="50%" cy="30%">
+                                                    <stop offset="0%" style={{ stopColor: '#FFFFFF', stopOpacity: 0.4 }} />
+                                                    <stop offset="40%" style={{ stopColor: '#FFFFFF', stopOpacity: 0.15 }} />
+                                                    <stop offset="100%" style={{ stopColor: '#FFFFFF', stopOpacity: 0 }} />
+                                                </radialGradient>
+
+                                                {/* Ambient Occlusion */}
+                                                <radialGradient id="ambientOcclusion" cx="50%" cy="100%">
+                                                    <stop offset="0%" style={{ stopColor: '#000000', stopOpacity: 0 }} />
+                                                    <stop offset="70%" style={{ stopColor: '#000000', stopOpacity: 0.03 }} />
+                                                    <stop offset="100%" style={{ stopColor: '#000000', stopOpacity: 0.08 }} />
+                                                </radialGradient>
+                                            </defs>
+
+                                            {/* 3D Gallery Room */}
+                                            {/* Back Wall with enhanced perspective */}
+                                            <path
+                                                d="M 60 50 L 440 50 L 400 280 L 100 280 Z"
+                                                fill="url(#wallGradientPremium)"
+                                                stroke="#D0D0D0"
+                                                strokeWidth="1.5"
                                             />
-                                            <text x={120 + result.width + 10} y={100} className="text-[10px] fill-int-orange font-mono font-bold">{result.width}cm</text>
-                                            <text x={120 + (result.width / 2)} y={100 + (result.height / 2) + 15} className="text-[10px] fill-int-orange font-mono font-bold text-center" textAnchor="middle">{result.height}cm</text>
+
+                                            {/* Crown Molding (architectural detail) */}
+                                            <path
+                                                d="M 60 50 L 440 50 L 435 58 L 65 58 Z"
+                                                fill="#FFFFFF"
+                                                opacity="0.8"
+                                            />
+
+                                            {/* Ambient Light Wash on Wall */}
+                                            <ellipse
+                                                cx="250"
+                                                cy="150"
+                                                rx="180"
+                                                ry="120"
+                                                fill="url(#spotlight)"
+                                            />
+
+                                            {/* Premium Parquet Floor */}
+                                            <path
+                                                d="M 100 280 L 400 280 L 470 390 L 30 390 Z"
+                                                fill="url(#floorGradientPremium)"
+                                                stroke="#B8B8B8"
+                                                strokeWidth="1.5"
+                                            />
+
+                                            {/* Parquet Texture Overlay */}
+                                            <path
+                                                d="M 100 280 L 400 280 L 470 390 L 30 390 Z"
+                                                fill="url(#parquetPattern)"
+                                            />
+
+                                            {/* Ambient Occlusion on Floor */}
+                                            <ellipse
+                                                cx="250"
+                                                cy="390"
+                                                rx="200"
+                                                ry="30"
+                                                fill="url(#ambientOcclusion)"
+                                            />
+
+                                            {/* Left Wall (subtle, adds depth) */}
+                                            <path
+                                                d="M 60 50 L 100 280 L 30 390 L 30 70 Z"
+                                                fill="#E0E0E0"
+                                                opacity="0.5"
+                                            />
+
+                                            {/* Baseboard with shadow */}
+                                            <line x1="100" y1="280" x2="400" y2="280" stroke="#A0A0A0" strokeWidth="3" opacity="0.6" />
+                                            <line x1="100" y1="283" x2="400" y2="283" stroke="#F5F5F5" strokeWidth="1.5" opacity="0.8" />
+
+                                            {/* Premium Artwork Display */}
+                                            <motion.g
+                                                initial={{ opacity: 0, y: -30, scale: 0.95 }}
+                                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                                            >
+                                                {(() => {
+                                                    const wallCenterX = 250;
+                                                    const wallCenterY = 165;
+                                                    const scaleFactor = 0.65;
+                                                    const artWidth = result.width * scaleFactor;
+                                                    const artHeight = result.height * scaleFactor;
+                                                    const artX = wallCenterX - (artWidth / 2);
+                                                    const artY = wallCenterY - (artHeight / 2);
+
+                                                    return (
+                                                        <>
+                                                            {/* Multi-layer Shadow for Depth */}
+                                                            <rect
+                                                                x={artX + 3}
+                                                                y={artY + 20}
+                                                                width={artWidth}
+                                                                height={artHeight}
+                                                                fill="#000000"
+                                                                opacity="0.12"
+                                                                rx="2"
+                                                                filter="blur(15px)"
+                                                            />
+
+                                                            <rect
+                                                                x={artX + 1}
+                                                                y={artY + 10}
+                                                                width={artWidth}
+                                                                height={artHeight}
+                                                                fill="#000000"
+                                                                opacity="0.08"
+                                                                rx="2"
+                                                                filter="blur(8px)"
+                                                            />
+
+                                                            {/* Outer Frame (Black Gallery Frame) */}
+                                                            <rect
+                                                                x={artX - 8}
+                                                                y={artY - 8}
+                                                                width={artWidth + 16}
+                                                                height={artHeight + 16}
+                                                                fill="#1A1A1A"
+                                                                rx="2"
+                                                                filter="url(#artworkShadowPremium)"
+                                                            />
+
+                                                            {/* Frame Inner Bevel (3D effect) */}
+                                                            <rect
+                                                                x={artX - 6}
+                                                                y={artY - 6}
+                                                                width={artWidth + 12}
+                                                                height={artHeight + 12}
+                                                                fill="none"
+                                                                stroke="#333333"
+                                                                strokeWidth="1"
+                                                                rx="1"
+                                                            />
+
+                                                            {/* Museum Mat Board */}
+                                                            <rect
+                                                                x={artX - 4}
+                                                                y={artY - 4}
+                                                                width={artWidth + 8}
+                                                                height={artHeight + 8}
+                                                                fill="#FAFAFA"
+                                                                rx="1"
+                                                            />
+
+                                                            {/* Mat Board Inner Shadow */}
+                                                            <rect
+                                                                x={artX - 3}
+                                                                y={artY - 3}
+                                                                width={artWidth + 6}
+                                                                height={artHeight + 6}
+                                                                fill="none"
+                                                                stroke="#E5E5E5"
+                                                                strokeWidth="2"
+                                                                rx="1"
+                                                            />
+
+                                                            {/* Artwork Canvas */}
+                                                            <rect
+                                                                x={artX}
+                                                                y={artY}
+                                                                width={artWidth}
+                                                                height={artHeight}
+                                                                fill="#FFFFFF"
+                                                                rx="0.5"
+                                                            />
+
+                                                            {/* Canvas Texture */}
+                                                            <rect
+                                                                x={artX + 8}
+                                                                y={artY + 8}
+                                                                width={artWidth - 16}
+                                                                height={artHeight - 16}
+                                                                fill="#F9F9F9"
+                                                                opacity="0.6"
+                                                            />
+
+                                                            {/* Gallery Lighting Effect (top highlight) */}
+                                                            <linearGradient id={`topLight-${result.width}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                                                                <stop offset="0%" style={{ stopColor: '#FFFFFF', stopOpacity: 0.8 }} />
+                                                                <stop offset="30%" style={{ stopColor: '#FFFFFF', stopOpacity: 0 }} />
+                                                            </linearGradient>
+                                                            <rect
+                                                                x={artX}
+                                                                y={artY}
+                                                                width={artWidth}
+                                                                height={artHeight * 0.3}
+                                                                fill={`url(#topLight-${result.width})`}
+                                                                rx="0.5"
+                                                            />
+
+                                                            {/* Premium Dimension Lines with Arrows */}
+                                                            {/* Width Dimension */}
+                                                            <g opacity="0.9">
+                                                                <defs>
+                                                                    <marker id="arrowWidth" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+                                                                        <path d="M 0 0 L 8 4 L 0 8 z" fill="#FF4F00" />
+                                                                    </marker>
+                                                                </defs>
+                                                                <line
+                                                                    x1={artX - 6}
+                                                                    y1={artY - 20}
+                                                                    x2={artX + artWidth + 6}
+                                                                    y2={artY - 20}
+                                                                    stroke="#FF4F00"
+                                                                    strokeWidth="2"
+                                                                    markerStart="url(#arrowWidth)"
+                                                                    markerEnd="url(#arrowWidth)"
+                                                                />
+                                                                <rect
+                                                                    x={wallCenterX - 35}
+                                                                    y={artY - 32}
+                                                                    width="70"
+                                                                    height="20"
+                                                                    fill="white"
+                                                                    rx="10"
+                                                                    opacity="0.95"
+                                                                />
+                                                                <text
+                                                                    x={wallCenterX}
+                                                                    y={artY - 20}
+                                                                    className="text-[14px] font-mono font-bold fill-[#FF4F00]"
+                                                                    textAnchor="middle"
+                                                                    dominantBaseline="middle"
+                                                                >
+                                                                    {result.width}cm
+                                                                </text>
+                                                            </g>
+
+                                                            {/* Height Dimension */}
+                                                            <g opacity="0.9">
+                                                                <line
+                                                                    x1={artX + artWidth + 20}
+                                                                    y1={artY - 6}
+                                                                    x2={artX + artWidth + 20}
+                                                                    y2={artY + artHeight + 6}
+                                                                    stroke="#FF4F00"
+                                                                    strokeWidth="2"
+                                                                    markerStart="url(#arrowWidth)"
+                                                                    markerEnd="url(#arrowWidth)"
+                                                                />
+                                                                <rect
+                                                                    x={artX + artWidth + 30}
+                                                                    y={wallCenterY - 10}
+                                                                    width="70"
+                                                                    height="20"
+                                                                    fill="white"
+                                                                    rx="10"
+                                                                    opacity="0.95"
+                                                                />
+                                                                <text
+                                                                    x={artX + artWidth + 65}
+                                                                    y={wallCenterY}
+                                                                    className="text-[14px] font-mono font-bold fill-[#FF4F00]"
+                                                                    textAnchor="middle"
+                                                                    dominantBaseline="middle"
+                                                                >
+                                                                    {result.height}cm
+                                                                </text>
+                                                            </g>
+                                                        </>
+                                                    );
+                                                })()}
+                                            </motion.g>
+
+                                            {/* Premium Human Figure (elegant, minimal) */}
+                                            <motion.g
+                                                initial={{ opacity: 0 }}
+                                                animate={{ opacity: 1 }}
+                                                transition={{ delay: 0.6, duration: 0.7 }}
+                                            >
+                                                <g transform="translate(400, 260)" opacity="0.28">
+                                                    {/* Subtle shadow under person */}
+                                                    <ellipse cx="0" cy="100" rx="12" ry="4" fill="#000000" opacity="0.15" />
+
+                                                    {/* Modern Minimalist Silhouette */}
+                                                    {/* Head */}
+                                                    <circle cx="0" cy="0" r="10" fill="#2D2D2D" />
+
+                                                    {/* Neck */}
+                                                    <rect x="-3" y="10" width="6" height="6" fill="#2D2D2D" />
+
+                                                    {/* Torso (modern cut) */}
+                                                    <path
+                                                        d="M -11 16 L -11 52 Q -11 56 -7 56 L 7 56 Q 11 56 11 52 L 11 16 Q 11 16 7 16 L -7 16 Q -11 16 -11 16 Z"
+                                                        fill="#2D2D2D"
+                                                    />
+
+                                                    {/* Legs (elegant proportions) */}
+                                                    <rect x="-9" y="56" width="8" height="44" rx="4" fill="#2D2D2D" />
+                                                    <rect x="1" y="56" width="8" height="44" rx="4" fill="#2D2D2D" />
+
+                                                    {/* Arms (relaxed position) */}
+                                                    <rect x="-17" y="18" width="6" height="32" rx="3" fill="#2D2D2D" transform="rotate(-8 -14 34)" />
+                                                    <rect x="11" y="18" width="6" height="32" rx="3" fill="#2D2D2D" transform="rotate(8 14 34)" />
+
+                                                    {/* Height Reference */}
+                                                    <line x1="24" y1="-12" x2="24" y2="100" stroke="#A0A0A0" strokeWidth="1" strokeDasharray="3,3" opacity="0.6" />
+                                                    <text x="30" y="45" className="text-[10px] fill-gray-400 font-sans italic" opacity="0.8">~170cm</text>
+                                                </g>
+                                            </motion.g>
+
+                                            {/* Viewing Distance Arc */}
+                                            <g opacity="0.25">
+                                                <path
+                                                    d="M 250 310 Q 270 335 400 310"
+                                                    stroke="#666666"
+                                                    strokeWidth="1.5"
+                                                    strokeDasharray="6,4"
+                                                    fill="none"
+                                                />
+                                                <circle cx="250" cy="310" r="3" fill="#666666" />
+                                                <circle cx="400" cy="310" r="3" fill="#666666" />
+                                                <rect x="305" y="320" width="60" height="18" fill="white" rx="9" opacity="0.9" />
+                                                <text x="335" y="331" className="text-[11px] fill-gray-600 font-mono" textAnchor="middle">
+                                                    {result.distance}
+                                                </text>
+                                            </g>
+
+                                            {/* Subtle Furniture Element (minimalist bench/pedestal for luxury context) */}
+                                            <motion.g
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: 0.8, duration: 0.6 }}
+                                                opacity="0.15"
+                                            >
+                                                <rect x="90" y="265" width="45" height="8" rx="1" fill="#1A1A1A" />
+                                                <rect x="95" y="273" width="35" height="4" fill="#1A1A1A" />
+                                            </motion.g>
                                         </svg>
                                     </div>
                                 </div>
+
 
                                 <div className="w-full md:w-1/2 bg-white p-12 flex flex-col justify-center">
                                     <div className="mb-8 flex items-center justify-between">
