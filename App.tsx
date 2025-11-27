@@ -65,11 +65,11 @@ const App = () => {
 
       <Hero onAnalyzeClick={scrollToScanner} lang={lang} />
       <ExplainerSection lang={lang} />
-      <ComparisonSection lang={lang} />
       <Process />
-      <Scanner id="scanner" lang={lang} />
+      <ComparisonSection lang={lang} />
       <Timeline lang={lang} />
       <OfferSection id="offer" lang={lang} />
+      <Scanner id="scanner" lang={lang} />
 
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 text-center border-t border-white/10">

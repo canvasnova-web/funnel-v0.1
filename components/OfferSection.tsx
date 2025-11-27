@@ -112,37 +112,33 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
 
     return (
         <section id={id} className="py-32 px-4 bg-gallery-black text-white relative overflow-hidden flex justify-center min-h-[800px] items-center">
-            {/* Background Texture - Noise & Ambient Light */}
-            <div className="absolute inset-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+            {/* Background Texture - Reduced Noise */}
+            <div className="absolute inset-0 opacity-5 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-int-orange blur-[150px] opacity-10 pointer-events-none" />
 
-            <div className="max-w-md w-full relative z-10 perspective-1000">
+            <div className="max-w-md w-full relative z-10">
                 <motion.div
-                    initial={{ y: 40, opacity: 0, rotateX: 10 }}
-                    whileInView={{ y: 0, opacity: 1, rotateX: 0 }}
+                    initial={{ y: 24, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.8, type: "spring", bounce: 0.4 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                     className={`relative rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 ${status !== 'idle' ? 'scale-[0.98] brightness-110' : ''}`}
                 >
 
-                    {/* Animated Border Beam with Metallic Gradient */}
+                    {/* Simplified Border */}
                     <div className="absolute inset-0 p-[1px] rounded-3xl overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-br from-neutral-700 via-neutral-800 to-neutral-900 rounded-3xl" />
                         <div className="absolute top-[-50%] left-[-50%] w-[200%] h-[200%] bg-[conic-gradient(from_0deg,transparent_0deg,transparent_340deg,#FF4F00_360deg)] animate-[spin_4s_linear_infinite] opacity-50" />
                     </div>
 
-                    {/* Card Content Container with Holographic Sheen */}
-                    <div className="relative bg-neutral-950 rounded-[23px] overflow-hidden h-full group/card">
-                        {/* Holographic Sheen on Hover */}
-                        <div className="absolute inset-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none overflow-hidden">
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-transparent translate-x-[-100%] group-hover/card:translate-x-[100%] transition-transform duration-1000 ease-out" style={{ transform: 'skewX(-20deg)' }} />
-                        </div>
-                        {/* Header Section */}
-                        <div className="bg-neutral-900 p-8 pb-10 relative border-b border-white/5">
-                            <div className="flex justify-between items-start mb-6">
+                    {/* Card Content Container */}
+                    <div className="relative bg-neutral-950 rounded-[23px] overflow-hidden h-full">
+                        {/* Header Section - Mobile Optimized */}
+                        <div className="bg-neutral-900 px-5 py-6 md:p-8 md:pb-10 relative">
+                            <div className="flex justify-between items-start mb-6 md:mb-8">
                                 <div>
-                                    <span className="font-mono text-[10px] text-gray-500 tracking-widest uppercase block mb-1">Pass Type</span>
-                                    <h3 className="text-2xl font-serif font-bold text-white tracking-tight">{currentVoucher.title}</h3>
+                                    <span className="font-mono text-[10px] text-white/40 tracking-widest uppercase block mb-2">Pass Type</span>
+                                    <h3 className="text-base md:text-2xl font-serif font-semibold md:font-bold text-white tracking-tight">{currentVoucher.title}</h3>
                                 </div>
                                 <div className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center">
                                     {currentVoucher.type === 'percentage' ? (
@@ -153,86 +149,79 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between">
+                            {/* Countdown Row - Mobile Optimized */}
+                            <div className="flex items-center justify-between bg-black/20 rounded-2xl px-4 md:px-5 py-3 md:py-4 border border-white/5">
                                 <div>
-                                    <span className="font-mono text-[10px] text-gray-500 tracking-widest uppercase block mb-1">{t.badge}</span>
+                                    <span className="font-mono text-[10px] text-white/40 tracking-widest uppercase block mb-1">ANGEBOT ENDET IN:</span>
                                     <div className="flex items-center gap-2">
-                                        <div className="w-2 h-2 bg-int-orange rounded-full animate-pulse shadow-[0_0_8px_rgba(255,79,0,0.8)]" style={{ animationDuration: '0.8s' }} />
-                                        <span className="text-white tracking-widest font-mono font-bold tabular-nums" style={{ fontVariantNumeric: 'tabular-nums', textShadow: '0 0 10px rgba(255,255,255,0.3)' }}>{formatTime(timeLeft)}</span>
+                                        <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-int-orange rounded-full animate-pulse shadow-[0_0_8px_rgba(255,79,0,0.8)]" style={{ animationDuration: '1.2s' }} />
+                                        <span className="text-white tracking-widest font-mono text-xs md:text-sm font-bold tabular-nums">{formatTime(timeLeft)}</span>
                                     </div>
                                 </div>
                                 <div className="text-right">
-                                    <span className="font-mono text-[10px] text-gray-500 tracking-widest uppercase block mb-1">Batch</span>
-                                    <span className="font-mono text-white text-sm">2025</span>
+                                    <span className="font-mono text-[10px] text-white/40 tracking-widest uppercase block mb-1">Batch</span>
+                                    <span className="font-mono text-white text-xs md:text-sm">2025</span>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Perforated Tear Line with Zigzag and Shadows */}
+                        {/* Perforated Tear Line */}
                         <div className="relative h-0 flex items-center justify-between px-3 z-20">
                             <div className="w-6 h-6 rounded-full bg-gallery-black -ml-6 shadow-inner" />
                             <div className="w-full mx-2 relative">
-                                {/* Zigzag Perforation */}
                                 <div className="w-full h-[2px] relative" style={{
                                     backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 8px, #404040 8px, #404040 10px)',
                                     backgroundSize: '18px 2px'
                                 }} />
-                                {/* Inner Shadow Effect */}
                                 <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-b from-black/40 to-transparent" />
                                 <div className="absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-t from-black/40 to-transparent" />
                             </div>
                             <div className="w-6 h-6 rounded-full bg-gallery-black -mr-6 shadow-inner" />
                         </div>
 
-                        {/* Body Section */}
-                        <div className="p-8 space-y-8 bg-neutral-950/50 backdrop-blur-sm">
-                            <div className="space-y-5">
-                                <div className="flex justify-between items-center text-sm group">
-                                    <span className="text-gray-400 group-hover:text-white transition-colors">{t.item1}</span>
-                                    <span className="font-mono text-gray-600 line-through decoration-white/20">€2.00</span>
+                        {/* Body Section - Mobile Optimized Spacing */}
+                        <div className="px-5 py-6 md:p-8 md:pt-10 space-y-8 md:space-y-10 bg-neutral-950/50 backdrop-blur-sm">
+                            {/* Benefits List - Mobile Optimized */}
+                            <div className="space-y-3 border-t border-white/10 pt-4 md:space-y-4 md:border-t md:border-white/5 md:pt-6">
+                                <div className="flex justify-between items-center text-xs md:text-sm">
+                                    <span className="text-white/70 md:text-white/60">{t.item1}</span>
+                                    <span className="font-mono text-[11px] md:text-xs text-white/30 line-through">€2.00</span>
                                 </div>
-                                <div className="flex justify-between items-center text-sm group">
-                                    <span className="text-gray-400 group-hover:text-white transition-colors">{t.item2}</span>
-                                    <span className="font-mono text-int-orange font-bold tracking-wider">{t.free}</span>
+                                <div className="flex justify-between items-center text-xs md:text-sm">
+                                    <span className="text-white/70 md:text-white/60">{t.item2}</span>
+                                    <span className="font-mono text-xs md:text-sm text-orange-400 font-semibold tracking-wider">{t.free}</span>
                                 </div>
-                                <div className="flex justify-between items-center text-sm group">
-                                    <span className="text-gray-400 group-hover:text-white transition-colors">{t.item3}</span>
-                                    <span className="font-mono text-gray-600 line-through decoration-white/20">€5.00</span>
-                                </div>
-
-                                {/* The Big Price Reveal */}
-                                <div className="pt-6 mt-6 border-t border-white/5 flex justify-between items-end">
-                                    <div>
-                                        <span className="font-mono text-[10px] text-gray-500 uppercase tracking-widest mb-1 block">{t.total}</span>
-                                        <span className="font-serif text-3xl text-gray-500 line-through decoration-int-orange/50 decoration-2">€7.00</span>
-                                    </div>
-                                    <div className="text-right">
-                                        <motion.div
-                                            initial={{ scale: 0.9 }}
-                                            animate={{ scale: 1 }}
-                                            transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
-                                            className="inline-block"
-                                        >
-                                            <span
-                                                className="font-sans text-7xl font-bold text-white tracking-tighter leading-none block"
-                                                style={{ textShadow: '0 0 30px rgba(255, 255, 255, 0.15)' }}
-                                            >
-                                                €0.00
-                                            </span>
-                                        </motion.div>
-                                        <span className="font-mono text-[10px] text-int-orange uppercase tracking-widest mt-2 block">
-                                            {t.vat} • {formatSavingsAmount(currentVoucher)}
-                                        </span>
-                                    </div>
+                                <div className="flex justify-between items-center text-xs md:text-sm">
+                                    <span className="text-white/70 md:text-white/60">{t.item3}</span>
+                                    <span className="font-mono text-[11px] md:text-xs text-white/30 line-through">€5.00</span>
                                 </div>
                             </div>
 
-                            {/* Interaction Area */}
-                            <div className="relative mt-4">
+                            {/* Price Block - Mobile Centered */}
+                            <div className="text-center space-y-2 md:space-y-3">
+                                <div className="flex items-center justify-center gap-3">
+                                    <span className="text-xs md:text-2xl font-serif text-white/30 line-through decoration-int-orange/50 decoration-2">€7.00</span>
+                                    <span className="font-mono text-[10px] text-white/40 uppercase tracking-widest">→</span>
+                                </div>
+                                <div>
+                                    <span
+                                        className="font-sans text-4xl md:text-5xl font-semibold text-white tracking-tight leading-none block"
+                                        style={{ textShadow: '0 0 20px rgba(0,0,0,0.8)' }}
+                                    >
+                                        €0.00
+                                    </span>
+                                    <span className="font-mono text-[10px] md:text-xs text-orange-300 uppercase tracking-[0.25em] mt-2 md:mt-3 block">
+                                        {t.vat} · {formatSavingsAmount(currentVoucher)}
+                                    </span>
+                                </div>
+                            </div>
+
+                            {/* CTA Button - Mobile Full Width */}
+                            <div className="relative">
                                 <button
                                     onClick={handleClaim}
                                     disabled={status !== 'idle'}
-                                    className="group w-full bg-white text-black py-5 rounded-xl font-mono text-sm font-bold tracking-[0.2em] uppercase flex items-center justify-center gap-3 hover:bg-gray-100 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-80 disabled:scale-100 relative overflow-hidden shadow-[0_0_20px_rgba(255,79,0,0.2)] hover:shadow-[0_0_30px_rgba(255,79,0,0.4)]"
+                                    className="group w-full bg-int-orange hover:bg-orange-600 active:bg-orange-700 text-white py-4 md:py-5 rounded-full font-sans text-xs md:text-sm font-semibold md:font-bold uppercase tracking-wide md:tracking-widest flex items-center justify-center gap-3 transition-all active:scale-95 disabled:opacity-80 disabled:scale-100 relative overflow-hidden shadow-[0_16px_40px_rgba(0,0,0,0.7)] md:shadow-xl md:shadow-int-orange/20 md:hover:scale-105 md:hover:shadow-[0_0_25px_rgba(255,255,255,0.25)]"
                                 >
                                     <AnimatePresence mode="wait">
                                         {status === 'idle' ? (
@@ -244,7 +233,6 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                                                 className="relative z-10 flex items-center gap-2"
                                             >
                                                 {t.cta_idle}
-                                                <MoveRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                             </motion.span>
                                         ) : (
                                             <motion.span
@@ -275,13 +263,11 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                                 ))}
                             </div>
 
-                            {/* Footer Code */}
-                            <div className="flex items-center justify-center gap-3 opacity-40 pt-2">
-                                <div className="h-px w-8 bg-white" />
-                                <p className="text-center font-mono text-[10px] text-white tracking-widest">
+                            {/* Fine Print - Simplified */}
+                            <div className="text-center pt-2">
+                                <p className="text-[10px] text-white/35 tracking-wide">
                                     {t.code_text.replace('{code}', currentVoucher.code)}
                                 </p>
-                                <div className="h-px w-8 bg-white" />
                             </div>
                         </div>
                     </div>

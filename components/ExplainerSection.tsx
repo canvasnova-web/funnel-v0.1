@@ -9,7 +9,7 @@ const ExplainerSection = ({ lang }: { lang: Lang }) => {
     const icons = [Sparkles, SlidersHorizontal, Gem];
 
     return (
-        <section className="py-20 md:py-32 px-6 bg-gallery-white relative z-20 border-b border-gray-100/50">
+        <section className="py-20 md:py-32 px-6 bg-gradient-to-b from-neutral-50 via-white to-neutral-100 relative z-20 border-b border-gray-100/50">
             <div className="max-w-6xl mx-auto">
                 <div className="flex flex-col space-y-6 md:grid md:grid-cols-3 md:gap-10 md:space-y-0">
                     {t.map((card, i) => (
@@ -40,7 +40,7 @@ const Card = ({ i, card, Icon }: { i: number, card: any, Icon: any }) => {
             onMouseMove={handleMouseMove}
             whileHover={{ y: -1, scale: 1.02 }}
             whileTap={{ y: -1, scale: 1.02 }}
-            className="group relative p-6 md:p-8 rounded-2xl border border-black/10 bg-white shadow-sm shadow-black/5 hover:shadow-md hover:shadow-black/10 active:shadow-md active:shadow-black/10 transition-all duration-300 cursor-default overflow-hidden"
+            className="group relative px-5 py-6 md:p-8 rounded-2xl border border-black/10 bg-white hover:shadow-md hover:shadow-black/10 active:shadow-md active:shadow-black/10 transition-all duration-300 cursor-default overflow-hidden"
         >
             <motion.div
                 className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
@@ -55,8 +55,8 @@ const Card = ({ i, card, Icon }: { i: number, card: any, Icon: any }) => {
                 }}
             />
             <div className="relative z-10 max-w-md mx-auto md:max-w-none">
-                <div className="h-10 w-10 rounded-xl bg-neutral-50 border border-black/5 flex items-center justify-center mb-5 text-neutral-700">
-                    <Icon className="w-5 h-5" strokeWidth={1.5} />
+                <div className="h-10 w-10 rounded-xl bg-neutral-50 border border-black/10 flex items-center justify-center mb-5 text-neutral-700">
+                    <Icon className="w-6 h-6" strokeWidth={1.5} />
                 </div>
                 <h3 className="font-serif text-lg md:text-xl font-semibold text-neutral-900 mb-2.5 tracking-tight leading-snug">{card.title}</h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">{card.text}</p>
