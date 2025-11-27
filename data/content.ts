@@ -57,6 +57,55 @@ export const CONTENT = {
                 scale_ref: "Größenvergleich"
             }
         },
+        curator_quiz: {
+            badge: "Kuratoren-Check",
+            headline: "Unsicher, was passt?",
+            sub: "Finden Sie in 30 Sekunden die perfekte Konfiguration für Ihren Raum.",
+            steps: {
+                space: {
+                    question: "Welcher Raum soll veredelt werden?",
+                    options: [
+                        { label: "Großes Wohnzimmer / Loft", icon: "Sofa" },
+                        { label: "Schlafzimmer / Ruhezone", icon: "Bed" },
+                        { label: "Flur / Entrée", icon: "Briefcase" },
+                        { label: "Kleine Nische / Home Office", icon: "Layout" }
+                    ]
+                },
+                light: {
+                    question: "Wie fällt das Licht?",
+                    options: [
+                        { label: "Fenster direkt gegenüber", sub: "Vorsicht: Reflexionen" },
+                        { label: "Seitliches Tageslicht", sub: "Ausgewogen" },
+                        { label: "Wenig Licht / Kunstlicht", sub: "Spots & Akzente" }
+                    ]
+                },
+                wall: {
+                    question: "Wie sieht die Wand aus?",
+                    options: [
+                        { label: "Klassisch Weiß", sub: "Heller Untergrund" },
+                        { label: "Dunkel / Farbig", sub: "Kontrastreich" },
+                        { label: "Beton / Stein / Rau", sub: "Industriell / Texturiert" }
+                    ]
+                },
+                style: { // Renamed to 'vibe' in logic but keeping key 'style' or changing to 'vibe'? User said "Step 4: The Vibe". Let's change key to 'vibe' to match logic, but need to update component too.
+                    question: "Was ist das Ziel?",
+                    options: [
+                        { label: "Statement / Wow-Effekt", sub: "Maximaler Fokus" },
+                        { label: "Gemütlichkeit / Akustik", sub: "Wärme & Ruhe" },
+                        { label: "Galerie-Look / Clean", sub: "Modern & Hochwertig" }
+                    ]
+                }
+            },
+            result: {
+                badge: "Ihre ideale Konfiguration",
+                headline: "Das Kuratoren-Ergebnis",
+                material_label: "Empfohlenes Material",
+                frame_label: "Empfohlener Rahmen",
+                format_label: "Empfohlenes Format",
+                cta: "Konfiguration merken & Ticket sichern",
+                restart: "Neu starten"
+            }
+        },
         timeline: {
             badge: "Der Manufaktur-Prozess",
             headline: "Ihr Weg zum Unikat.",
@@ -144,6 +193,55 @@ export const CONTENT = {
                 cta: "Use This Configuration",
                 why: "Why?",
                 scale_ref: "Scale Reference"
+            }
+        },
+        curator_quiz: {
+            badge: "Curator Check",
+            headline: "Unsure what fits?",
+            sub: "Find the perfect configuration for your room in 30 seconds.",
+            steps: {
+                space: {
+                    question: "Which room is it for?",
+                    options: [
+                        { label: "Large Living Room / Loft", icon: "Sofa" },
+                        { label: "Bedroom / Quiet Zone", icon: "Bed" },
+                        { label: "Hallway / Entry", icon: "Briefcase" },
+                        { label: "Small Niche / Home Office", icon: "Layout" }
+                    ]
+                },
+                light: {
+                    question: "How is the lighting?",
+                    options: [
+                        { label: "Window directly opposite", sub: "Caution: Reflections" },
+                        { label: "Side Daylight", sub: "Balanced" },
+                        { label: "Low Light / Artificial Spots", sub: "Spots & Accents" }
+                    ]
+                },
+                wall: {
+                    question: "What does the wall look like?",
+                    options: [
+                        { label: "Classic White", sub: "Bright Background" },
+                        { label: "Dark / Colored", sub: "High Contrast" },
+                        { label: "Concrete / Stone / Rough", sub: "Industrial / Textured" }
+                    ]
+                },
+                style: {
+                    question: "What is the goal?",
+                    options: [
+                        { label: "Statement / Wow-Effect", sub: "Maximum Focus" },
+                        { label: "Cozy / Acoustic", sub: "Warmth & Silence" },
+                        { label: "Gallery Look / Clean", sub: "Modern & Premium" }
+                    ]
+                }
+            },
+            result: {
+                badge: "Your Ideal Configuration",
+                headline: "The Curator Result",
+                material_label: "Recommended Material",
+                frame_label: "Recommended Frame",
+                format_label: "Recommended Format",
+                cta: "Save Configuration & Secure Ticket",
+                restart: "Restart"
             }
         },
         timeline: {

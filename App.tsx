@@ -5,7 +5,7 @@ import Hero from './components/Hero';
 import ExplainerSection from './components/ExplainerSection';
 import ComparisonSection from './components/ComparisonSection';
 import Process from './components/Process';
-import Scanner from './components/Scanner';
+import CuratorQuiz from './components/CuratorQuiz';
 import Timeline from './components/Timeline';
 import OfferSection from './components/OfferSection';
 
@@ -69,7 +69,7 @@ const App = () => {
       <ComparisonSection lang={lang} />
       <Timeline lang={lang} />
       <OfferSection id="offer" lang={lang} />
-      <Scanner id="scanner" lang={lang} />
+      <CuratorQuiz id="scanner" lang={lang} />
 
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 text-center border-t border-white/10">
