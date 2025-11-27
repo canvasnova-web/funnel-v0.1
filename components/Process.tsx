@@ -3,7 +3,7 @@ import { Check, Sparkles, Bot, User, CheckCircle2, Info, Sliders, ChevronLeft, C
 import { useLanguage } from '../contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Process: React.FC = () => {
+const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
     const { t } = useLanguage();
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -424,7 +424,10 @@ const Process: React.FC = () => {
 
                 {/* CTA */}
                 <div className="mt-16 md:mt-24 flex justify-center pb-12 md:pb-0">
-                    <button className="bg-gallery-black text-white px-10 py-5 rounded-full font-mono text-xs uppercase tracking-widest hover:bg-int-orange hover:shadow-[0_10px_40px_-10px_rgba(255,79,0,0.6)] transition-all duration-300 flex items-center gap-3">
+                    <button
+                        onClick={onCtaClick}
+                        className="bg-gallery-black text-white px-10 py-5 rounded-full font-mono text-xs uppercase tracking-widest hover:bg-int-orange hover:shadow-[0_10px_40px_-10px_rgba(255,79,0,0.6)] transition-all duration-300 flex items-center gap-3"
+                    >
                         {t.process.cta}
                     </button>
                 </div>

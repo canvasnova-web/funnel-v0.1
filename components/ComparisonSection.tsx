@@ -4,7 +4,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CONTENT } from '../data/content';
 import { Lang } from '../types';
 
-const ComparisonSection = ({ lang }: { lang: Lang }) => {
+interface ComparisonSectionProps {
+    id?: string;
+    lang: Lang;
+    onCtaClick?: () => void;
+}
+
+const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => {
     const t = CONTENT[lang].comparison;
     const [expandedFeature, setExpandedFeature] = useState<number>(0); // First feature open by default
 
@@ -58,7 +64,7 @@ const ComparisonSection = ({ lang }: { lang: Lang }) => {
     };
 
     return (
-        <section className="py-24 px-4 md:px-6 bg-[#FAFAFA] relative overflow-hidden">
+        <section id={id} className="py-24 px-4 md:px-6 bg-[#FAFAFA] relative overflow-hidden">
             <div
                 className="absolute inset-0 opacity-[0.015] pointer-events-none"
                 style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}
@@ -170,7 +176,10 @@ const ComparisonSection = ({ lang }: { lang: Lang }) => {
                                 <span className="text-[10px] text-neutral-500 uppercase tracking-widest font-semibold">{t.col2.impact}</span>
                             </div>
                             {/* CTA */}
-                            <button className="w-full bg-gallery-black text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-int-orange transition-colors shadow-sm mt-4">
+                            <button
+                                onClick={onCtaClick}
+                                className="w-full bg-gallery-black text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-int-orange transition-colors shadow-sm mt-4"
+                            >
                                 {t.col2.cta}
                             </button>
                         </motion.div>
@@ -313,7 +322,10 @@ const ComparisonSection = ({ lang }: { lang: Lang }) => {
                                 Galerie-Qualität ohne Galeriepreis
                             </p>
 
-                            <button className="w-full bg-white text-neutral-900 py-4 rounded-full text-sm font-semibold shadow-lg hover:bg-neutral-100 transition-colors">
+                            <button
+                                onClick={onCtaClick}
+                                className="w-full bg-white text-neutral-900 py-4 rounded-full text-sm font-semibold shadow-lg hover:bg-neutral-100 transition-colors"
+                            >
                                 Mit meinem Raum starten
                             </button>
                         </div>

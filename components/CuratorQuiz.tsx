@@ -7,6 +7,7 @@ import { Lang } from '../types';
 interface CuratorQuizProps {
     id: string;
     lang: Lang;
+    onCtaClick?: () => void;
 }
 
 type Step = 'space' | 'light' | 'wall' | 'style' | 'result';
@@ -18,7 +19,7 @@ interface QuizState {
     style: number | null;
 }
 
-const CuratorQuiz: React.FC<CuratorQuizProps> = ({ id, lang }) => {
+const CuratorQuiz: React.FC<CuratorQuizProps> = ({ id, lang, onCtaClick }) => {
     const t = CONTENT[lang].curator_quiz;
     const [currentStep, setCurrentStep] = useState<Step>('space');
     const [answers, setAnswers] = useState<QuizState>({
@@ -179,7 +180,7 @@ const CuratorQuiz: React.FC<CuratorQuizProps> = ({ id, lang }) => {
 
                                             <div className="flex flex-col gap-4 max-w-md mx-auto">
                                                 <button
-                                                    onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })}
+                                                    onClick={onCtaClick}
                                                     className="w-full bg-gallery-black text-white py-4 rounded-lg hover:bg-int-orange transition-colors font-mono text-sm uppercase tracking-widest flex items-center justify-center gap-3 group shadow-lg hover:shadow-xl hover:shadow-int-orange/20"
                                                 >
                                                     {t.result.cta}

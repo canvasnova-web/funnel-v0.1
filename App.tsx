@@ -8,6 +8,7 @@ import Process from './components/Process';
 import CuratorQuiz from './components/CuratorQuiz';
 import Timeline from './components/Timeline';
 import OfferSection from './components/OfferSection';
+import OfferSectionSecondary from './components/OfferSectionSecondary';
 
 // Main App Component
 const App = () => {
@@ -20,8 +21,11 @@ const App = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToScanner = () => {
-    document.getElementById('scanner')?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -54,7 +58,7 @@ const App = () => {
             </div>
 
             <button
-              onClick={scrollToScanner}
+              onClick={() => scrollToSection('quiz')}
               className="hidden md:block text-neutral-500 hover:text-black px-5 py-2 text-sm font-medium transition-colors"
             >
               {CONTENT[lang].nav.cta}
@@ -63,13 +67,14 @@ const App = () => {
         </div>
       </nav>
 
-      <Hero onAnalyzeClick={scrollToScanner} lang={lang} />
+      <Hero onAnalyzeClick={() => scrollToSection('ticket')} lang={lang} />
       <ExplainerSection lang={lang} />
-      <Process />
-      <ComparisonSection lang={lang} />
+      <Process onCtaClick={() => scrollToSection('ticket')} />
+      <OfferSection id="ticket" lang={lang} />
+      <ComparisonSection id="comparison" lang={lang} onCtaClick={() => scrollToSection('ticket')} />
       <Timeline lang={lang} />
-      <OfferSection id="offer" lang={lang} />
-      <CuratorQuiz id="scanner" lang={lang} />
+      <CuratorQuiz id="quiz" lang={lang} onCtaClick={() => scrollToSection('ticket')} />
+      <OfferSectionSecondary lang={lang} />
 
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 text-center border-t border-white/10">

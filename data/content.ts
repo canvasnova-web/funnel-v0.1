@@ -132,6 +132,17 @@ export const CONTENT = {
             cta_loading: "Aktiviere Zugang...",
             code_text: "Ihr Vorteilscode ist bereits hinterlegt."
         },
+        secondary_offer: {
+            badge: "Creator Pass",
+            headline: "Noch unsicher? Starten Sie risikofrei.",
+            sub: "Testen Sie den Prozess ohne Kosten.",
+            item1: "3x Design-Entwürfe",
+            item2: "Visualisierung",
+            item3: "Gutschein",
+            price_label: "Kostenlos",
+            price: "€0.00",
+            cta: "Creator Pass sichern"
+        },
         footer: {
             desc: "Technologie trifft Handwerk. Made in München.",
             rights: "© 2025 canvasnova. Eine Marke der Berberich & Hühn GbR."
@@ -269,6 +280,17 @@ export const CONTENT = {
             cta_idle: "Claim Free Creator Pass",
             cta_loading: "Activating Access...",
             code_text: "Code {code} Auto-Applied"
+        },
+        secondary_offer: {
+            badge: "Creator Pass",
+            headline: "Still unsure? Start risk-free.",
+            sub: "Try the process at no cost.",
+            item1: "3x Design Drafts",
+            item2: "Visualization",
+            item3: "Voucher",
+            price_label: "Free",
+            price: "€0.00",
+            cta: "Claim Creator Pass"
         },
         footer: {
             desc: "Bridging the gap between artificial intelligence and human emotion through the medium of interior space.",
