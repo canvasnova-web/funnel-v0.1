@@ -37,16 +37,17 @@ const App = () => {
 
           <div className="flex items-center gap-6">
             {/* Language Toggle */}
-            <div className="flex items-center bg-gray-100 rounded-full p-1 border border-gray-200">
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => setLang('de')}
-                className={`px-3 py-1 rounded-full text-[10px] font-bold transition-all ${lang === 'de' ? 'bg-white shadow-sm text-black' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`px-2 py-1 text-[10px] font-bold transition-all ${lang === 'de' ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
               >
                 DE
               </button>
+              <span className="text-gray-300 text-[10px]">/</span>
               <button
                 onClick={() => setLang('en')}
-                className={`px-3 py-1 rounded-full text-[10px] font-bold transition-all ${lang === 'en' ? 'bg-white shadow-sm text-black' : 'text-gray-400 hover:text-gray-600'}`}
+                className={`px-2 py-1 text-[10px] font-bold transition-all ${lang === 'en' ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
               >
                 EN
               </button>
