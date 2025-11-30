@@ -274,13 +274,6 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                                             transition={{ duration: 0.3, ease: "easeInOut" }}
                                         >
                                             <div className="px-5 pb-5 space-y-2 border-t border-neutral-100 pt-4 mt-2">
-                                                {/* canvasnova - Highlighted */}
-                                                <div className="bg-orange-50 rounded-2xl px-4 py-3">
-                                                    <div className="flex justify-between items-start mb-1">
-                                                        <span className="text-xs font-bold text-orange-600 uppercase tracking-wide">canvasnova</span>
-                                                    </div>
-                                                    <p className="text-sm text-neutral-900 font-medium leading-relaxed">{f.cn}</p>
-                                                </div>
 
                                                 {/* Industrie-Poster */}
                                                 <div className="px-4 py-2">
@@ -288,6 +281,14 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                                                         <span className="text-xs font-bold text-neutral-500 uppercase tracking-wide">Poster</span>
                                                     </div>
                                                     <p className="text-sm text-neutral-600 leading-relaxed">{f.mass}</p>
+                                                </div>
+
+                                                {/* canvasnova - Highlighted */}
+                                                <div className="bg-orange-50 rounded-2xl px-4 py-3">
+                                                    <div className="flex justify-between items-start mb-1">
+                                                        <span className="text-xs font-bold text-orange-600 uppercase tracking-wide">canvasnova</span>
+                                                    </div>
+                                                    <p className="text-sm text-neutral-900 font-medium leading-relaxed">{f.cn}</p>
                                                 </div>
 
                                                 {/* Galerie */}
@@ -326,7 +327,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                                 onClick={onCtaClick}
                                 className="w-full bg-white text-neutral-900 py-4 rounded-full text-sm font-semibold shadow-lg hover:bg-neutral-100 transition-colors"
                             >
-                                Mit meinem Raum starten
+                                Kuratieren
                             </button>
                         </div>
                     </motion.div>

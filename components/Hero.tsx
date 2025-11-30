@@ -135,7 +135,7 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
             >
                 {/* Context Label */}
                 <p className="text-xs text-neutral-500 uppercase tracking-wide text-center mb-6 opacity-80">
-                    Verwandlung Ihres Raums
+                    Erleben Sie den Unterschied.
                 </p>
 
                 {/* Slider Card */}

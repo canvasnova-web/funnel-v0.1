@@ -3,7 +3,7 @@ import { Check, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONTENT } from '../data/content';
 import { Lang } from '../types';
-import { getVoucherFromURL, getVoucherFromBackendAPI, getRedirectURL, getVoucherValidUntil } from '../utils/voucher';
+import { getVoucherFromURL, getVoucherFromBackendAPI, getRedirectURL } from '../utils/voucher';
 import { VoucherConfig } from '../data/vouchers';
 
 const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
@@ -11,15 +11,6 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
     const [status, setStatus] = useState<'idle' | 'claiming' | 'redirecting'>('idle');
     const [currentVoucher, setCurrentVoucher] = useState<VoucherConfig>(getVoucherFromURL());
     const [isLoading, setIsLoading] = useState(true);
-
-    const calculateTimeLeft = () => {
-        const now = new Date();
-        const endDate = getVoucherValidUntil(currentVoucher);
-        const diff = Math.floor((endDate.getTime() - now.getTime()) / 1000);
-        return Math.max(0, diff);
-    };
-
-    const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
     useEffect(() => {
         const loadVoucherFromAPI = async () => {
@@ -40,20 +31,8 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
         return () => window.removeEventListener('popstate', handleURLChange);
     }, []);
 
-    useEffect(() => {
-        const timer = setInterval(() => setTimeLeft(calculateTimeLeft()), 1000);
-        return () => clearInterval(timer);
-    }, [currentVoucher]);
-
-    const formatTime = (seconds: number) => {
-        const h = Math.floor(seconds / 3600);
-        const m = Math.floor((seconds % 3600) / 60);
-        const s = seconds % 60;
-        return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-    };
-
     const handleClaim = () => {
-        navigator.clipboard.writeText(currentVoucher.code);
+        localStorage.setItem('appliedPromoCode', currentVoucher.code);
         setStatus('claiming');
         setTimeout(() => {
             setStatus('redirecting');
@@ -64,57 +43,45 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
     };
 
     return (
-        <section className="py-24 px-4 bg-white border-t border-neutral-100">
+        <section className="py-24 md:py-32 px-4 bg-zinc-50">
             <div className="max-w-7xl mx-auto">
                 <motion.div
                     initial={{ y: 20, opacity: 0 }}
                     whileInView={{ y: 0, opacity: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-neutral-50 rounded-3xl p-8 md:p-12 lg:p-16 border border-neutral-200"
                 >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
 
-                        {/* Left Column */}
-                        <div className="space-y-8">
-                            {/* Badge */}
-                            <div className="flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-orange-500" />
-                                <span className="text-sm font-medium text-neutral-700">
-                                    Zeitlich limitiert
-                                </span>
-                            </div>
-
+                        {/* Left Column - Offer */}
+                        <div className="space-y-10">
                             {/* Headline */}
                             <div>
-                                <h2 className="text-5xl md:text-6xl font-serif text-neutral-900 tracking-tight leading-[1.1] mb-4">
-                                    0→1 Wandkunst
+                                <h2 className="text-6xl md:text-7xl lg:text-8xl font-serif text-zinc-900 tracking-tight leading-[1.05] mb-6">
+                                    Ihr Unikat wartet.
                                 </h2>
-                                <h3 className="text-4xl md:text-5xl font-serif text-neutral-900 tracking-tight leading-[1.1]">
-                                    in <span className="italic text-neutral-500">48 Stunden</span>
-                                </h3>
+                                <p className="text-xl md:text-2xl text-zinc-600 font-light leading-relaxed">
+                                    Vom leeren Raum zum Gesprächsstoff in wenigen Klicks. Testen Sie es jetzt risikofrei.
+                                </p>
                             </div>
 
-                            {/* Description */}
-                            <p className="text-lg text-neutral-600 leading-relaxed max-w-md">
-                                Von der Idee zum fertigen Design. Wir erstellen dein Unikat, visualisieren es in deinem Raum und liefern dir 3 hochauflösende Entwürfe. Komplett kostenlos.
-                            </p>
-
                             {/* Price */}
-                            <div className="pt-4">
-                                <div className="flex items-baseline gap-3 mb-1">
-                                    <span className="text-5xl md:text-6xl font-serif font-bold text-neutral-900">
-                                        €0.00
+                            <div className="pt-2">
+                                <div className="flex items-baseline gap-3 mb-2">
+                                    <span className="text-6xl md:text-7xl font-serif font-bold text-zinc-900">
+                                        0,00 €
                                     </span>
-                                    <span className="text-lg text-neutral-400">kostenloser Start</span>
                                 </div>
+                                <span className="text-sm text-zinc-500 uppercase tracking-wider font-medium">
+                                    Kostenlos testen
+                                </span>
                             </div>
 
                             {/* CTA */}
                             <button
                                 onClick={handleClaim}
                                 disabled={status !== 'idle'}
-                                className="w-full max-w-md bg-neutral-900 hover:bg-black text-white py-5 rounded-xl font-sans text-sm font-bold uppercase tracking-widest transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-80 disabled:scale-100 shadow-lg"
+                                className="w-full max-w-md bg-zinc-900 hover:bg-zinc-800 text-white py-4 px-6 rounded-full font-sans text-sm font-semibold tracking-wide transition-all duration-200 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                             >
                                 <AnimatePresence mode="wait">
                                     {status === 'idle' ? (
@@ -124,7 +91,7 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
                                             animate={{ opacity: 1 }}
                                             exit={{ opacity: 0 }}
                                         >
-                                            Jetzt starten
+                                            Account erstellen & loslegen →
                                         </motion.span>
                                     ) : (
                                         <motion.span
@@ -139,73 +106,37 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
                                     )}
                                 </AnimatePresence>
                             </button>
-
-                            {/* Countdown */}
-                            <p className="text-sm text-neutral-500 flex items-center gap-2">
-                                <span className="w-1.5 h-1.5 rounded-full bg-int-orange animate-pulse" />
-                                Angebot endet in {formatTime(timeLeft)}
-                            </p>
                         </div>
 
                         {/* Right Column - Benefits */}
-                        <div className="space-y-4 lg:pl-8">
-                            <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-neutral-200">
-                                <div className="w-6 h-6 rounded-full bg-neutral-900 flex items-center justify-center flex-shrink-0">
-                                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                        <div className="space-y-4">
+                            <div className="flex items-start gap-4">
+                                <div className="w-5 h-5 rounded-full bg-zinc-900 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <Check className="w-3 h-3 text-white" strokeWidth={2.5} />
                                 </div>
                                 <div>
-                                    <h4 className="font-medium text-neutral-900 mb-1">3x Design-Entwürfe</h4>
-                                    <p className="text-sm text-neutral-500">Hochauflösende Unikate für deine Wand</p>
+                                    <h4 className="font-medium text-zinc-900 mb-1">3x Design-Entwürfe</h4>
+                                    <p className="text-sm text-zinc-500">Hochauflösende Unikate für deine Wand</p>
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-neutral-200">
-                                <div className="w-6 h-6 rounded-full bg-neutral-900 flex items-center justify-center flex-shrink-0">
-                                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                            <div className="flex items-start gap-4">
+                                <div className="w-5 h-5 rounded-full bg-zinc-900 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <Check className="w-3 h-3 text-white" strokeWidth={2.5} />
                                 </div>
                                 <div>
-                                    <h4 className="font-medium text-neutral-900 mb-1">Raum-Visualisierung</h4>
-                                    <p className="text-sm text-neutral-500">Sieh das Ergebnis an deiner echten Wand</p>
+                                    <h4 className="font-medium text-zinc-900 mb-1">Raum-Visualisierung</h4>
+                                    <p className="text-sm text-zinc-500">Sieh das Ergebnis an deiner echten Wand</p>
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-neutral-200">
-                                <div className="w-6 h-6 rounded-full bg-neutral-900 flex items-center justify-center flex-shrink-0">
-                                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                            <div className="flex items-start gap-4">
+                                <div className="w-5 h-5 rounded-full bg-zinc-900 flex items-center justify-center flex-shrink-0 mt-1">
+                                    <Check className="w-3 h-3 text-white" strokeWidth={2.5} />
                                 </div>
                                 <div>
-                                    <h4 className="font-medium text-neutral-900 mb-1">Material-Beratung</h4>
-                                    <p className="text-sm text-neutral-500">Welches Finish passt zu deinem Raum?</p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-neutral-200">
-                                <div className="w-6 h-6 rounded-full bg-neutral-900 flex items-center justify-center flex-shrink-0">
-                                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
-                                </div>
-                                <div>
-                                    <h4 className="font-medium text-neutral-900 mb-1">€5.00 Produktions-Guthaben</h4>
-                                    <p className="text-sm text-neutral-500">Sofort anrechenbar bei Bestellung</p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-neutral-200">
-                                <div className="w-6 h-6 rounded-full bg-neutral-900 flex items-center justify-center flex-shrink-0">
-                                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
-                                </div>
-                                <div>
-                                    <h4 className="font-medium text-neutral-900 mb-1">48h Lieferzeit</h4>
-                                    <p className="text-sm text-neutral-500">Deine Designs in 2 Tagen bereit</p>
-                                </div>
-                            </div>
-
-                            <div className="flex items-start gap-4 p-4 bg-white rounded-xl border border-neutral-200">
-                                <div className="w-6 h-6 rounded-full bg-neutral-900 flex items-center justify-center flex-shrink-0">
-                                    <Check className="w-4 h-4 text-white" strokeWidth={3} />
-                                </div>
-                                <div>
-                                    <h4 className="font-medium text-neutral-900 mb-1">Unbegrenzte Revisionen</h4>
-                                    <p className="text-sm text-neutral-500">Bis du 100% zufrieden bist</p>
+                                    <h4 className="font-medium text-zinc-900 mb-1">5€ Startguthaben</h4>
+                                    <p className="text-sm text-zinc-500">Sofort anrechenbar bei Bestellung</p>
                                 </div>
                             </div>
                         </div>

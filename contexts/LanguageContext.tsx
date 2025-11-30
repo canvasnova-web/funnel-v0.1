@@ -104,7 +104,9 @@ const translations: Record<Language, Translations> = {
             specs: { color: "Farbraum", res: "Auflösung", mat: "Basismaterial", weight: "Gewicht" }
         },
         process: {
-            tag: "Der Beweis", l1: "SO EINFACH ENTSTEHT", l2: "IHR UNIKAT.",
+            tag: "Wie es funktioniert",
+            l1: "VOM GEDANKEN",
+            l2: "ZUM MEISTERWERK.",
             step0: "DEINE EINGABE",
             step1: "BASIS-PARAMETER",
             step2: "MEDIUM WÄHLEN",
@@ -168,9 +170,9 @@ const translations: Record<Language, Translations> = {
                 }
             },
             bullets: [
-                { title: "Intuitiver Kurator", desc: "Kein Fachwissen nötig. Unser Assistent führt Sie Schritt für Schritt zum perfekten Ergebnis." },
-                { title: "Gigapixel-Schärfe", desc: "Speziell für Großformate entwickelt. Gestochen scharf, auch auf 2 Metern Breite." },
-                { title: "Handmade in Germany", desc: "Echte Manufaktur-Arbeit. Aufgezogen auf Alu-Dibond oder unter Acrylglas." }
+                { title: "Ihr persönlicher KI-Kurator.", desc: "Beschreiben Sie Ihre Vision. Unser Assistent verwandelt Ihre Wünsche in visuelle Vorschläge. Ohne Vorkenntnisse." },
+                { title: "Brillante Auflösung.", desc: "Jedes Detail wird perfektioniert. Gestochen scharf auch im Großformat – für eine Wirkung, die den Raum dominiert." },
+                { title: "Handmade in Germany.", desc: "Produziert im besten Fotolabor der Welt. In 5-7 Tagen hängt Ihr Unikat bei Ihnen. Fertig montiert." }
             ],
             cta: "Jetzt Ausprobieren"
         },
@@ -194,7 +196,7 @@ const translations: Record<Language, Translations> = {
     en: {
         nav: {
             process: "Process", materials: "Materials", gallery: "Gallery", faq: "FAQ",
-            account: "Account", start: "Start Creating", shipping: "Global Shipping via WhiteWall®", madeIn: "Made in Germany"
+            account: "Account", start: "Start Creating", shipping: "Global Shipping", madeIn: "Made in Germany"
         },
         hero: {
             l1: "NO MORE", l2: "GENERIC DECOR.",

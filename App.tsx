@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { Toaster } from 'sonner';
 import { CONTENT } from './data/content';
 import { Lang } from './types';
 import Hero from './components/Hero';
-import ExplainerSection from './components/ExplainerSection';
+import FeaturesBento from './components/FeaturesBento';
 import ComparisonSection from './components/ComparisonSection';
 import Process from './components/Process';
 import CuratorQuiz from './components/CuratorQuiz';
@@ -30,6 +31,7 @@ const App = () => {
 
   return (
     <main className="bg-gallery-white min-h-screen text-gallery-black selection:bg-int-orange selection:text-white font-sans">
+      <Toaster position="bottom-center" richColors />
       {/* Header */}
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'py-4 bg-white/80 backdrop-blur-md border-b border-gray-100' : 'py-8 bg-transparent'}`}>
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
@@ -68,7 +70,7 @@ const App = () => {
       </nav>
 
       <Hero onAnalyzeClick={() => scrollToSection('ticket')} lang={lang} />
-      <ExplainerSection lang={lang} />
+      <FeaturesBento lang={lang} />
       <Process onCtaClick={() => scrollToSection('ticket')} />
       <OfferSection id="ticket" lang={lang} />
       <ComparisonSection id="comparison" lang={lang} onCtaClick={() => scrollToSection('ticket')} />

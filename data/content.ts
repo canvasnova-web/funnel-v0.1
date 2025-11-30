@@ -6,11 +6,11 @@ export const CONTENT = {
             lang_en: "EN"
         },
         hero: {
-            badge: "DAS ENDE DER LEEREN WÄNDE",
-            headline_1: "Kein Poster,",
-            headline_2: "das jeder hat.",
-            sub_headline: "Erschaffen Sie echte Galerie-Unikate, die es weltweit nur einmal gibt. Perfekt auf Ihren Raum abgestimmt.",
-            cta: "JETZT UNIKAT ENTWERFEN →",
+            badge: "Bereits über 1.000 Entwürfe generiert.",
+            headline_1: "Ihr Zuhause verdient",
+            headline_2: "mehr als Standard.",
+            sub_headline: "Entwerfen Sie in Minuten echte Galerie-Kunst, die perfekt zu Ihrem Raum passt. Einzigartig weltweit. Ohne künstlerisches Talent.",
+            cta: "Jetzt kostenlos entwerfen →",
             before: "Vorher:",
             after: "Nachher: canvasnova"
         },
@@ -28,7 +28,7 @@ export const CONTENT = {
                 acquisition: "Erwerb",
                 price: "Preismodell"
             },
-            col1: { title: "Industrie-Poster", sub: "Poster & Drucke", val1: "Massenware (1 Mio. Kopien)", val2: "Dünnes Poster-Papier", val3: "Von der Stange", val4: "Wegwerf-Deko", price: "~ €40", impact: "Billig" },
+            col1: { title: "Massenware", sub: "Poster & Drucke", val1: "Endlose Kopien", val2: "Dünnes Poster-Papier", val3: "Von der Stange", val4: "Wegwerf-Deko", price: "~ €40", impact: "Billig" },
             col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Museums-Qualität (Hahnemühle/Alu)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €140", impact: "Fair", cta: "Kuratieren" },
             col3: { title: "Galerie", sub: "Traditionell", val1: "Original", val2: "Leinwand / Öl", val3: "Exklusiver Zugang nötig", val4: "Kapitalanlage", price: "€3.000+", impact: "Überteuert" }
         },
@@ -108,29 +108,46 @@ export const CONTENT = {
         },
         timeline: {
             badge: "Der Manufaktur-Prozess",
-            headline: "Ihr Weg zum Unikat.",
+            headline: "Vom Gedanken zum Meisterwerk.",
             steps: [
-                { title: "Ihre Vision.", desc: "Wählen Sie eine Richtung oder beschreiben Sie ein Gefühl. Kein Fachwissen nötig – nur Ihr Geschmack." },
-                { title: "Die Entstehung.", desc: "Unser Algorithmus erschafft 3 exklusive Entwürfe. Hochauflösend und perfekt auf Großdruck optimiert." },
-                { title: "Der Feinschliff.", desc: "Sie haben die Kontrolle. Wählen Sie Ihren Favoriten und verfeinern Sie Details, bis es 'Klick' macht." },
-                { title: "Die Veredelung.", desc: "Museums-Acrylglas, Alu-Dibond oder Leinen? Wählen Sie das Finish, das Ihr Werk zum Strahlen bringt." },
-                { title: "Das 4-Augen-Prinzip.", desc: "Bevor wir drucken, prüft ein Experte jede Datei manuell auf Farbechtheit und Auflösung." },
-                { title: "Die Ankunft.", desc: "Sicher verpackt in unserer Spezial-Box. Auspacken, aufhängen, staunen." }
+                { title: "Ihr persönlicher KI-Kurator.", desc: "Beschreiben Sie Ihre Vision. Unser Assistent verwandelt Ihre Wünsche in visuelle Vorschläge. Ohne Vorkenntnisse." },
+                { title: "Brillante Auflösung.", desc: "Jedes Detail wird perfektioniert. Gestochen scharf auch im Großformat – für eine Wirkung, die den Raum dominiert." },
+                { title: "Handmade in Germany.", desc: "Produziert im besten Fotolabor der Welt. In 5-7 Tagen hängt Ihr Unikat bei Ihnen. Fertig montiert." }
             ]
         },
         offer: {
-            badge: "Angebot endet in:",
-            title: "EARLY ACCESS",
-            sub: "Zeitlich Limitiert",
-            item1: "3x Design-Entwürfe (High-Res)",
-            item2: "Raum-Visualisierung Pro",
-            item3: "Produktions-Guthaben",
-            free: "GRATIS",
-            total: "Gesamt",
-            vat: "INKL. MWST",
-            cta_idle: "JETZT KOSTENLOS EINLÖSEN →",
-            cta_loading: "Aktiviere Zugang...",
-            code_text: "Ihr Vorteilscode ist bereits hinterlegt."
+            badges: {
+                left: "Limitiertes Angebot",
+                right: "Aktivierter Partner-Code"
+            },
+            headline: "Creator-Zugang freigeschaltet.",
+            subheadline: "Testen Sie unsere KI-Kunst-Engine heute kostenlos. Wir übernehmen die API-Gebühren für Sie.",
+            dealStack: {
+                item1: {
+                    label: "Creator-Gebühr",
+                    original: "2,00 €",
+                    discounted: "0,00 €"
+                },
+                item2: {
+                    label: "Startguthaben",
+                    value: "5,00 €"
+                },
+                item3: {
+                    label: "Versand",
+                    value: "Kostenlos"
+                }
+            },
+            voucherCard: {
+                badge: "Aktivierter Partner-Code",
+                bigText: "GRATIS STARTEN",
+                subtext: "Keine Zahlungsdaten erforderlich.",
+                codeLabel: "Ihr Code (Auto-aktiviert)"
+            },
+            copyArea: {
+                copiedToast: "Code kopiert!"
+            },
+            cta: "Account erstellen & loslegen →",
+            ctaLoading: "Wird aktiviert..."
         },
         secondary_offer: {
             badge: "Creator Pass",
@@ -178,7 +195,7 @@ export const CONTENT = {
                 price: "Price Model"
             },
             col1: { title: "Mass Market", sub: "Posters & Prints", val1: "1 of 1,000,000", val2: "Poster Paper", val3: "Instant", val4: "Depreciating", price: "€50", impact: "Low Impact" },
-            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Recommended", val1: "1 of 1 (Original)", val2: "Museum-Grade (WhiteWall)", val3: "Curated (5 Days)", val4: "Accessible Luxury", price: "€140", impact: "Avg. Price / Unique Piece", cta: "Start Curating" },
+            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Recommended", val1: "1 of 1 (Original)", val2: "Gallerie-Niveau", val3: "Curated (5 Days)", val4: "Accessible Luxury", price: "€140", impact: "Avg. Price / Unique Piece", cta: "Start Curating" },
             col3: { title: "Traditional Gallery", sub: "Traditional", val1: "1 of 1 (Original)", val2: "Canvas / Oil", val3: "Negotiated (3 Mo+)", val4: "Investment Only", price: "€3,000+", impact: "High Barrier" }
         },
         scanner: {
@@ -268,18 +285,38 @@ export const CONTENT = {
             ]
         },
         offer: {
-            badge: "Offer Expires In:",
-            title: "Founding Member Pass",
-            sub: "Limited Time Access",
-            item1: "Finally Individual Art",
-            item2: "No More Boring Walls",
-            item3: "Your Personal Masterpiece",
-            free: "FREE",
-            total: "Total",
-            vat: "INC. VAT",
-            cta_idle: "Claim Free Creator Pass",
-            cta_loading: "Activating Access...",
-            code_text: "Code {code} Auto-Applied"
+            badges: {
+                left: "Limited Offer",
+                right: "Activated Partner Code"
+            },
+            headline: "Creator Access Unlocked.",
+            subheadline: "Test our AI art engine for free today. We cover the API fees for you.",
+            dealStack: {
+                item1: {
+                    label: "Creator Fee",
+                    original: "€2.00",
+                    discounted: "€0.00"
+                },
+                item2: {
+                    label: "Starting Credit",
+                    value: "€5.00"
+                },
+                item3: {
+                    label: "Shipping",
+                    value: "Free"
+                }
+            },
+            voucherCard: {
+                badge: "Activated Partner Code",
+                bigText: "START FREE",
+                subtext: "No payment details required.",
+                codeLabel: "Your Code (Auto-applied)"
+            },
+            copyArea: {
+                copiedToast: "Code copied!"
+            },
+            cta: "Create Account & Start →",
+            ctaLoading: "Activating..."
         },
         secondary_offer: {
             badge: "Creator Pass",
