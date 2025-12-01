@@ -96,14 +96,17 @@ const Timeline = ({ lang }: { lang: Lang }) => {
         offset: ["start 20%", "end 80%"]
     });
 
-    const icons = [Sparkles, Eye, Truck];
+    const icons = [Palette, Sparkles, Scan, Layers, Eye, Truck];
     const steps = t.steps.map((step, i) => ({
         ...step,
         icon: icons[i],
         image: [
             "/images/step1.png",
             "/images/step2.jpg",
-            "/images/step3.jpg"
+            "/images/step3.jpg",
+            "/images/step4.jpg",
+            "/images/step5.jpg",
+            "/images/step6.jpg"
         ][i]
     }));
 

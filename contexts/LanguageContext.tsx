@@ -117,56 +117,62 @@ const translations: Record<Language, Translations> = {
                 A: {
                     id: 'A',
                     label: 'Klassisch',
-                    subject: "Ein einsamer Leuchtturm im Sturm",
-                    tags: ["TYP: MALEREI", "THEMA: NATUR", "RATIO: 3:2"],
+                    subject: "Eine Poolparty am Genfer See in den 1960ern",
+                    tags: ["TYP: FOTOGRAPHIE", "THEMA: VINTAGE", "RATIO: 3:2"],
                     mediums: [
-                        { label: "Acryl", img: "https://images.unsplash.com/photo-1549490349-8643362247b5?w=150&h=150&fit=crop", selected: false },
-                        { label: "Öl", img: "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=150&h=150&fit=crop", selected: true },
-                        { label: "Aquarell", img: "https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=150&h=150&fit=crop", selected: false }
+                        { label: "ANALOG FILM", img: "/images/process_images/A/A-Analog.jpeg", selected: false },
+                        { label: "EDITORIAL", img: "/images/process_images/A/A-Editorial.jpeg", selected: true },
+                        { label: "CINEMATIC", img: "/images/process_images/A/A-Cinematic.jpeg", selected: false }
                     ],
                     chat: [
-                        { role: 'bot', text: "Exzellent. Bei Öl empfehle ich eine 'Impasto'-Struktur. Sollen wir das anwenden?" },
-                        { role: 'user', text: "Ja, gerne." },
-                        { role: 'bot', text: "Und die Lichtstimmung? Eher sanftes Morgenlicht oder dramatisches Chiaroscuro?" },
-                        { role: 'user', text: "Dramatisch, bitte." }
+                        { role: 'bot', text: "Klassisch. Sollen wir den Look von altem Kodak-Film (warm & gesättigt) oder Fujifilm (kühl & grünlich) simulieren?" },
+                        { role: 'user', text: "Kodak, warm und sonnig." },
+                        { role: 'bot', text: "Verstanden. Wie soll die Szenerie wirken? Eher intim mit wenigen Personen oder eine belebte Gesellschaft?" },
+                        { role: 'user', text: "Eine große, belebte Gesellschaft." },
+                        { role: 'bot', text: "Notiert. Sollen wir im Hintergrund eine bestimmte Landschaft integrieren?" },
+                        { role: 'user', text: "Ja, Berge und ein Seeufer." }
                     ],
-                    resultImage: "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=2000&auto=format&fit=crop" // Dramatic Oil
+                    resultImage: "/images/process_images/A/A.png"
                 },
                 B: {
                     id: 'B',
                     label: 'Futuristisch',
-                    subject: "Eine futuristische Stadt in den Wolken",
-                    tags: ["TYP: DIGITAL", "THEMA: SCI-FI", "RATIO: 16:9"],
+                    subject: "Ein entspannter Tiger am Poolrand eines luxuriösen Resorts, umgeben von tropischen Palmen, symmetrische Komposition.",
+                    tags: ["TYP: DIGITAL", "THEMA: SURREAL", "RATIO: 1:1"],
                     mediums: [
-                        { label: "Vektor", img: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=150&h=150&fit=crop", selected: false },
-                        { label: "3D Render", img: "https://images.unsplash.com/photo-1614728853911-49e036259f94?w=150&h=150&fit=crop", selected: true },
-                        { label: "Matte", img: "https://images.unsplash.com/photo-1620641788427-b11e6919dece?w=150&h=150&fit=crop", selected: false }
+                        { label: "DIGITAL PAINTING", img: "/images/process_images/B/B-Digital Painting.jpeg", selected: false },
+                        { label: "3D RENDER", img: "/images/process_images/B/B-3DRender.jpeg", selected: true },
+                        { label: "COLLAGE", img: "/images/process_images/B/B-Collage.jpeg", selected: false }
                     ],
                     chat: [
-                        { role: 'bot', text: "Spannend. Sollen wir einen Neon-Glow Effekt für die Wolkenkratzer hinzufügen?" },
-                        { role: 'user', text: "Ja, Cyberpunk-Style." },
-                        { role: 'bot', text: "Wie detailliert soll die Architektur sein? Abstrakt oder ultra-realistisch?" },
-                        { role: 'user', text: "Ultra-Detailliert." }
+                        { role: 'bot', text: "Ein starker Kontrast. Soll die Szene bedrohlich wirken oder eine friedliche 'Traum-Logik' ausstrahlen?" },
+                        { role: 'user', text: "Friedliche Traum-Logik." },
+                        { role: 'bot', text: "Verstanden. Bevorzugst du eine natürliche, wilde Anordnung oder eine streng symmetrische Architektur (ähnlich Wes Anderson)?" },
+                        { role: 'user', text: "Streng symmetrisch." },
+                        { role: 'bot', text: "Notiert. Welche Akzentfarben sollen wir für die Sonnenschirme und Möbel nutzen, um das Grün der Palmen zu ergänzen?" },
+                        { role: 'user', text: "Gelb-Weiß gestreift für einen sonnigen Resort-Look." }
                     ],
-                    resultImage: "https://images.unsplash.com/photo-1535868463750-c78d9543614f?q=80&w=2000&auto=format&fit=crop" // Cyberpunk City
+                    resultImage: "/images/process_images/B/B.png"
                 },
                 C: {
                     id: 'C',
                     label: 'Minimalist',
-                    subject: "Ein einzelner Baum im dichten Nebel",
-                    tags: ["TYP: FOTO", "THEMA: ZEN", "RATIO: 1:1"],
+                    subject: "Ein Astronaut betrachtet eine leuchtende Stadt-Silhouette, gemalt im Stil eines alten Meisters, mit sichtbarer Leinwand-Textur und goldenem Licht.",
+                    tags: ["TYP: MALEREI", "THEMA: SCI-FI", "RATIO: 3:2"],
                     mediums: [
-                        { label: "Farbe", img: "https://images.unsplash.com/photo-1508144753681-9986d4df99b3?w=150&h=150&fit=crop", selected: false },
-                        { label: "B&W", img: "https://images.unsplash.com/photo-1480796927426-f609979314bd?w=150&h=150&fit=crop", selected: true },
-                        { label: "Sepia", img: "https://images.unsplash.com/photo-1533158388470-9a56699990c6?w=150&h=150&fit=crop", selected: false }
+                        { label: "GOUACHE", img: "/images/process_images/C/C-Gouache.jpeg", selected: false },
+                        { label: "ÖL AUF LEINWAND", img: "/images/process_images/C/C-Malerei.jpeg", selected: true },
+                        { label: "KREIDEZEICHNUNG", img: "/images/process_images/C/C-Kreidezeichnung.jpeg", selected: false }
                     ],
                     chat: [
-                        { role: 'bot', text: "Sehr poetisch. Sollen wir eine starke Filmkörnung (Grain) hinzufügen?" },
-                        { role: 'user', text: "Ja, starkes Grain." },
-                        { role: 'bot', text: "Kontrast: Eher weich (Low Key) oder hart (High Key)?" },
-                        { role: 'user', text: "High Key, bitte." }
+                        { role: 'bot', text: "Ein spannender Kontrast: Hochtechnologie gemalt mit klassischen Mitteln. Sollen wir den Pinselstrich so setzen, dass das Bild wie ein antikes Fundstück aus der Zukunft wirkt?" },
+                        { role: 'user', text: "Ja, genau. Wie ein altes Gemälde mit futuristischem Look." },
+                        { role: 'bot', text: "Exzellent. Für die Beleuchtung: Wollen wir das typische 'Chiaroscuro' (hell-dunkel Kontrast) alter Meister nutzen, um den Astronauten dramatisch hervorzuheben?" },
+                        { role: 'user', text: "Ja, starker Kontrast mit goldenem Lichtschein." },
+                        { role: 'bot', text: "Verstanden. Soll die Stadt im Hintergrund technologisch detailliert sein oder eher abstrakt wirken, wie Pinselstriche, die Licht reflektieren?" },
+                        { role: 'user', text: "Abstrakt, nur Licht und vertikale Strukturen." }
                     ],
-                    resultImage: "https://images.unsplash.com/photo-1478436127897-579ea5a604bc?q=80&w=2000&auto=format&fit=crop" // Minimalist Fog
+                    resultImage: "/images/process_images/C/C.png"
                 }
             },
             bullets: [

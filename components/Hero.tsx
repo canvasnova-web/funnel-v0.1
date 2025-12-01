@@ -20,9 +20,9 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
             label: 'Living Room'
         },
         {
-            before: '/images/room-empty-2.jpg',
-            after: '/images/room-art-2.jpg',
-            label: 'Loft / Beton'
+            before: '/images/bedroom-empty.png',
+            after: '/images/bedroom.png',
+            label: 'Bedroom'
         },
         {
             before: '/images/gym-empty.jpg',

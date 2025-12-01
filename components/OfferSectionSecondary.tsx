@@ -125,8 +125,8 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
                                     <Check className="w-3 h-3 text-white" strokeWidth={2.5} />
                                 </div>
                                 <div>
-                                    <h4 className="font-medium text-zinc-900 mb-1">Raum-Visualisierung</h4>
-                                    <p className="text-sm text-zinc-500">Sieh das Ergebnis an deiner echten Wand</p>
+                                    <h4 className="font-medium text-zinc-900 mb-1">Creator-Gebühr: ̶2̶̶,̶̶0̶̶0̶̶ ̶€ → 0,00 €</h4>
+                                    <p className="text-sm text-zinc-500">Keine Zahlungsdaten erforderlich.</p>
                                 </div>
                             </div>
 
