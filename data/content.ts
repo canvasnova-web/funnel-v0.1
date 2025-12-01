@@ -110,9 +110,12 @@ export const CONTENT = {
             badge: "Der Manufaktur-Prozess",
             headline: "Vom Gedanken zum Meisterwerk.",
             steps: [
-                { title: "Ihr persönlicher KI-Kurator.", desc: "Beschreiben Sie Ihre Vision. Unser Assistent verwandelt Ihre Wünsche in visuelle Vorschläge. Ohne Vorkenntnisse." },
-                { title: "Brillante Auflösung.", desc: "Jedes Detail wird perfektioniert. Gestochen scharf auch im Großformat – für eine Wirkung, die den Raum dominiert." },
-                { title: "Handmade in Germany.", desc: "Produziert im besten Fotolabor der Welt. In 5-7 Tagen hängt Ihr Unikat bei Ihnen. Fertig montiert." }
+                { title: "Vision & Stil", desc: "Definieren Sie Ihren Geschmack. Wählen Sie eine Stilrichtung oder beschreiben Sie Ihren Wunsch. Keine Vorkenntnisse nötig." },
+                { title: "KI-Kreation", desc: "Unsere Engine generiert 3 einzigartige Kunstwerke in höchster Auflösung. Optimiert für Großformat-Druck." },
+                { title: "Kuratieren & Verfeinern", desc: "Wählen Sie Ihren Favoriten. Fordern Sie Anpassungen an oder generieren Sie neue Vorschläge. Sie haben die Kontrolle." },
+                { title: "Material & Rahmen", desc: "Wählen Sie Museumsglas-Acryl, Alu-Dibond oder Canvas. Ergänzen Sie einen handgefertigten Holzrahmen." },
+                { title: "Expert Check & Produktion", desc: "Manuelle Qualitätsprüfung durch Print-Experten. Produziert in Deutschland mit 12-Farben-Archivtinte." },
+                { title: "Sichere Lieferung", desc: "Spezialisierte Kunst-Verpackung garantiert sicheren Transport. Sofort aufhängbereit." }
             ]
         },
         offer: {
