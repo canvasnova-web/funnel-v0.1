@@ -144,6 +144,10 @@ const Card2 = ({ lang }: { lang: Lang }) => {
         {
             name: lang === 'de' ? 'Minimal' : 'Minimal',
             image: 'images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png' // Minimal
+        },
+        {
+            name: lang === 'de' ? 'Surreal' : 'Surreal',
+            image: 'public/images/process_images/B/B.png' // Surreal
         }
     ];
 

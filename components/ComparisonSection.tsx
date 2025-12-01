@@ -108,7 +108,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                             <p className="text-[10px] font-mono text-neutral-400 mt-1 uppercase tracking-widest">{t.col1.sub}</p>
                         </div>
 
-                        {/* CanvasNova Header */}
+                        {/* canvasnova Header */}
                         <div className="relative text-center">
                             <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap z-10">
                                 <span className="bg-int-orange text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md">
@@ -149,7 +149,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                             </div>
                         </div>
 
-                        {/* Center Column - CanvasNova (Elevated Card) */}
+                        {/* Center Column - canvasnova (Elevated Card) */}
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}

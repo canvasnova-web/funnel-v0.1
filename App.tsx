@@ -11,6 +11,7 @@ import CuratorQuiz from './components/CuratorQuiz';
 import Timeline from './components/Timeline';
 import OfferSection from './components/OfferSection';
 import OfferSectionSecondary from './components/OfferSectionSecondary';
+import FAQ from './components/FAQ';
 
 // Main App Component
 const App = () => {
@@ -48,23 +49,6 @@ const App = () => {
           </div>
 
           <div className="flex items-center gap-6">
-            {/* Language Toggle */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setLang('de')}
-                className={`px-2 py-1 text-[10px] font-bold transition-all ${lang === 'de' ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
-              >
-                DE
-              </button>
-              <span className="text-gray-300 text-[10px]">/</span>
-              <button
-                onClick={() => setLang('en')}
-                className={`px-2 py-1 text-[10px] font-bold transition-all ${lang === 'en' ? 'text-black' : 'text-gray-400 hover:text-gray-600'}`}
-              >
-                EN
-              </button>
-            </div>
-
             <button
               onClick={() => scrollToSection('quiz')}
               className="hidden md:block text-neutral-500 hover:text-black px-5 py-2 text-sm font-medium transition-colors"
@@ -83,6 +67,7 @@ const App = () => {
       <Timeline lang={lang} />
       <CuratorQuiz id="quiz" lang={lang} onCtaClick={handleCtaClick} />
       <OfferSectionSecondary lang={lang} />
+      <FAQ lang={lang} />
 
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 text-center border-t border-white/10">

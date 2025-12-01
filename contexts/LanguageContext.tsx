@@ -87,7 +87,7 @@ const translations: Record<Language, Translations> = {
     de: {
         nav: {
             process: "Prozess", materials: "Materialien", gallery: "Galerie", faq: "FAQ",
-            account: "Konto", start: "Jetzt starten", shipping: "Globaler Versand via WhiteWall®", madeIn: "Made in Germany"
+            account: "Konto", start: "Jetzt starten", shipping: "Globaler Versand", madeIn: "Made in Germany"
         },
         hero: {
             l1: "SCHLUSS MIT", l2: "DEKO VON DER STANGE.",
@@ -196,7 +196,7 @@ const translations: Record<Language, Translations> = {
         footer: {
             explore: "Entdecken", legal: "Rechtliches",
             links: { lab: "Das Labor", journal: "Journal", corp: "Corporate", imp: "Impressum", priv: "Datenschutz", terms: "AGB" },
-            brand: "Canvasnova ist eine Marke der Metropolitan Gallery GmbH.\nDesigned in Berlin. Gedruckt weltweit."
+            brand: "canvasnova ist eine Marke der Metropolitan Gallery GmbH.\nDesigned in Berlin. Gedruckt weltweit."
         }
     },
     en: {
@@ -214,7 +214,7 @@ const translations: Record<Language, Translations> = {
             cards: [
                 { title: "AI Super-Resolution", desc: "Proprietary upscaling to 400 DPI density for razor-sharp details at large formats (>120cm).", detail: "GAN-V3.2" },
                 { title: "Gallery Acrylic Glass", desc: "2mm Crystal-Clear Acrylic facing with permanent elastic silicone sealing.", detail: "REFRACTIVE" },
-                { title: "WhiteWall® Lab", desc: "Handcrafted in Germany. Lumachrome-style precision. 75-year color brilliance guarantee.", detail: "ISO 9706" }
+                { title: "Foto Lab", desc: "Handcrafted in Germany. Lumachrome-style precision. 75-year color brilliance guarantee.", detail: "ISO 9706" }
             ],
             specs: { color: "Color Space", res: "Resolution", mat: "Base Material", weight: "Weight" }
         },
@@ -303,7 +303,7 @@ const translations: Record<Language, Translations> = {
         footer: {
             explore: "Explore", legal: "Legal",
             links: { lab: "The Lab", journal: "Journal", corp: "Corporate", imp: "Imprint", priv: "Privacy", terms: "Terms" },
-            brand: "Canvasnova is a trademark of Metropolitan Gallery GmbH.\nDesigned in Berlin. Printed Globally."
+            brand: "canvasnova is a trademark of Metropolitan Gallery GmbH.\nDesigned in Berlin. Printed Globally."
         }
     }
 };
