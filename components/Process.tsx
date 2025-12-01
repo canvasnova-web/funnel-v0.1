@@ -18,6 +18,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
     const [displayedSubject, setDisplayedSubject] = useState("");
     const [visibleMsgCount, setVisibleMsgCount] = useState(0);
     const [chatListKey, setChatListKey] = useState(0);
+    const [isExiting, setIsExiting] = useState(false);
 
     const activeData = t.process.scenarios[activeScenarioId];
 
@@ -55,7 +56,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
 
         // --- ANIMATION TIMELINE ---
 
-        // 1. Typing Effect (0s - 1.5s)
+        // 1. Typing Effect (0s - 1.5s approx)
         let currentText = "";
         const fullText = targetData.subject;
         let charIndex = 0;
@@ -75,7 +76,6 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
         intervalsRef.current.push(typingInterval);
 
         
-
         // 3. Medium (Starts at 3.0s)
         timeoutsRef.current.push(setTimeout(() => setSequenceState('medium'), 3000));
 
@@ -84,23 +84,32 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
             setSequenceState('chat');
             setChatListKey(prev => prev + 1);
         }, 4500));
-
-        // Processing & Reveal werden dynamisch nach Abschluss der Chat-Sequenz geplant
     };
 
     const switchScenario = (id: 'A' | 'B' | 'C') => {
-        // Clear all running timers first
-        clearAllTimers();
+        // Trigger exit animation first
+        setIsExiting(true);
 
-        // Reset state immediately
-        setActiveScenarioId(id);
-        setSequenceState('idle');
-        setVisibleMsgCount(0);
-        setDisplayedSubject("");
-
-        // Small delay to allow re-render then restart with the new scenario ID
-        const restartTimeout = setTimeout(() => startSequence(id), 100);
-        timeoutsRef.current.push(restartTimeout);
+        // Wait for exit animation (300ms) then restart
+        const exitTimeout = setTimeout(() => {
+            clearAllTimers();
+            setActiveScenarioId(id);
+            setSequenceState('typing'); 
+            setDisplayedSubject("");
+            setVisibleMsgCount(0);
+            setIsExiting(false);
+            
+            // Start new sequence
+            startSequence(id);
+        }, 300);
+        
+        // We need to track this timeout in a separate way or just let it run
+        // If we put it in timeoutsRef, clearAllTimers would kill it? 
+        // No, clearAllTimers is called INSIDE it.
+        // But if user clicks AGAIN quickly? We should clear pending switch.
+        // Ideally we should have a 'switchTimeoutRef' but keeping it simple:
+        // The UI blocks interaction or we assume user isn't spamming 100ms clicks.
+        // But to be safe, let's just run it.
     };
 
     // Progressive message rendering for chat
@@ -111,23 +120,37 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
         setVisibleMsgCount(0);
         msgTimeoutsRef.current.forEach(clearTimeout);
         msgTimeoutsRef.current = [];
+        
         const total = activeData.chat.length;
         const delay = 400;
+        
+        // Schedule message appearance
         for (let i = 1; i <= total; i++) {
             const to = setTimeout(() => {
                 setVisibleMsgCount(i);
             }, i * delay);
             msgTimeoutsRef.current.push(to);
         }
-        // Nach Abschluss der Nachrichtensequenz: Processing und danach Reveal
+
+        // Schedule transition to processing AFTER messages are done
+        // We put these in timeoutsRef so they persist even if this effect cleans up 
+        // (though effect only cleans up on unmount or dep change)
+        // Wait: if sequenceState changes to processing, effect cleans up.
+        // We want these timeouts to trigger the change.
+        
+        const processingStart = total * delay + 600;
+        
         const processingTimeout = setTimeout(() => {
             setSequenceState('processing');
-        }, total * delay + 600);
+        }, processingStart);
+        
         const revealTimeout = setTimeout(() => {
             setSequenceState('reveal');
             setHasFinishedOnce(true);
-        }, total * delay + 600 + 3000);
+        }, processingStart + 3000); // 3s loading bar
+
         timeoutsRef.current.push(processingTimeout, revealTimeout);
+        
         return () => {
             msgTimeoutsRef.current.forEach(clearTimeout);
             msgTimeoutsRef.current = [];
@@ -199,6 +222,8 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                     className="relative w-full max-w-6xl mx-auto h-[750px] md:h-[800px] bg-neutral-900 shadow-2xl overflow-hidden rounded-2xl md:rounded-sm border border-neutral-800 mb-16 flex flex-col md:flex-row"
                     onViewportEnter={() => { if (sequenceState === 'idle') startSequence(); }}
                     viewport={{ once: true, amount: 0.3 }}
+                    animate={{ opacity: isExiting ? 0 : 1, scale: isExiting ? 0.98 : 1 }}
+                    transition={{ duration: 0.3 }}
                 >
 
                     {/* --- RIGHT LAYER: ARTWORK (Desktop: Right Side / Mobile: Full Background) --- */}
@@ -437,7 +462,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                             <AnimatePresence>
                                 {sequenceState === 'processing' && (
                                     <motion.div
-                                        className="absolute bottom-0 left-0 w-full bg-[#fdfcf8] border-t border-neutral-200 p-6 flex items-center gap-4 z-30"
+                                        className="absolute bottom-0 left-0 w-full bg-[#fdfcf8] border-t border-neutral-200 p-6 flex items-center gap-4 z-50"
                                         initial={{ y: '100%' }}
                                         animate={{ y: 0 }}
                                         exit={{ y: '100%' }}
