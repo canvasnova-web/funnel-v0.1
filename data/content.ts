@@ -9,7 +9,7 @@ export const CONTENT = {
             badge: "Bereits über 1.000 Entwürfe generiert.",
             headline_1: "Ihr Zuhause verdient",
             headline_2: "mehr als Standard.",
-            sub_headline: "Entwerfen Sie in Minuten echte Galerie-Kunst, die perfekt zu Ihrem Raum passt. Einzigartig weltweit. Ohne künstlerisches Talent.",
+            sub_headline: "Entwerfen Sie ohne Vorkenntnisse in Minuten echte Galerie-Kunst, die perfekt zu Ihrem Raum passt. Einzigartig weltweit.",
             cta: "Jetzt kostenlos entwerfen →",
             before: "Vorher:",
             after: "Nachher: canvasnova"
@@ -29,8 +29,8 @@ export const CONTENT = {
                 price: "Preismodell"
             },
             col1: { title: "Massenware", sub: "Poster & Drucke", val1: "Endlose Kopien", val2: "Dünnes Poster-Papier", val3: "Von der Stange", val4: "Wegwerf-Deko", price: "~ €40", impact: "Billig" },
-            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Museums-Qualität (Hahnemühle/Alu)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €140", impact: "Fair", cta: "Kuratieren" },
-            col3: { title: "Galerie", sub: "Traditionell", val1: "Original", val2: "Leinwand / Öl", val3: "Exklusiver Zugang nötig", val4: "Kapitalanlage", price: "€3.000+", impact: "Überteuert" }
+            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Galerie-Qualität (Fineart-Acryl/Papier/Alu/Canvas)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €140", impact: "Fair", cta: "Kuratieren" },
+            col3: { title: "Galerie", sub: "Traditionell", val1: "Original / Abzug", val2: "Leinwand / Öl / Acryl", val3: "Exklusiver Zugang nötig", val4: "Kapitalanlage", price: "€3.000+", impact: "Überteuert" }
         },
         scanner: {
             badge: "Sofort-Visualisierung • 100% Kostenlos",
@@ -59,8 +59,8 @@ export const CONTENT = {
         },
         curator_quiz: {
             badge: "Kuratoren-Check",
-            headline: "Unsicher, was passt?",
-            sub: "Finden Sie in 30 Sekunden die perfekte Konfiguration für Ihren Raum.",
+            headline: "Finden Sie Ihren Stil in 30 Sekunden.",
+            sub: "Kostenlos & unverbindlich.",
             steps: {
                 space: {
                     question: "Welcher Raum soll veredelt werden?",

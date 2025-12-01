@@ -68,34 +68,22 @@ const CardWrapper = ({ children, className = "", colSpan = "col-span-1" }: { chi
 // Card 1: "Schluss mit 'passt schon'." (Infinite Choice)
 const Card1 = ({ lang }: { lang: Lang }) => {
     const images1 = [
-        "https://images.unsplash.com/photo-1549887552-93f8efb4133f?q=80&w=300&auto=format&fit=crop", // Abstract
-        "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=300&auto=format&fit=crop", // Art
-        "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=300&auto=format&fit=crop", // Texture
-        "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=300&auto=format&fit=crop", // Colorful
-        "https://images.unsplash.com/photo-1549887552-93f8efb4133f?q=80&w=300&auto=format&fit=crop", // Abstract
-        "https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?q=80&w=300&auto=format&fit=crop", // Art
-        "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?q=80&w=300&auto=format&fit=crop", // Texture
-        "https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=300&auto=format&fit=crop", // Colorful
+        "dist/images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png",
+        "dist/images/bento_images/Gemini_Generated_Image_7y9s327y9s327y9s.png",
+        "dist/images/bento_images/Gemini_Generated_Image_9mk7u19mk7u19mk7.png",
+        "dist/images/bento_images/Gemini_Generated_Image_31uco631uco631uc.png",
     ];
     const images2 = [
-        "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?q=80&w=300&auto=format&fit=crop", // Nature
-        "https://images.unsplash.com/photo-1515405295579-ba7b45498955?q=80&w=300&auto=format&fit=crop", // Portrait
-        "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=300&auto=format&fit=crop", // Retro
-        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=300&auto=format&fit=crop", // Paint
-        "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?q=80&w=300&auto=format&fit=crop", // Nature
-        "https://images.unsplash.com/photo-1515405295579-ba7b45498955?q=80&w=300&auto=format&fit=crop", // Portrait
-        "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=300&auto=format&fit=crop", // Retro
-        "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?q=80&w=300&auto=format&fit=crop", // Paint
+        "dist/images/bento_images/Gemini_Generated_Image_cv51focv51focv51.png",
+        "dist/images/bento_images/Gemini_Generated_Image_f5ihylf5ihylf5ih.png",
+        "dist/images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png",
+        "dist/images/bento_images/Gemini_Generated_Image_jcbxv7jcbxv7jcbx.png",
     ];
     const images3 = [
-        "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=300&auto=format&fit=crop", // Abstract 2
-        "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=300&auto=format&fit=crop", // Earthy
-        "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?q=80&w=300&auto=format&fit=crop", // Face
-        "https://images.unsplash.com/photo-1515169273894-7e876dcf13da?q=80&w=300&auto=format&fit=crop", // Blue
-        "https://images.unsplash.com/photo-1558591710-4b4a1ae0f04d?q=80&w=300&auto=format&fit=crop", // Abstract 2
-        "https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?q=80&w=300&auto=format&fit=crop", // Earthy
-        "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?q=80&w=300&auto=format&fit=crop", // Face
-        "https://images.unsplash.com/photo-1515169273894-7e876dcf13da?q=80&w=300&auto=format&fit=crop", // Blue
+        "dist/images/bento_images/Gemini_Generated_Image_tm59votm59votm59.png",
+        "dist/images/bento_images/Gemini_Generated_Image_uhrc4suhrc4suhrc.png",
+        "dist/images/bento_images/Gemini_Generated_Image_x4n8mpx4n8mpx4n8.png",
+        "dist/images/bento_images/Gemini_Generated_Image_y4n745y4n745y4n7.png",
     ];
 
     return (
@@ -147,15 +135,15 @@ const Card2 = ({ lang }: { lang: Lang }) => {
     const styles = [
         {
             name: lang === 'de' ? 'Realistisch' : 'Realistic',
-            image: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop' // Landscape
+            image: 'dist/images/process_images/A/A.png' // Landscape
         },
         {
             name: lang === 'de' ? 'Öl-Gemälde' : 'Oil Painting',
-            image: 'https://images.unsplash.com/photo-1578321272176-b7bbc0679853?q=80&w=800&auto=format&fit=crop' // Oil style
+            image: 'dist/images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png' // Oil style
         },
         {
             name: lang === 'de' ? 'Minimal' : 'Minimal',
-            image: 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=800&auto=format&fit=crop' // Minimal
+            image: 'dist/images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png' // Minimal
         }
     ];
 
@@ -248,7 +236,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                 {/* Right Image (Canvas Texture) - Background */}
                 <div className="absolute inset-0">
                     <img
-                        src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop" // Use a texture-like image or macro shot
+                        src="dist/images/bento_images/01-Floater Frame.png" // Use a texture-like image or macro shot
                         alt="Canvas"
                         className="w-full h-full object-cover filter brightness-90 contrast-125"
                     />
@@ -264,7 +252,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                     style={{ width: `${sliderPosition}%` }}
                 >
                     <img
-                        src="https://images.unsplash.com/photo-1550684848-fac1c5b4e853?q=80&w=1200&auto=format&fit=crop" // Same image but cleaner/brighter
+                        src="dist/images/process_images/A/A.png" // Same image but cleaner/brighter
                         alt="Digital"
                         className="w-full h-full object-cover" // Need to ensure it doesn't squash. Ideally absolute positioning or object-cover with full width of container
                         style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100vw' }} // Hack to keep image static while container clips

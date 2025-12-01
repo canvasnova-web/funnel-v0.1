@@ -176,7 +176,7 @@ const translations: Record<Language, Translations> = {
                 }
             },
             bullets: [
-                { title: "Ihr persönlicher KI-Kurator.", desc: "Beschreiben Sie Ihre Vision. Unser Assistent verwandelt Ihre Wünsche in visuelle Vorschläge. Ohne Vorkenntnisse." },
+                { title: "Persönlicher KI-Kurator.", desc: "Beschreiben Sie Ihre Vision. Unser Assistent verwandelt Ihre Wünsche in visuelle Vorschläge. Ohne Vorkenntnisse." },
                 { title: "Brillante Auflösung.", desc: "Jedes Detail wird perfektioniert. Gestochen scharf auch im Großformat – für eine Wirkung, die den Raum dominiert." },
                 { title: "Handmade in Germany.", desc: "Produziert im besten Fotolabor der Welt. In 5-7 Tagen hängt Ihr Unikat bei Ihnen. Fertig montiert." }
             ],

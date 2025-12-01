@@ -223,9 +223,10 @@ const CuratorQuiz: React.FC<CuratorQuizProps> = ({ id, lang, onCtaClick }) => {
                                                     onClick={() => handleAnswer(step as Step, index)}
                                                     className={`
                                                         group relative p-6 rounded-xl border-2 text-left transition-all duration-300
+                                                        hover:scale-[1.01] hover:shadow-md
                                                         ${answers[step as keyof QuizState] === index
                                                             ? 'border-int-orange bg-int-orange/5'
-                                                            : 'border-gray-100 hover:border-int-orange/30 hover:bg-neutral-50'
+                                                            : 'border-gray-100 hover:border-int-orange hover:bg-neutral-50'
                                                         }
                                                     `}
                                                 >

@@ -63,10 +63,10 @@ const TimelineStep: React.FC<TimelineStepProps> = ({ step, index, isLast }) => {
 
                     <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                         <div>
-                            <h3 className={`font-serif text-3xl md:text-4xl text-gallery-black mb-4 transition-colors duration-300 ${isInView ? 'text-gallery-black' : 'text-gray-400'}`}>
+                            <h3 className={`font-serif font-bold text-3xl md:text-4xl text-gallery-black mb-4 transition-colors duration-300 ${isInView ? 'text-gallery-black' : 'text-gray-400'}`}>
                                 {step.title}
                             </h3>
-                            <p className="font-sans text-gray-500 leading-relaxed text-lg">
+                            <p className="font-sans text-gray-400 leading-relaxed text-lg">
                                 {step.desc}
                             </p>
                         </div>

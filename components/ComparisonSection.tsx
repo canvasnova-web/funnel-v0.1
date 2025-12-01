@@ -64,7 +64,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
     };
 
     return (
-        <section id={id} className="py-24 px-4 md:px-6 bg-[#FAFAFA] relative overflow-hidden">
+        <section id={id} className="py-24 px-4 md:px-6 bg-white relative overflow-hidden">
             <div
                 className="absolute inset-0 opacity-[0.015] pointer-events-none"
                 style={{ backgroundImage: 'linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)', backgroundSize: '40px 40px' }}
@@ -155,10 +155,10 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.2, duration: 0.5 }}
-                            className="bg-white rounded-3xl shadow-xl shadow-black/10 border border-black/5 p-6 space-y-6"
+                            className="bg-zinc-50 rounded-3xl shadow-xl shadow-black/10 border border-black/5 p-6 space-y-6"
                         >
                             {features.slice(0, 3).map((f, i) => (
-                                <div key={i} className="bg-neutral-50 rounded-2xl px-4 py-4 text-center">
+                                <div key={i} className="bg-white rounded-2xl px-4 py-4 text-center">
                                     <div className="flex items-center justify-center gap-2 mb-2">
                                         <f.icon className="w-4 h-4 text-neutral-600" />
                                         <span className="text-xs text-neutral-600 uppercase tracking-wide font-semibold">{f.label}</span>
