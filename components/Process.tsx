@@ -8,6 +8,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
     const chatContainerRef = useRef<HTMLDivElement>(null);
     const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
     const intervalsRef = useRef<NodeJS.Timeout[]>([]);
+    const msgTimeoutsRef = useRef<NodeJS.Timeout[]>([]);
 
     // State Machine
     const [sequenceState, setSequenceState] = useState<'idle' | 'typing' | 'params' | 'medium' | 'chat' | 'processing' | 'reveal'>('idle');
@@ -16,6 +17,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
     const [hasFinishedOnce, setHasFinishedOnce] = useState(false);
     const [displayedSubject, setDisplayedSubject] = useState("");
     const [visibleMsgCount, setVisibleMsgCount] = useState(0);
+    const [chatListKey, setChatListKey] = useState(0);
 
     const activeData = t.process.scenarios[activeScenarioId];
 
@@ -31,8 +33,10 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
     const clearAllTimers = () => {
         timeoutsRef.current.forEach(clearTimeout);
         intervalsRef.current.forEach(clearInterval);
+        msgTimeoutsRef.current.forEach(clearTimeout);
         timeoutsRef.current = [];
         intervalsRef.current = [];
+        msgTimeoutsRef.current = [];
     };
 
     // Start sequence when in view OR when scenario changes
@@ -70,23 +74,18 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
         }, 40); // Typing speed
         intervalsRef.current.push(typingInterval);
 
-        // 2. Params (Starts approx at 2.0s)
-        timeoutsRef.current.push(setTimeout(() => setSequenceState('params'), 2000));
+        
 
         // 3. Medium (Starts at 3.0s)
         timeoutsRef.current.push(setTimeout(() => setSequenceState('medium'), 3000));
 
         // 4. Chat (Starts at 4.5s)
-        timeoutsRef.current.push(setTimeout(() => setSequenceState('chat'), 4500));
-
-        // 5. Processing (Starts at 9.0s - after chat)
-        timeoutsRef.current.push(setTimeout(() => setSequenceState('processing'), 9000));
-
-        // 6. Reveal (Starts at 12.5s)
         timeoutsRef.current.push(setTimeout(() => {
-            setSequenceState('reveal');
-            setHasFinishedOnce(true);
-        }, 12500));
+            setSequenceState('chat');
+            setChatListKey(prev => prev + 1);
+        }, 4500));
+
+        // Processing & Reveal werden dynamisch nach Abschluss der Chat-Sequenz geplant
     };
 
     const switchScenario = (id: 'A' | 'B' | 'C') => {
@@ -109,33 +108,51 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
         if (sequenceState !== 'chat') {
             return;
         }
-
-        // Reset and start showing messages one by one
         setVisibleMsgCount(0);
-        const msgInterval = setInterval(() => {
-            setVisibleMsgCount(prev => {
-                if (prev < activeData.chat.length) {
-                    return prev + 1;
-                } else {
-                    clearInterval(msgInterval);
-                    return prev;
-                }
-            });
-        }, 1000); // 1 message per second
-
-        intervalsRef.current.push(msgInterval);
-        return () => clearInterval(msgInterval);
-    }, [sequenceState, activeData.chat.length]);
+        msgTimeoutsRef.current.forEach(clearTimeout);
+        msgTimeoutsRef.current = [];
+        const total = activeData.chat.length;
+        const delay = 400;
+        for (let i = 1; i <= total; i++) {
+            const to = setTimeout(() => {
+                setVisibleMsgCount(i);
+            }, i * delay);
+            msgTimeoutsRef.current.push(to);
+        }
+        // Nach Abschluss der Nachrichtensequenz: Processing und danach Reveal
+        const processingTimeout = setTimeout(() => {
+            setSequenceState('processing');
+        }, total * delay + 600);
+        const revealTimeout = setTimeout(() => {
+            setSequenceState('reveal');
+            setHasFinishedOnce(true);
+        }, total * delay + 600 + 3000);
+        timeoutsRef.current.push(processingTimeout, revealTimeout);
+        return () => {
+            msgTimeoutsRef.current.forEach(clearTimeout);
+            msgTimeoutsRef.current = [];
+        };
+    }, [sequenceState, activeScenarioId]);
 
     // Auto-scroll when new messages appear
     useEffect(() => {
-        if (chatContainerRef.current && visibleMsgCount > 0) {
-            chatContainerRef.current.scrollTo({
-                top: chatContainerRef.current.scrollHeight,
-                behavior: 'smooth'
-            });
-        }
-    }, [visibleMsgCount]);
+        const el = chatContainerRef.current;
+        if (!el || visibleMsgCount <= 0) return;
+        let raf = 0;
+        const target = el.scrollHeight;
+        const step = () => {
+            const diff = target - el.scrollTop;
+            if (Math.abs(diff) < 1) {
+                el.scrollTop = target;
+                cancelAnimationFrame(raf);
+                return;
+            }
+            el.scrollTop += diff * 0.2;
+            raf = requestAnimationFrame(step);
+        };
+        raf = requestAnimationFrame(step);
+        return () => cancelAnimationFrame(raf);
+    }, [visibleMsgCount, chatListKey]);
 
     // Cleanup on unmount
     useEffect(() => {
@@ -249,7 +266,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                                             <button
                                                 key={id}
                                                 onClick={() => switchScenario(id)}
-                                                className={`w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all hover:scale-110 ${activeScenarioId === id ? 'bg-intl-orange text-white border-intl-orange' : 'bg-black/40 text-white/70 hover:bg-white hover:text-black'}`}
+                                                className="btn btn--secondary btn--sm"
                                             >
                                                 {id}
                                             </button>
@@ -371,32 +388,40 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
 
                             {/* 3. BOTTOM: CHAT THREAD */}
                             <div className="flex-grow relative mask-linear-fade" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 5%)' }}>
-                                <div ref={chatContainerRef} className="absolute inset-0 overflow-y-auto scrollbar-hide pb-24">
-                                    <div className="flex flex-col gap-4 pt-2 px-1">
-                                        <AnimatePresence>
-                                            {(sequenceState === 'chat' || sequenceState === 'processing' || sequenceState === 'reveal') && activeData.chat.slice(0, sequenceState === 'chat' ? visibleMsgCount : activeData.chat.length).map((msg, i) => (
-                                                <motion.div
-                                                    key={`${activeScenarioId}-${i}`}
-                                                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                    transition={{ duration: 0.5 }}
-                                                    className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} w-full`}
-                                                >
-                                                    <div
-                                                        className={`
-                                                    text-xs md:text-sm py-3 px-4 shadow-sm leading-relaxed max-w-[85%] relative rounded-2xl
-                                                    ${msg.role === 'bot'
+                                <div key={chatListKey} ref={chatContainerRef} className="absolute inset-0 overflow-y-auto scrollbar-hide pb-24">
+                                    <AnimatePresence mode='wait'>
+                                        {(sequenceState === 'chat' || sequenceState === 'processing' || sequenceState === 'reveal') && (
+                                            <motion.div
+                                                key={`${activeScenarioId}-${chatListKey}`}
+                                                initial={{ opacity: 0, y: 10 }}
+                                                animate={{ opacity: 1, y: 0 }}
+                                                exit={{ opacity: 0, y: -6 }}
+                                                transition={{ duration: 0.35, ease: 'easeInOut' }}
+                                                className="flex flex-col gap-4 pt-2 px-1"
+                                            >
+                                                {activeData.chat.slice(0, sequenceState === 'chat' ? visibleMsgCount : activeData.chat.length).map((msg, i) => (
+                                                    <motion.div
+                                                        key={`${activeScenarioId}-${i}`}
+                                                        layout
+                                                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
+                                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                                        exit={{ opacity: 0, y: -6 }}
+                                                        transition={{ duration: 0.35, ease: 'easeOut' }}
+                                                        className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} w-full`}
+                                                    >
+                                                        <div
+                                                            className={`text-xs md:text-sm py-3 px-4 shadow-sm leading-relaxed max-w-[85%] relative rounded-2xl ${msg.role === 'bot'
                                                                 ? 'bg-white border border-neutral-200 text-neutral-700 rounded-tr-xl rounded-br-xl rounded-bl-xl'
                                                                 : 'bg-neutral-900 text-white rounded-tl-xl rounded-bl-xl rounded-br-xl'
-                                                            }
-                                                `}
-                                                    >
-                                                        {msg.text}
-                                                    </div>
-                                                </motion.div>
-                                            ))}
-                                        </AnimatePresence>
-                                    </div>
+                                                            }`}
+                                                        >
+                                                            {msg.text}
+                                                        </div>
+                                                    </motion.div>
+                                                ))}
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                             </div>
 
@@ -426,7 +451,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                                                 className="h-full bg-intl-orange"
                                                 initial={{ width: 0 }}
                                                 animate={{ width: '100%' }}
-                                                transition={{ duration: 3.5, ease: "easeInOut" }}
+                                                transition={{ duration: 3.0, ease: "easeInOut" }}
                                             ></motion.div>
                                         </div>
                                     </motion.div>
@@ -444,7 +469,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                                     >
                                         <button
                                             onClick={() => {/* Logic to toggle view handled by opacity class state if needed, or just let user scroll/click replay */ }}
-                                            className="bg-neutral-900 text-white px-6 py-3 rounded-full flex items-center gap-2 shadow-xl text-[10px] font-mono font-bold uppercase tracking-widest hover:scale-105 transition-transform"
+                                            className="btn btn--primary btn--sm"
                                         >
                                             {/* On mobile, 'reveal' hides chat automatically via opacity. 
                                         The 'Replay' UI on artwork handles reset. 
@@ -482,7 +507,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                 <div className="mt-16 md:mt-24 flex justify-center pb-12 md:pb-0">
                     <button
                         onClick={onCtaClick}
-                        className="bg-gallery-black text-white px-10 py-5 rounded-full font-mono text-xs uppercase tracking-widest hover:bg-int-orange hover:shadow-[0_10px_40px_-10px_rgba(255,79,0,0.6)] transition-all duration-300 flex items-center gap-3"
+                        className="btn btn--primary btn--md"
                     >
                         {t.process.cta}
                     </button>

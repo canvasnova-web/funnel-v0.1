@@ -19,23 +19,23 @@ export const Button: React.FC<ButtonProps> = ({
     className,
     ...props
 }) => {
-    const baseStyles = 'relative inline-flex items-center justify-center gap-3 rounded-full font-sans font-bold uppercase tracking-widest transition-all overflow-hidden active:scale-95';
+    const baseStyles = 'btn';
 
     const variantStyles = {
-        primary: 'bg-gallery-black text-white shadow-2xl shadow-black/20 hover:bg-gray-800',
-        secondary: 'bg-white text-gallery-black border-2 border-gallery-black hover:bg-gallery-black hover:text-white',
-    };
+        primary: 'btn--primary',
+        secondary: 'btn--secondary',
+    } as const;
 
     const sizeStyles = {
-        sm: 'px-6 h-11 text-xs', // 44px height
-        md: 'px-8 h-14 text-sm', // 56px height
-        lg: 'px-10 h-16 text-base', // 64px height
-    };
+        sm: 'btn--sm',
+        md: 'btn--md',
+        lg: 'btn--lg',
+    } as const;
 
     return (
         <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             className={cn(
                 baseStyles,
                 variantStyles[variant],
@@ -45,13 +45,12 @@ export const Button: React.FC<ButtonProps> = ({
             )}
             {...props}
         >
-            <span className="relative z-10">{children}</span>
             {icon && (
-                <div className="relative z-10 w-6 h-6 rounded-full bg-int-orange flex items-center justify-center group-hover:scale-125 transition-transform duration-300">
+                <span className="btn__icon" aria-hidden>
                     {icon}
-                </div>
+                </span>
             )}
-            <div className="absolute inset-0 bg-gray-800 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out" />
+            <span>{children}</span>
         </motion.button>
     );
 };

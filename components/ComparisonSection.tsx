@@ -178,7 +178,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                             {/* CTA */}
                             <button
                                 onClick={onCtaClick}
-                                className="w-full bg-gallery-black text-white px-8 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-int-orange transition-colors shadow-sm mt-4"
+                                className="btn btn--primary btn--md w-full"
                             >
                                 {t.col2.cta}
                             </button>
@@ -325,7 +325,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
 
                             <button
                                 onClick={onCtaClick}
-                                className="w-full bg-white text-neutral-900 py-4 rounded-full text-sm font-semibold shadow-lg hover:bg-neutral-100 transition-colors"
+                                className="btn btn--secondary btn--md w-full"
                             >
                                 Kuratieren
                             </button>

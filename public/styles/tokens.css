@@ -1,0 +1,48 @@
+:root {
+  --color-bg: #F5F5F5;
+  --color-primary: #0F172A;
+  --color-primary-hover: #1E2746;
+  --color-primary-active: #0B1223;
+  --color-secondary-bg: #F5F5F5;
+  --color-secondary-hover: #EAEAEA;
+  --color-secondary-active: #E0E0E0;
+  --color-text-on-primary: #F5F5F5;
+  --color-text-on-bg: #0F172A;
+
+  --font-primary: "Syne", sans-serif;
+  --font-secondary: "Inter", sans-serif;
+  --font-size-sm: 12px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-weight-regular: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  --button-radius: 8px;
+  --button-py: 10px;
+  --button-px: 16px;
+  --button-shadow: 0 8px 16px rgba(15, 23, 42, 0.16);
+  --button-shadow-hover: 0 12px 20px rgba(15, 23, 42, 0.22);
+  --button-shadow-active: 0 4px 10px rgba(15, 23, 42, 0.18);
+
+  --scrollbar-width: 8px;
+  --scrollbar-track: var(--color-secondary-bg);
+  --scrollbar-thumb: var(--color-primary);
+  --scrollbar-thumb-hover: var(--color-primary-hover);
+}
+
+html, body {
+  background-color: var(--color-bg);
+  color: var(--color-text-on-bg);
+  font-family: var(--font-secondary);
+  overflow-x: hidden;
+}
+
+@media (pointer: coarse) {
+  :root {
+    --button-py: 12px;
+    --button-px: 18px;
+    --font-size-md: 15px;
+    --font-size-lg: 17px;
+  }
+}

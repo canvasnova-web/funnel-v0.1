@@ -113,14 +113,10 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.45, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-                    whileHover={{
-                        scale: 1.05,
-                        boxShadow: "0 18px 45px rgba(234, 88, 12, 0.45)",
-                        backgroundColor: "#ea580c"
-                    }}
-                    whileTap={{ scale: 0.95 }}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                     onClick={onAnalyzeClick}
-                    className="px-8 py-3 rounded-full bg-orange-500 text-white text-sm font-semibold tracking-wide transition-all shadow-lg shadow-orange-500/20"
+                    className="btn btn--primary btn--md"
                 >
                     JETZT UNIKAT ENTWERFEN
                 </motion.button>
@@ -241,4 +237,3 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
 };
 
 export default Hero;
-

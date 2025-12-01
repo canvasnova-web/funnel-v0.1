@@ -81,7 +81,7 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
                             <button
                                 onClick={handleClaim}
                                 disabled={status !== 'idle'}
-                                className="w-full max-w-md bg-zinc-900 hover:bg-zinc-800 text-white py-4 px-6 rounded-full font-sans text-sm font-semibold tracking-wide transition-all duration-200 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="btn btn--primary btn--md w-full max-w-md"
                             >
                                 <AnimatePresence mode="wait">
                                     {status === 'idle' ? (

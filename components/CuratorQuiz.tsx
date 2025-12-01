@@ -181,7 +181,7 @@ const CuratorQuiz: React.FC<CuratorQuizProps> = ({ id, lang, onCtaClick }) => {
                                             <div className="flex flex-col gap-4 max-w-md mx-auto">
                                                 <button
                                                     onClick={onCtaClick}
-                                                    className="w-full bg-gallery-black text-white py-4 rounded-lg hover:bg-int-orange transition-colors font-mono text-sm uppercase tracking-widest flex items-center justify-center gap-3 group shadow-lg hover:shadow-xl hover:shadow-int-orange/20"
+                                                    className="btn btn--primary btn--md w-full"
                                                 >
                                                     {t.result.cta}
                                                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
