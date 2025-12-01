@@ -121,9 +121,9 @@ export const CONTENT = {
         offer: {
             badges: {
                 left: "Limitiertes Angebot",
-                right: "Aktivierter Partner-Code"
+                right: "Aktivierter Gutschein-Code"
             },
-            headline: "Creator-Zugang freigeschaltet.",
+            headline: "Curator-Zugang freigeschaltet.",
             subheadline: "Testen Sie unsere KI-Kunst-Engine heute kostenlos. Wir übernehmen die API-Gebühren für Sie.",
             dealStack: {
                 item1: {
@@ -141,7 +141,7 @@ export const CONTENT = {
                 }
             },
             voucherCard: {
-                badge: "Aktivierter Partner-Code",
+                badge: "Einladung bestätigt",
                 bigText: "GRATIS STARTEN",
                 subtext: "Keine Zahlungsdaten erforderlich.",
                 codeLabel: "Ihr Code (Auto-aktiviert)"
