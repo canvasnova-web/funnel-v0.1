@@ -68,22 +68,22 @@ const CardWrapper = ({ children, className = "", colSpan = "col-span-1" }: { chi
 // Card 1: "Schluss mit 'passt schon'." (Infinite Choice)
 const Card1 = ({ lang }: { lang: Lang }) => {
     const images1 = [
-        "dist/images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png",
-        "dist/images/bento_images/Gemini_Generated_Image_7y9s327y9s327y9s.png",
-        "dist/images/bento_images/Gemini_Generated_Image_9mk7u19mk7u19mk7.png",
-        "dist/images/bento_images/Gemini_Generated_Image_31uco631uco631uc.png",
+        "images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png",
+        "images/bento_images/Gemini_Generated_Image_7y9s327y9s327y9s.png",
+        "images/bento_images/Gemini_Generated_Image_9mk7u19mk7u19mk7.png",
+        "images/bento_images/Gemini_Generated_Image_31uco631uco631uc.png",
     ];
     const images2 = [
-        "dist/images/bento_images/Gemini_Generated_Image_cv51focv51focv51.png",
-        "dist/images/bento_images/Gemini_Generated_Image_f5ihylf5ihylf5ih.png",
-        "dist/images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png",
-        "dist/images/bento_images/Gemini_Generated_Image_jcbxv7jcbxv7jcbx.png",
+        "images/bento_images/Gemini_Generated_Image_cv51focv51focv51.png",
+        "images/bento_images/Gemini_Generated_Image_f5ihylf5ihylf5ih.png",
+        "images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png",
+        "images/bento_images/Gemini_Generated_Image_jcbxv7jcbxv7jcbx.png",
     ];
     const images3 = [
-        "dist/images/bento_images/Gemini_Generated_Image_tm59votm59votm59.png",
-        "dist/images/bento_images/Gemini_Generated_Image_uhrc4suhrc4suhrc.png",
-        "dist/images/bento_images/Gemini_Generated_Image_x4n8mpx4n8mpx4n8.png",
-        "dist/images/bento_images/Gemini_Generated_Image_y4n745y4n745y4n7.png",
+        "images/bento_images/Gemini_Generated_Image_tm59votm59votm59.png",
+        "images/bento_images/Gemini_Generated_Image_uhrc4suhrc4suhrc.png",
+        "images/bento_images/Gemini_Generated_Image_x4n8mpx4n8mpx4n8.png",
+        "images/bento_images/Gemini_Generated_Image_y4n745y4n745y4n7.png",
     ];
 
     return (
@@ -135,15 +135,15 @@ const Card2 = ({ lang }: { lang: Lang }) => {
     const styles = [
         {
             name: lang === 'de' ? 'Realistisch' : 'Realistic',
-            image: 'dist/images/process_images/A/A.png' // Landscape
+            image: 'images/process_images/A/A.png' // Landscape
         },
         {
             name: lang === 'de' ? 'Öl-Gemälde' : 'Oil Painting',
-            image: 'dist/images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png' // Oil style
+            image: 'images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png' // Oil style
         },
         {
             name: lang === 'de' ? 'Minimal' : 'Minimal',
-            image: 'dist/images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png' // Minimal
+            image: 'images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png' // Minimal
         }
     ];
 
@@ -202,59 +202,79 @@ const Card2 = ({ lang }: { lang: Lang }) => {
 // Card 3: "Digital erschaffen. Als Meisterwerk geliefert." (Quality Proof)
 const Card3 = ({ lang }: { lang: Lang }) => {
     const [sliderPosition, setSliderPosition] = useState(50);
+    const [isDragging, setIsDragging] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
-    const isDragging = useRef(false);
 
-    const handleMove = (clientX: number) => {
-        if (containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            const x = Math.max(0, Math.min(clientX - rect.left, rect.width));
-            const percent = (x / rect.width) * 100;
-            setSliderPosition(percent);
+    const handleDrag = React.useCallback((e: MouseEvent | TouchEvent | React.MouseEvent | React.TouchEvent) => {
+        if (!containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+
+        let clientX: number;
+        if ('touches' in e && e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+        } else if ('clientX' in e) {
+            clientX = (e as any).clientX;
+        } else {
+            return;
         }
-    };
 
-    const onMouseDown = () => { isDragging.current = true; };
-    const onMouseUp = () => { isDragging.current = false; };
-    const onMouseMove = (e: React.MouseEvent) => {
-        if (isDragging.current) handleMove(e.clientX);
-    };
-    const onTouchMove = (e: React.TouchEvent) => {
-        handleMove(e.touches[0].clientX);
-    };
+        const position = ((clientX - rect.left) / rect.width) * 100;
+        setSliderPosition(Math.min(100, Math.max(0, position)));
+    }, []);
+
+    const startDrag = () => setIsDragging(true);
+    const stopDrag = () => setIsDragging(false);
+
+    useEffect(() => {
+        if (isDragging) {
+            window.addEventListener('mouseup', stopDrag);
+            window.addEventListener('touchend', stopDrag);
+            window.addEventListener('mousemove', handleDrag as any);
+            window.addEventListener('touchmove', handleDrag as any);
+        } else {
+            window.removeEventListener('mouseup', stopDrag);
+            window.removeEventListener('touchend', stopDrag);
+            window.removeEventListener('mousemove', handleDrag as any);
+            window.removeEventListener('touchmove', handleDrag as any);
+        }
+        return () => {
+            window.removeEventListener('mouseup', stopDrag);
+            window.removeEventListener('touchend', stopDrag);
+            window.removeEventListener('mousemove', handleDrag as any);
+            window.removeEventListener('touchmove', handleDrag as any);
+        };
+    }, [isDragging, handleDrag]);
 
     return (
         <CardWrapper colSpan="md:col-span-3" className="h-[400px] md:h-[500px] flex flex-col md:flex-row">
-            <div className="relative w-full h-full select-none"
+            <div className="relative w-full h-full select-none group"
                 ref={containerRef}
-                onMouseDown={onMouseDown}
-                onMouseUp={onMouseUp}
-                onMouseLeave={onMouseUp}
-                onMouseMove={onMouseMove}
-                onTouchMove={onTouchMove}
+                onMouseDown={startDrag}
+                onTouchStart={startDrag}
+                onClick={(e) => !isDragging && handleDrag(e)}
             >
                 {/* Right Image (Canvas Texture) - Background */}
                 <div className="absolute inset-0">
                     <img
-                        src="dist/images/bento_images/01-Floater Frame.png" // Use a texture-like image or macro shot
+                        src="images/bento_images/01-Floater Frame.png"
                         alt="Canvas"
                         className="w-full h-full object-cover filter brightness-90 contrast-125"
                     />
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/canvas-orange.png')] opacity-40 mix-blend-overlay" />
                     <div className="absolute bottom-8 right-8 bg-black/80 text-white text-xs font-bold px-3 py-1 rounded">
-                        {lang === 'de' ? 'Echtes Canvas' : 'Real Canvas'}
+                        {lang === 'de' ? 'Acrylglas im Floater Frame' : 'Acrylic glass in a Floater Frame'}
                     </div>
                 </div>
 
                 {/* Left Image (Digital Art) - Clipped */}
                 <div
-                    className="absolute inset-0 overflow-hidden border-r-2 border-white shadow-[5px_0_20px_rgba(0,0,0,0.3)]"
+                    className="absolute inset-0 overflow-hidden border-r border-white/60 shadow-[5px_0_20px_rgba(0,0,0,0.3)]"
                     style={{ width: `${sliderPosition}%` }}
                 >
                     <img
-                        src="dist/images/process_images/A/A.png" // Same image but cleaner/brighter
+                        src="images/process_images/A/A.png"
                         alt="Digital"
-                        className="w-full h-full object-cover" // Need to ensure it doesn't squash. Ideally absolute positioning or object-cover with full width of container
+                        className="w-full h-full object-cover max-w-none"
                         style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100vw' }} // Hack to keep image static while container clips
                     />
                     <div className="absolute bottom-8 left-8 bg-white/90 text-black text-xs font-bold px-3 py-1 rounded">
@@ -264,25 +284,28 @@ const Card3 = ({ lang }: { lang: Lang }) => {
 
                 {/* Slider Handle */}
                 <div
-                    className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize z-10 flex items-center justify-center"
+                    className="absolute top-0 bottom-0 w-px bg-transparent z-20 flex items-center justify-center pointer-events-none"
                     style={{ left: `${sliderPosition}%` }}
                 >
-                    <div className="w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 text-gray-600">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
-                        </svg>
+                    <div className="relative pointer-events-auto cursor-ew-resize group-active:scale-95 transition-transform duration-200">
+                        <div className="w-12 h-12 rounded-full backdrop-blur-md bg-white/40 border border-white/80 shadow-[0_0_18px_rgba(0,0,0,0.15)] flex items-center justify-center group-hover:scale-110 transition-all duration-300">
+                            <div className="flex gap-1">
+                                <div className="w-0.5 h-4 bg-white/90 rounded-full shadow-sm" />
+                                <div className="w-0.5 h-4 bg-white/90 rounded-full shadow-sm" />
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 {/* Text Overlay */}
-                <div className="absolute top-8 left-8 z-20 pointer-events-none mix-blend-difference text-white">
-                    <h3 className="text-3xl font-serif font-bold mb-2">
+                <div className="absolute top-8 left-8 z-20 pointer-events-none">
+                    <h3 className="text-3xl md:text-4xl font-serif font-bold mb-2 text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
                         {lang === 'de' ? 'Weltklasse Qualität.' : 'World-Class Quality.'}
                     </h3>
-                    <h3 className="text-3xl font-serif font-bold opacity-80">
-                        {lang === 'de' ? 'Gefertigt besten Fotolabor der Welt.' : 'Made by the best Fotolab in the World.'}
+                    <h3 className="text-2xl md:text-3xl font-serif font-bold text-white/95 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
+                        {lang === 'de' ? 'Gefertigt im besten Fotolabor der Welt.' : 'Made by the best Fotolab in the World.'}
                     </h3>
-                    <p className="text-white/80 mt-2 max-w-xs">
+                    <p className="text-white/90 mt-2 max-w-xs font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] hidden md:block">
                         {lang === 'de' ? 'Galerie-Standard für Ihr Zuhause.' : 'Gallery standard for your home.'}
                     </p>
                 </div>

@@ -92,6 +92,7 @@ export const VOUCHERS: Record<string, VoucherConfig> = {
 
 /**
  * Name des URL-Parameters, der verwendet wird
- * Beispiel: ?campaign=christmas
+ * Beispiel: ?promo=christmas
  */
-export const URL_PARAM_NAME = "campaign";
+export const URL_PARAM_NAME = "promo";
+

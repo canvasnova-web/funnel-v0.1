@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Toaster } from 'sonner';
 import { CONTENT } from './data/content';
 import { Lang } from './types';
+import { getVoucherFromURL, getRedirectURL } from './utils/voucher';
 import Hero from './components/Hero';
 import FeaturesBento from './components/FeaturesBento';
 import ComparisonSection from './components/ComparisonSection';
@@ -27,6 +28,11 @@ const App = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const handleCtaClick = () => {
+    const voucher = getVoucherFromURL();
+    window.location.href = getRedirectURL(voucher);
   };
 
   return (
@@ -69,13 +75,13 @@ const App = () => {
         </div>
       </nav>
 
-      <Hero onAnalyzeClick={() => scrollToSection('ticket')} lang={lang} />
+      <Hero onAnalyzeClick={handleCtaClick} lang={lang} />
       <FeaturesBento lang={lang} />
-      <Process onCtaClick={() => scrollToSection('ticket')} />
+      <Process onCtaClick={handleCtaClick} />
       <OfferSection id="ticket" lang={lang} />
-      <ComparisonSection id="comparison" lang={lang} onCtaClick={() => scrollToSection('ticket')} />
+      <ComparisonSection id="comparison" lang={lang} onCtaClick={handleCtaClick} />
       <Timeline lang={lang} />
-      <CuratorQuiz id="quiz" lang={lang} onCtaClick={() => scrollToSection('ticket')} />
+      <CuratorQuiz id="quiz" lang={lang} onCtaClick={handleCtaClick} />
       <OfferSectionSecondary lang={lang} />
 
       {/* Footer */}
