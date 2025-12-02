@@ -1,26 +1,392 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Check, Sparkles, Bot, User, CheckCircle2, Info, Sliders, ChevronLeft, ChevronRight, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Check, Sparkles, CheckCircle2, Info } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// --- Types ---
+type ScenarioId = 'A' | 'B' | 'C';
+type ProcessStep =
+    | 'typing'      // 0. Typing the subject
+    | 'analyzing'   // 1. Showing tags & medium (Simulating analysis)
+    | 'chatting'    // 2. Streaming chat messages
+    | 'processing'  // 3. Loading bar
+    | 'reveal';     // 4. Final result
+
+// --- Sub-Component: Scenario Runner ---
+// This component handles the entire animation sequence for a SINGLE scenario.
+// It is "keyed" by the scenario ID in the parent, so it completely unmounts/remounts on switch.
+const ScenarioRunner: React.FC<{
+    scenarioId: ScenarioId;
+    data: any; // Typed from your content
+    t: any;
+    isDesktop: boolean;
+    onSwitch: (id: ScenarioId) => void;
+}> = ({ scenarioId, data, t, isDesktop, onSwitch }) => {
+
+    // -- State --
+    const [step, setStep] = useState<ProcessStep>('typing');
+    const [typedText, setTypedText] = useState("");
+    const [visibleMsgCount, setVisibleMsgCount] = useState(0);
+    const [progress, setProgress] = useState(0); // Explicit progress state
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+
+    // -- Constants --
+    const TYPING_SPEED = 35;
+    const ANALYSIS_DELAY = 1500; // Time to look at tags/mediums
+    const MSG_DELAY = 1200;      // Time between messages
+    const PROCESSING_DURATION = 2800; // Milliseconds
+
+    // -- Sequence Logic --
+
+    // 1. Typing Effect
+    useEffect(() => {
+        let currentText = "";
+        const targetText = data.subject;
+        let charIndex = 0;
+
+        const interval = setInterval(() => {
+            if (charIndex < targetText.length) {
+                currentText += targetText.charAt(charIndex);
+                setTypedText(currentText);
+                charIndex++;
+            } else {
+                clearInterval(interval);
+                // Move to next step after a brief pause
+                setTimeout(() => setStep('analyzing'), 600);
+            }
+        }, TYPING_SPEED);
+
+        return () => clearInterval(interval);
+    }, []); // Run once on mount
+
+    // 2. Analyzing (Tags & Mediums)
+    useEffect(() => {
+        if (step !== 'analyzing') return;
+
+        const timer = setTimeout(() => {
+            setStep('chatting');
+        }, ANALYSIS_DELAY);
+
+        return () => clearTimeout(timer);
+    }, [step]);
+
+    // 3. Chatting
+    useEffect(() => {
+        if (step !== 'chatting') return;
+
+        // Reset msg count just in case
+        setVisibleMsgCount(0);
+
+        let msgIndex = 0;
+        const totalMsgs = data.chat.length;
+
+        const interval = setInterval(() => {
+            msgIndex++;
+            setVisibleMsgCount(msgIndex);
+
+            if (msgIndex >= totalMsgs) {
+                clearInterval(interval);
+                // Wait a bit after last message, then process
+                setTimeout(() => setStep('processing'), 1000);
+            }
+        }, MSG_DELAY);
+
+        return () => clearInterval(interval);
+    }, [step, data.chat.length]);
+
+    // 4. Processing (Handled by CSS transition)
+    useEffect(() => {
+        if (step !== 'processing') {
+            setProgress(0);
+            return;
+        }
+
+        // Trigger the fill animation slightly after mount to ensure transition works
+        const fillTimer = setTimeout(() => {
+            setProgress(100);
+        }, 50);
+
+        const nextStepTimer = setTimeout(() => {
+            setStep('reveal');
+        }, PROCESSING_DURATION);
+
+        return () => {
+            clearTimeout(fillTimer);
+            clearTimeout(nextStepTimer);
+        };
+    }, [step]);
+
+    // -- Auto-Scroll Chat --
+    useEffect(() => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTo({
+                top: chatContainerRef.current.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
+    }, [visibleMsgCount, step]);
+
+
+    // -- Renders --
+
+    // Helper to check if we should show elements based on current step
+    // We want to keep elements visible after they appear
+    const showParams = step !== 'typing';
+    const showChat = step === 'chatting' || step === 'processing' || step === 'reveal';
+    const showProcessing = step === 'processing';
+    const showReveal = step === 'reveal';
+
+    return (
+        <>
+            {/* --- LEFT SIDE: INTERFACE --- */}
+            <motion.div
+                className="relative h-full bg-[#fdfcf8] border-r border-neutral-200 flex flex-col overflow-hidden z-10"
+                initial={{ width: '100%', flexBasis: '100%' }}
+                animate={isDesktop ? {
+                    width: showReveal ? '30%' : '100%',
+                    flexBasis: showReveal ? '30%' : '100%',
+                } : {
+                    width: '100%',
+                    // On mobile, we fade out the chat layer to show the art behind it
+                    opacity: showReveal ? 0 : 1,
+                    pointerEvents: showReveal ? 'none' : 'auto'
+                }}
+                transition={{ duration: 1.2, ease: "easeInOut" }}
+            >
+                <div className="flex flex-col h-full p-6 md:p-12 w-full relative">
+
+                    {/* 1. Subject Input */}
+                    <div className="mb-8 flex-shrink-0">
+                        <span className="font-mono text-[9px] text-neutral-400 uppercase tracking-widest block mb-2">
+                            {t.process.step0}
+                        </span>
+                        <div className="relative">
+                            <input
+                                type="text"
+                                value={typedText}
+                                readOnly
+                                className="w-full bg-white border-b-2 border-neutral-200 py-2 text-lg md:text-xl font-serif text-ink focus:outline-none"
+                            />
+                            {step === 'typing' && (
+                                <span className="absolute right-0 top-2 w-2 h-6 bg-intl-orange animate-pulse"></span>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* 2. Parameters (Tags) */}
+                    <div className="mb-8 flex-shrink-0 min-h-[60px]">
+                        <AnimatePresence>
+                            {showParams && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                >
+                                    <span className="font-mono text-[9px] text-neutral-400 uppercase tracking-widest block mb-3">
+                                        {t.process.step1}
+                                    </span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {data.tags.map((tag: string, i: number) => (
+                                            <motion.div
+                                                key={i}
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ delay: i * 0.1 }}
+                                                className="flex items-center gap-2 bg-white border border-neutral-200 px-3 py-1.5 rounded text-[10px] font-mono text-neutral-600 shadow-sm"
+                                            >
+                                                <Check size={10} className="text-intl-orange" strokeWidth={3} />
+                                                {tag}
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    {/* 3. Visual Choice (Mediums) */}
+                    <div className="mb-8 flex-shrink-0 min-h-[100px]">
+                        <AnimatePresence>
+                            {showParams && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 }}
+                                >
+                                    <span className="font-mono text-[9px] text-neutral-400 uppercase tracking-widest block mb-3">
+                                        {t.process.step2}
+                                    </span>
+                                    <div className="grid grid-cols-3 gap-3">
+                                        {data.mediums.map((m: any, i: number) => (
+                                            <div key={i} className="flex flex-col items-center gap-2">
+                                                <motion.div
+                                                    className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-500 ${m.selected ? 'border-intl-orange shadow-md scale-105' : 'border-transparent opacity-50'}`}
+                                                    initial={{ scale: 0.9, opacity: 0 }}
+                                                    animate={{ scale: m.selected ? 1.05 : 0.9, opacity: 1 }}
+                                                    transition={{ delay: 0.5 + (i * 0.1) }}
+                                                >
+                                                    <img src={m.img} alt={m.label} className="w-full h-full object-cover" />
+                                                    {m.selected && (
+                                                        <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
+                                                            <CheckCircle2 className="text-white drop-shadow-md" size={20} />
+                                                        </div>
+                                                    )}
+                                                </motion.div>
+                                                <span className={`font-mono text-[9px] uppercase tracking-widest ${m.selected ? 'text-intl-orange font-bold' : 'text-neutral-400'}`}>
+                                                    {m.label}
+                                                </span>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+
+                    {/* 4. Chat Thread */}
+                    <div className="flex-grow relative mask-linear-fade" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 5%)' }}>
+                        <div ref={chatContainerRef} className="absolute inset-0 overflow-y-auto scrollbar-hide pb-24">
+                            <div className="flex flex-col gap-4 pt-2 px-1">
+                                {showChat && data.chat.slice(0, step === 'chatting' ? visibleMsgCount : undefined).map((msg: any, i: number) => (
+                                    <motion.div
+                                        key={i}
+                                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                                        className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} w-full`}
+                                    >
+                                        <div className={`text-xs md:text-sm py-3 px-4 shadow-sm leading-relaxed max-w-[85%] relative rounded-2xl ${msg.role === 'bot'
+                                                ? 'bg-white border border-neutral-200 text-neutral-700 rounded-tr-xl rounded-br-xl rounded-bl-xl'
+                                                : 'bg-neutral-900 text-white rounded-tl-xl rounded-bl-xl rounded-br-xl'
+                                            }`}>
+                                            {msg.text}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Disclaimer */}
+                    <div className="mt-auto pt-4 pb-20 md:pb-4 flex-shrink-0">
+                        <p className="text-[10px] text-neutral-400 flex items-start md:items-center gap-2 font-mono leading-tight">
+                            <Info size={12} className="flex-shrink-0 mt-0.5 md:mt-0" />
+                            Hinweis: Dies ist eine vereinfachte Demo. Der echte AI-Kurator analysiert deine Antworten in 12+ Dimensionen.
+                        </p>
+                    </div>
+
+                    {/* 5. Loading Bar */}
+                    <AnimatePresence>
+                        {showProcessing && (
+                            <motion.div
+                                className="absolute bottom-0 left-0 w-full bg-[#fdfcf8] border-t border-neutral-200 p-6 flex items-center gap-4 z-[60]"
+                                initial={{ y: '100%' }}
+                                animate={{ y: 0 }}
+                                exit={{ y: '100%' }}
+                            >
+                                <div className="w-4 h-4 border-2 border-intl-orange border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
+                                <span className="font-mono text-[10px] text-neutral-500 uppercase tracking-widest flex-shrink-0">
+                                    {t.process.processing}
+                                </span>
+                                <div className="flex-grow h-1 bg-neutral-200 rounded-full overflow-hidden">
+                                    <div
+                                        className="h-full bg-intl-orange transition-all ease-linear"
+                                        style={{
+                                            width: `${progress}%`,
+                                            transitionDuration: `${PROCESSING_DURATION}ms`
+                                        }}
+                                    />
+                                </div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+
+                </div>
+            </motion.div>
+
+            {/* --- RIGHT SIDE: ARTWORK --- */}
+            <motion.div
+                className="absolute inset-0 md:relative bg-neutral-800 overflow-hidden z-0"
+                initial={{ width: '0%', flexBasis: '0%' }}
+                animate={isDesktop ? {
+                    width: showReveal ? '70%' : '0%',
+                    flexBasis: showReveal ? '70%' : '0%',
+                } : {
+                    width: '100%',
+                    // On mobile, this is always full width behind, revealed by chat opacity
+                }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+            >
+                {/* Image */}
+                <motion.img
+                    src={data.resultImage}
+                    alt="Result"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.1, filter: 'blur(12px)' }}
+                    animate={{
+                        opacity: showReveal ? 1 : 0,
+                        scale: showReveal ? 1 : 1.1,
+                        filter: showReveal ? 'blur(0px)' : 'blur(12px)'
+                    }}
+                    transition={{ duration: 1.5 }}
+                />
+
+                {/* Reveal Label */}
+                <AnimatePresence>
+                    {showReveal && (
+                        <motion.div
+                            className="absolute bottom-32 md:bottom-12 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-md text-white border border-white/10 px-6 py-3 rounded-full flex items-center gap-3 shadow-2xl whitespace-nowrap z-20"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                        >
+                            <Sparkles className="text-intl-orange animate-pulse" size={16} />
+                            <span className="font-mono text-xs font-bold uppercase tracking-widest">
+                                {t.process.revealLabel}
+                            </span>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+                {/* Replay UI */}
+                <AnimatePresence>
+                    {showReveal && (
+                        <motion.div
+                            className="absolute top-6 right-6 z-50 flex flex-col items-end gap-2"
+                            initial={{ opacity: 0, x: 20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: 1.0 }}
+                        >
+                            <span className="bg-black/50 text-white text-[9px] px-2 py-1 rounded font-mono uppercase tracking-widest backdrop-blur-md">
+                                {t.process.replayLabel}
+                            </span>
+                            <div className="flex gap-2">
+                                {(['A', 'B', 'C'] as const).map((id) => (
+                                    <button
+                                        key={id}
+                                        onClick={() => onSwitch(id)}
+                                        className={`w-8 h-8 rounded flex items-center justify-center font-mono text-xs transition-colors ${scenarioId === id
+                                                ? 'bg-intl-orange text-white'
+                                                : 'bg-white/10 text-white hover:bg-white/20'
+                                            }`}
+                                    >
+                                        {id}
+                                    </button>
+                                ))}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+
+            </motion.div>
+        </>
+    );
+};
+
+
+// --- Main Component ---
 const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
     const { t } = useLanguage();
-    const chatContainerRef = useRef<HTMLDivElement>(null);
-    const timeoutsRef = useRef<NodeJS.Timeout[]>([]);
-    const intervalsRef = useRef<NodeJS.Timeout[]>([]);
-    const msgTimeoutsRef = useRef<NodeJS.Timeout[]>([]);
-
-    // State Machine
-    const [sequenceState, setSequenceState] = useState<'idle' | 'typing' | 'params' | 'medium' | 'chat' | 'processing' | 'reveal'>('idle');
-    const [activeScenarioId, setActiveScenarioId] = useState<'A' | 'B' | 'C'>('A');
+    const [activeScenarioId, setActiveScenarioId] = useState<ScenarioId>('A');
     const [isDesktop, setIsDesktop] = useState(true);
-    const [hasFinishedOnce, setHasFinishedOnce] = useState(false);
-    const [displayedSubject, setDisplayedSubject] = useState("");
-    const [visibleMsgCount, setVisibleMsgCount] = useState(0);
-    const [chatListKey, setChatListKey] = useState(0);
-    const [isExiting, setIsExiting] = useState(false);
-
-    const activeData = t.process.scenarios[activeScenarioId];
 
     // Handle Resize
     useEffect(() => {
@@ -29,179 +395,6 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
-    // Clear all timeouts and intervals
-    const clearAllTimers = () => {
-        timeoutsRef.current.forEach(clearTimeout);
-        intervalsRef.current.forEach(clearInterval);
-        msgTimeoutsRef.current.forEach(clearTimeout);
-        timeoutsRef.current = [];
-        intervalsRef.current = [];
-        msgTimeoutsRef.current = [];
-    };
-
-    // Start sequence when in view OR when scenario changes
-    const startSequence = (scenarioId?: 'A' | 'B' | 'C') => {
-        // Clear any existing timers
-        clearAllTimers();
-
-        // Use the provided scenarioId or fall back to current activeScenarioId
-        const targetScenarioId = scenarioId || activeScenarioId;
-        const targetData = t.process.scenarios[targetScenarioId];
-
-        // Reset state
-        setSequenceState('typing');
-        setDisplayedSubject("");
-        setVisibleMsgCount(0);
-
-        // --- ANIMATION TIMELINE ---
-
-        // 1. Typing Effect (0s - 1.5s approx)
-        let currentText = "";
-        const fullText = targetData.subject;
-        let charIndex = 0;
-
-        const typingInterval = setInterval(() => {
-            if (charIndex < fullText.length) {
-                currentText += fullText.charAt(charIndex);
-                setDisplayedSubject(currentText);
-                charIndex++;
-            } else {
-                clearInterval(typingInterval);
-                // Proceed to next step
-                const timeout = setTimeout(() => setSequenceState('params'), 500);
-                timeoutsRef.current.push(timeout);
-            }
-        }, 40); // Typing speed
-        intervalsRef.current.push(typingInterval);
-
-        
-        // 3. Medium (Starts at 3.0s)
-        timeoutsRef.current.push(setTimeout(() => setSequenceState('medium'), 3000));
-
-        // 4. Chat (Starts at 4.5s)
-        timeoutsRef.current.push(setTimeout(() => {
-            setSequenceState('chat');
-            setChatListKey(prev => prev + 1);
-        }, 4500));
-    };
-
-    const switchScenario = (id: 'A' | 'B' | 'C') => {
-        // Trigger exit animation first
-        setIsExiting(true);
-
-        // Wait for exit animation (300ms) then restart
-        const exitTimeout = setTimeout(() => {
-            clearAllTimers();
-            setActiveScenarioId(id);
-            setSequenceState('typing'); 
-            setDisplayedSubject("");
-            setVisibleMsgCount(0);
-            setIsExiting(false);
-            
-            // Start new sequence
-            startSequence(id);
-        }, 300);
-        
-        // We need to track this timeout in a separate way or just let it run
-        // If we put it in timeoutsRef, clearAllTimers would kill it? 
-        // No, clearAllTimers is called INSIDE it.
-        // But if user clicks AGAIN quickly? We should clear pending switch.
-        // Ideally we should have a 'switchTimeoutRef' but keeping it simple:
-        // The UI blocks interaction or we assume user isn't spamming 100ms clicks.
-        // But to be safe, let's just run it.
-    };
-
-    // Progressive message rendering for chat
-    useEffect(() => {
-        if (sequenceState !== 'chat') {
-            return;
-        }
-        setVisibleMsgCount(0);
-        msgTimeoutsRef.current.forEach(clearTimeout);
-        msgTimeoutsRef.current = [];
-        
-        const total = activeData.chat.length;
-        const delay = 400;
-        
-        // Schedule message appearance
-        for (let i = 1; i <= total; i++) {
-            const to = setTimeout(() => {
-                setVisibleMsgCount(i);
-            }, i * delay);
-            msgTimeoutsRef.current.push(to);
-        }
-
-        // Schedule transition to processing AFTER messages are done
-        // We put these in timeoutsRef so they persist even if this effect cleans up 
-        // (though effect only cleans up on unmount or dep change)
-        // Wait: if sequenceState changes to processing, effect cleans up.
-        // We want these timeouts to trigger the change.
-        
-        const processingStart = total * delay + 600;
-        
-        const processingTimeout = setTimeout(() => {
-            setSequenceState('processing');
-        }, processingStart);
-        
-        const revealTimeout = setTimeout(() => {
-            setSequenceState('reveal');
-            setHasFinishedOnce(true);
-        }, processingStart + 3000); // 3s loading bar
-
-        timeoutsRef.current.push(processingTimeout, revealTimeout);
-        
-        return () => {
-            msgTimeoutsRef.current.forEach(clearTimeout);
-            msgTimeoutsRef.current = [];
-        };
-    }, [sequenceState, activeScenarioId]);
-
-    // Auto-scroll when new messages appear
-    useEffect(() => {
-        const el = chatContainerRef.current;
-        if (!el || visibleMsgCount <= 0) return;
-        let raf = 0;
-        const target = el.scrollHeight;
-        const step = () => {
-            const diff = target - el.scrollTop;
-            if (Math.abs(diff) < 1) {
-                el.scrollTop = target;
-                cancelAnimationFrame(raf);
-                return;
-            }
-            el.scrollTop += diff * 0.2;
-            raf = requestAnimationFrame(step);
-        };
-        raf = requestAnimationFrame(step);
-        return () => cancelAnimationFrame(raf);
-    }, [visibleMsgCount, chatListKey]);
-
-    // Cleanup on unmount
-    useEffect(() => {
-        return () => clearAllTimers();
-    }, []);
-
-    // Reset Logic (Mobile Back Button)
-    const resetToChat = () => {
-        // Just visually hide reveal, but keep state as 'reveal' to show full chat? 
-        // Or revert state? Reverting state is cleaner for animations.
-        // Let's effectively "rewind" to 'processing' state visually without the loading bar?
-        // Actually, mobile logic just hides the Art Layer opacity.
-        // But we need to manage the 'Back' button visibility.
-        // Simplified: We just toggle a mobile-specific view flag if we needed it, 
-        // but here we can just leverage the desktop logic or simple state if we want to be strict.
-        // For this demo, "Back" just re-plays the end state of chat.
-        // Let's just set sequenceState back to 'chat' (completed).
-        // But that would re-trigger auto-scroll. 
-        // Let's keep it simple: The "Back" button is mainly to see parameters. 
-        // We can just toggle the opacity logic on mobile.
-    };
-
-    // Mobile Toggle Logic handled via CSS classes in render usually, 
-    // but here we used `isRevealed` state in previous iteration.
-    // `sequenceState === 'reveal'` drives the layout. 
-    // If we want to "go back", we set sequenceState = 'processing' (finished bar).
 
     return (
         <section id="process" className="py-12 md:py-48 bg-white relative">
@@ -217,303 +410,27 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                     </h2>
                 </div>
 
-                {/* === MAIN INTERACTIVE CONTAINER === */}
-                <motion.div
-                    className="relative w-full max-w-6xl mx-auto h-[750px] md:h-[800px] bg-neutral-900 shadow-2xl overflow-hidden rounded-2xl md:rounded-sm border border-neutral-800 mb-16 flex flex-col md:flex-row"
-                    onViewportEnter={() => { if (sequenceState === 'idle') startSequence(); }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    animate={{ opacity: isExiting ? 0 : 1, scale: isExiting ? 0.98 : 1 }}
-                    transition={{ duration: 0.3 }}
-                >
+                {/* Main Container */}
+                <div className="relative w-full max-w-6xl mx-auto h-[750px] md:h-[800px] bg-neutral-900 shadow-2xl overflow-hidden rounded-2xl md:rounded-sm border border-neutral-800 mb-16 flex flex-col md:flex-row">
+                    {/* 
+                        KEY CONCEPT: 
+                        We use the `key` prop here to force React to completely unmount the old ScenarioRunner 
+                        and mount a fresh one when the scenario ID changes. 
+                        This guarantees zero state pollution between scenarios.
+                    */}
+                    <ScenarioRunner
+                        key={activeScenarioId}
+                        scenarioId={activeScenarioId}
+                        data={t.process.scenarios[activeScenarioId]}
+                        t={t}
+                        isDesktop={isDesktop}
+                        onSwitch={setActiveScenarioId}
+                    />
+                </div>
 
-                    {/* --- RIGHT LAYER: ARTWORK (Desktop: Right Side / Mobile: Full Background) --- */}
-                    <motion.div
-                        className="absolute inset-0 md:relative bg-neutral-800 overflow-hidden z-0"
-                        // Desktop Logic: Hidden until reveal, then expands to 70%
-                        initial={{ width: '0%', flexBasis: '0%' }}
-                        animate={isDesktop ? {
-                            width: sequenceState === 'reveal' ? '70%' : '0%',
-                            flexBasis: sequenceState === 'reveal' ? '70%' : '0%',
-                            filter: sequenceState === 'reveal' ? 'blur(0px)' : 'blur(12px)',
-                            opacity: sequenceState === 'reveal' ? 1 : 0
-                        } : {
-                            width: '100%',
-                            opacity: 1,
-                            filter: sequenceState === 'reveal' ? 'blur(0px)' : 'blur(12px)'
-                        }}
-                        transition={{ duration: 1.5, ease: "easeInOut" }}
-                    >
-                        {/* Image Transition */}
-                        <AnimatePresence mode='wait'>
-                            <motion.img
-                                key={activeData.resultImage}
-                                src={activeData.resultImage}
-                                alt="Final Masterpiece"
-                                className="absolute inset-0 w-full h-full object-cover"
-                                initial={{ opacity: 0, scale: 1.1 }}
-                                animate={{ opacity: sequenceState === 'reveal' ? 1 : 0, scale: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 1.5 }}
-                            />
-                        </AnimatePresence>
-
-                        {/* Reveal Label */}
-                        <AnimatePresence>
-                            {sequenceState === 'reveal' && (
-                                <motion.div
-                                    className="absolute bottom-32 md:bottom-12 left-1/2 -translate-x-1/2 bg-black/60 backdrop-blur-md text-white border border-white/10 px-6 py-3 rounded-full flex items-center gap-3 shadow-2xl whitespace-nowrap z-20"
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: 0.5 }}
-                                >
-                                    <Sparkles className="text-intl-orange animate-pulse" size={16} />
-                                    <span className="font-mono text-xs font-bold uppercase tracking-widest">
-                                        {t.process.revealLabel}
-                                    </span>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                        {/* REPLAY UI (Overlay on Art) */}
-                        <AnimatePresence>
-                            {sequenceState === 'reveal' && (
-                                <motion.div
-                                    className="absolute top-6 right-6 z-50 flex flex-col items-end gap-2"
-                                    initial={{ opacity: 0, x: 20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: 1.0 }}
-                                >
-                                    <span className="bg-black/50 text-white text-[9px] px-2 py-1 rounded font-mono uppercase tracking-widest backdrop-blur-md">
-                                        {t.process.replayLabel}
-                                    </span>
-                                    <div className="flex gap-2">
-                                        {(['A', 'B', 'C'] as const).map((id) => (
-                                            <button
-                                                key={id}
-                                                onClick={() => switchScenario(id)}
-                                                className="btn btn--secondary btn--sm"
-                                            >
-                                                {id}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-
-                    </motion.div>
-
-
-                    {/* --- LEFT LAYER: CHAT INTERFACE --- */}
-                    <motion.div
-                        className="relative h-full bg-[#fdfcf8] border-r border-neutral-200 flex flex-col overflow-hidden z-10"
-                        // Desktop Logic: Full width until reveal, then shrinks to 30%
-                        // Mobile Logic: Fullscreen Overlay that fades out
-                        initial={{ width: '100%', flexBasis: '100%' }}
-                        animate={isDesktop ? {
-                            width: sequenceState === 'reveal' ? '30%' : '100%',
-                            flexBasis: sequenceState === 'reveal' ? '30%' : '100%',
-                        } : {
-                            width: '100%',
-                            opacity: sequenceState === 'reveal' ? 0 : 1,
-                            pointerEvents: sequenceState === 'reveal' ? 'none' : 'auto'
-                        }}
-                        transition={{ duration: 1.2, ease: "easeInOut" }}
-                    >
-                        <div className="flex flex-col h-full p-6 md:p-12 w-full relative">
-
-                            {/* 0. NEW: SUBJECT INPUT SIMULATION */}
-                            <div className="mb-8 flex-shrink-0">
-                                <span className="font-mono text-[9px] text-neutral-400 uppercase tracking-widest block mb-2">
-                                    {t.process.step0}
-                                </span>
-                                <div className="relative">
-                                    <input
-                                        type="text"
-                                        value={displayedSubject}
-                                        readOnly
-                                        className="w-full bg-white border-b-2 border-neutral-200 py-2 text-lg md:text-xl font-serif text-ink focus:outline-none"
-                                    />
-                                    {sequenceState === 'typing' && (
-                                        <span className="absolute right-0 top-2 w-2 h-6 bg-intl-orange animate-pulse"></span>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* 1. TOP: PARAMETER TAGS */}
-                            <div className="mb-8 flex-shrink-0">
-                                <AnimatePresence>
-                                    {(sequenceState === 'params' || sequenceState === 'medium' || sequenceState === 'chat' || sequenceState === 'processing' || sequenceState === 'reveal') && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                        >
-                                            <span className="font-mono text-[9px] text-neutral-400 uppercase tracking-widest block mb-3">
-                                                {t.process.step1}
-                                            </span>
-                                            <div className="flex flex-wrap gap-2">
-                                                {activeData.tags.map((tag, i) => (
-                                                    <motion.div
-                                                        key={`${activeScenarioId}-${i}`}
-                                                        initial={{ opacity: 0, x: -10 }}
-                                                        animate={{ opacity: 1, x: 0 }}
-                                                        transition={{ delay: i * 0.1 }}
-                                                        className="flex items-center gap-2 bg-white border border-neutral-200 px-3 py-1.5 rounded text-[10px] font-mono text-neutral-600 shadow-sm"
-                                                    >
-                                                        <Check size={10} className="text-intl-orange" strokeWidth={3} />
-                                                        {tag}
-                                                    </motion.div>
-                                                ))}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-
-                            {/* 2. MIDDLE: VISUAL CHOICE */}
-                            <div className="mb-8 flex-shrink-0">
-                                <AnimatePresence>
-                                    {(sequenceState === 'medium' || sequenceState === 'chat' || sequenceState === 'processing' || sequenceState === 'reveal') && (
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.5 }}
-                                        >
-                                            <span className="font-mono text-[9px] text-neutral-400 uppercase tracking-widest block mb-3">
-                                                {t.process.step2}
-                                            </span>
-                                            <div className="grid grid-cols-3 gap-3">
-                                                {activeData.mediums.map((m, i) => {
-                                                    return (
-                                                        <div key={`${activeScenarioId}-${i}`} className="flex flex-col items-center gap-2">
-                                                            <motion.div
-                                                                className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all duration-500 ${m.selected ? 'border-intl-orange shadow-md scale-105' : 'border-transparent opacity-50'}`}
-                                                                initial={{ scale: 0.9 }}
-                                                                animate={m.selected ? { scale: 1.05 } : { scale: 0.9 }}
-                                                                transition={{ delay: 0.5 }}
-                                                            >
-                                                                <img src={m.img} alt={m.label} className="w-full h-full object-cover" />
-                                                                {m.selected && (
-                                                                    <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
-                                                                        <CheckCircle2 className="text-white drop-shadow-md" size={20} />
-                                                                    </div>
-                                                                )}
-                                                            </motion.div>
-                                                            <span className={`font-mono text-[9px] uppercase tracking-widest ${m.selected ? 'text-intl-orange font-bold' : 'text-neutral-400'}`}>
-                                                                {m.label}
-                                                            </span>
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
-
-                            {/* 3. BOTTOM: CHAT THREAD */}
-                            <div className="flex-grow relative mask-linear-fade" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 5%)' }}>
-                                <div key={chatListKey} ref={chatContainerRef} className="absolute inset-0 overflow-y-auto scrollbar-hide pb-24">
-                                    <AnimatePresence mode='wait'>
-                                        {(sequenceState === 'chat' || sequenceState === 'processing' || sequenceState === 'reveal') && (
-                                            <motion.div
-                                                key={`${activeScenarioId}-${chatListKey}`}
-                                                initial={{ opacity: 0, y: 10 }}
-                                                animate={{ opacity: 1, y: 0 }}
-                                                exit={{ opacity: 0, y: -6 }}
-                                                transition={{ duration: 0.35, ease: 'easeInOut' }}
-                                                className="flex flex-col gap-4 pt-2 px-1"
-                                            >
-                                                {activeData.chat.slice(0, sequenceState === 'chat' ? visibleMsgCount : activeData.chat.length).map((msg, i) => (
-                                                    <motion.div
-                                                        key={`${activeScenarioId}-${i}`}
-                                                        layout
-                                                        initial={{ opacity: 0, y: 8, scale: 0.98 }}
-                                                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                                                        exit={{ opacity: 0, y: -6 }}
-                                                        transition={{ duration: 0.35, ease: 'easeOut' }}
-                                                        className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} w-full`}
-                                                    >
-                                                        <div
-                                                            className={`text-xs md:text-sm py-3 px-4 shadow-sm leading-relaxed max-w-[85%] relative rounded-2xl ${msg.role === 'bot'
-                                                                ? 'bg-white border border-neutral-200 text-neutral-700 rounded-tr-xl rounded-br-xl rounded-bl-xl'
-                                                                : 'bg-neutral-900 text-white rounded-tl-xl rounded-bl-xl rounded-br-xl'
-                                                            }`}
-                                                        >
-                                                            {msg.text}
-                                                        </div>
-                                                    </motion.div>
-                                                ))}
-                                            </motion.div>
-                                        )}
-                                    </AnimatePresence>
-                                </div>
-                            </div>
-
-                            {/* DISCLAIMER */}
-                            <div className="mt-auto pt-4 pb-20 md:pb-4 flex-shrink-0">
-                                <p className="text-[10px] text-neutral-400 flex items-start md:items-center gap-2 font-mono leading-tight">
-                                    <Info size={12} className="flex-shrink-0 mt-0.5 md:mt-0" />
-                                    Hinweis: Dies ist eine vereinfachte Demo. Der echte AI-Kurator analysiert deine Antworten in 12+ Dimensionen.
-                                </p>
-                            </div>
-
-                            {/* 4. FOOTER: LOADING BAR */}
-                            <AnimatePresence>
-                                {sequenceState === 'processing' && (
-                                    <motion.div
-                                        className="absolute bottom-0 left-0 w-full bg-[#fdfcf8] border-t border-neutral-200 p-6 flex items-center gap-4 z-50"
-                                        initial={{ y: '100%' }}
-                                        animate={{ y: 0 }}
-                                        exit={{ y: '100%' }}
-                                    >
-                                        <div className="w-4 h-4 border-2 border-intl-orange border-t-transparent rounded-full animate-spin flex-shrink-0"></div>
-                                        <span className="font-mono text-[10px] text-neutral-500 uppercase tracking-widest flex-shrink-0">
-                                            {t.process.processing}
-                                        </span>
-                                        <div className="flex-grow h-1 bg-neutral-200 rounded-full overflow-hidden">
-                                            <motion.div
-                                                className="h-full bg-intl-orange"
-                                                initial={{ width: 0 }}
-                                                animate={{ width: '100%' }}
-                                                transition={{ duration: 3.0, ease: "easeInOut" }}
-                                            ></motion.div>
-                                        </div>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-
-                            {/* 5. MOBILE NAV: SHOW RESULT BUTTON */}
-                            <AnimatePresence>
-                                {!isDesktop && sequenceState === 'reveal' && (
-                                    <motion.div
-                                        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40"
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: 20 }}
-                                    >
-                                        <button
-                                            onClick={() => {/* Logic to toggle view handled by opacity class state if needed, or just let user scroll/click replay */ }}
-                                            className="btn btn--primary btn--sm"
-                                        >
-                                            {/* On mobile, 'reveal' hides chat automatically via opacity. 
-                                        The 'Replay' UI on artwork handles reset. 
-                                        So we might not need a button here unless we want to toggle back.
-                                        Let's render a "Replay" style selector on mobile artwork too.
-                                    */}
-                                        </button>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
-
-                        </div>
-                    </motion.div>
-
-                </motion.div>
-
-                {/* BENEFITS */}
+                {/* Benefits */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 border-t border-neutral-100 pt-12 md:pt-16 max-w-5xl mx-auto">
-                    {t.process.bullets.map((bullet, i) => (
+                    {t.process.bullets.map((bullet: any, i: number) => (
                         <div key={i} className="flex flex-col items-center text-center px-4">
                             <div className="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center text-intl-orange mb-4">
                                 <Check size={16} strokeWidth={3} />
