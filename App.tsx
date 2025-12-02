@@ -1,27 +1,18 @@
-import React, { useState, useEffect, lazy, Suspense } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Toaster } from 'sonner';
 import { CONTENT } from './data/content';
 import { Lang } from './types';
 import { getVoucherFromURL, getRedirectURL } from './utils/voucher';
 import Hero from './components/Hero';
+import FeaturesBento from './components/FeaturesBento';
 import ComparisonSection from './components/ComparisonSection';
+import Process from './components/Process';
 import CuratorQuiz from './components/CuratorQuiz';
+import Timeline from './components/Timeline';
 import OfferSection from './components/OfferSection';
 import OfferSectionSecondary from './components/OfferSectionSecondary';
+import FAQ from './components/FAQ';
 import CookieConsent from './components/CookieConsent';
-
-// Lazy load heavy components
-const FeaturesBento = lazy(() => import('./components/FeaturesBento'));
-const Process = lazy(() => import('./components/Process'));
-const Timeline = lazy(() => import('./components/Timeline'));
-const FAQ = lazy(() => import('./components/FAQ'));
-
-// Loading component
-const LoadingFallback = () => (
-  <div className="w-full h-32 flex items-center justify-center">
-    <div className="w-8 h-8 border-2 border-neutral-200 border-t-neutral-800 rounded-full animate-spin"></div>
-  </div>
-);
 
 // Main App Component
 const App = () => {
@@ -54,13 +45,7 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center">
             <a href="https://canvasnova.com">
-              <img
-                src="/logo.webp"
-                alt="canvasnova"
-                className="h-8 w-auto"
-                width="604"
-                height="108"
-              />
+              <img src="/logo.webp" alt="canvasnova" className="h-8 w-auto" />
             </a>
           </div>
 
@@ -76,28 +61,14 @@ const App = () => {
       </nav>
 
       <Hero onAnalyzeClick={handleCtaClick} lang={lang} />
-
-      <Suspense fallback={<LoadingFallback />}>
-        <FeaturesBento lang={lang} />
-      </Suspense>
-
-      <Suspense fallback={<LoadingFallback />}>
-        <Process onCtaClick={handleCtaClick} />
-      </Suspense>
-
+      <FeaturesBento lang={lang} />
+      <Process onCtaClick={handleCtaClick} />
       <OfferSection id="ticket" lang={lang} />
       <ComparisonSection id="comparison" lang={lang} onCtaClick={handleCtaClick} />
-
-      <Suspense fallback={<LoadingFallback />}>
-        <Timeline lang={lang} />
-      </Suspense>
-
+      <Timeline lang={lang} />
       <CuratorQuiz id="quiz" lang={lang} onCtaClick={handleCtaClick} />
       <OfferSectionSecondary lang={lang} />
-
-      <Suspense fallback={<LoadingFallback />}>
-        <FAQ lang={lang} />
-      </Suspense>
+      <FAQ lang={lang} />
 
       {/* Cookie Consent Banner */}
       <CookieConsent />
