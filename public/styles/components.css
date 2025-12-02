@@ -15,7 +15,12 @@
   cursor: pointer;
   user-select: none;
 }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; box-shadow: none; }
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
 
 .btn:focus {
   outline: 2px solid var(--color-primary);
@@ -56,13 +61,32 @@
   transform: translateY(1px);
 }
 
-.btn--sm { font-size: var(--font-size-sm); min-height: 44px; }
-.btn--md { font-size: var(--font-size-md); min-height: 48px; }
-.btn--lg { font-size: var(--font-size-lg); min-height: 56px; }
+.btn--sm {
+  font-size: var(--font-size-sm);
+  min-height: 44px;
+}
 
-.btn__icon { width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; }
+.btn--md {
+  font-size: var(--font-size-md);
+  min-height: 48px;
+}
 
-html, body, .scrollbar-themed {
+.btn--lg {
+  font-size: var(--font-size-lg);
+  min-height: 56px;
+}
+
+.btn__icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html,
+body,
+.scrollbar-themed {
   scrollbar-width: thin;
   scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 }
@@ -93,8 +117,59 @@ body::-webkit-scrollbar-thumb:hover,
   background: var(--scrollbar-thumb-hover);
 }
 
-.scrollbar-hide { 
-  -ms-overflow-style: none; 
-  scrollbar-width: none; 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.scrollbar-hide::-webkit-scrollbar { display: none; }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cookie Consent Animation */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.4s ease-out forwards;
+}
+
+/* Modal Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.3s ease-out forwards;
+}

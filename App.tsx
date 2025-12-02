@@ -12,6 +12,7 @@ import Timeline from './components/Timeline';
 import OfferSection from './components/OfferSection';
 import OfferSectionSecondary from './components/OfferSectionSecondary';
 import FAQ from './components/FAQ';
+import CookieConsent from './components/CookieConsent';
 
 // Main App Component
 const App = () => {
@@ -68,6 +69,9 @@ const App = () => {
       <CuratorQuiz id="quiz" lang={lang} onCtaClick={handleCtaClick} />
       <OfferSectionSecondary lang={lang} />
       <FAQ lang={lang} />
+
+      {/* Cookie Consent Banner */}
+      <CookieConsent />
 
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 text-center border-t border-white/10">
