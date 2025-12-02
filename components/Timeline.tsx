@@ -101,12 +101,12 @@ const Timeline = ({ lang }: { lang: Lang }) => {
         ...step,
         icon: icons[i],
         image: [
-            "/images/step1.png",
-            "/images/step2.jpg",
-            "/images/step3.jpg",
-            "/images/step4.jpg",
-            "/images/step5.jpg",
-            "/images/step6.jpg"
+            "/images/step1.webp",
+            "/images/step2.webp",
+            "/images/step3.webp",
+            "/images/step4.webp",
+            "/images/step5.webp",
+            "/images/step6.webp"
         ][i]
     }));
 

@@ -68,22 +68,22 @@ const CardWrapper = ({ children, className = "", colSpan = "col-span-1" }: { chi
 // Card 1: "Schluss mit 'passt schon'." (Infinite Choice)
 const Card1 = ({ lang }: { lang: Lang }) => {
     const images1 = [
-        "images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png",
-        "images/bento_images/Gemini_Generated_Image_7y9s327y9s327y9s.png",
-        "images/bento_images/Gemini_Generated_Image_9mk7u19mk7u19mk7.png",
-        "images/bento_images/Gemini_Generated_Image_31uco631uco631uc.png",
+        "images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.webp",
+        "images/bento_images/Gemini_Generated_Image_7y9s327y9s327y9s.webp",
+        "images/bento_images/Gemini_Generated_Image_9mk7u19mk7u19mk7.webp",
+        "images/bento_images/Gemini_Generated_Image_31uco631uco631uc.webp",
     ];
     const images2 = [
-        "images/bento_images/Gemini_Generated_Image_cv51focv51focv51.png",
-        "images/bento_images/Gemini_Generated_Image_f5ihylf5ihylf5ih.png",
-        "images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png",
-        "images/bento_images/Gemini_Generated_Image_jcbxv7jcbxv7jcbx.png",
+        "images/bento_images/Gemini_Generated_Image_cv51focv51focv51.webp",
+        "images/bento_images/Gemini_Generated_Image_f5ihylf5ihylf5ih.webp",
+        "images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.webp",
+        "images/bento_images/Gemini_Generated_Image_jcbxv7jcbxv7jcbx.webp",
     ];
     const images3 = [
-        "images/bento_images/Gemini_Generated_Image_tm59votm59votm59.png",
-        "images/bento_images/Gemini_Generated_Image_uhrc4suhrc4suhrc.png",
-        "images/bento_images/Gemini_Generated_Image_x4n8mpx4n8mpx4n8.png",
-        "images/bento_images/Gemini_Generated_Image_y4n745y4n745y4n7.png",
+        "images/bento_images/Gemini_Generated_Image_tm59votm59votm59.webp",
+        "images/bento_images/Gemini_Generated_Image_uhrc4suhrc4suhrc.webp",
+        "images/bento_images/Gemini_Generated_Image_x4n8mpx4n8mpx4n8.webp",
+        "images/bento_images/Gemini_Generated_Image_y4n745y4n745y4n7.webp",
     ];
 
     return (
@@ -135,19 +135,19 @@ const Card2 = ({ lang }: { lang: Lang }) => {
     const styles = [
         {
             name: lang === 'de' ? 'Realistisch' : 'Realistic',
-            image: 'images/process_images/A/A.png' // Landscape
+            image: 'images/process_images/A/A.webp' // Landscape
         },
         {
             name: lang === 'de' ? 'Öl-Gemälde' : 'Oil Painting',
-            image: 'images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.png' // Oil style
+            image: 'images/bento_images/Gemini_Generated_Image_4vcmg54vcmg54vcm.webp' // Oil style
         },
         {
             name: lang === 'de' ? 'Minimal' : 'Minimal',
-            image: 'images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.png' // Minimal
+            image: 'images/bento_images/Gemini_Generated_Image_hnd0eehnd0eehnd0.webp' // Minimal
         },
         {
             name: lang === 'de' ? 'Surreal' : 'Surreal',
-            image: 'public/images/process_images/B/B.png' // Surreal
+            image: 'public/images/process_images/B/B.webp' // Surreal
         }
     ];
 
@@ -260,7 +260,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                 {/* Right Image (Canvas Texture) - Background */}
                 <div className="absolute inset-0">
                     <img
-                        src="images/bento_images/01-Floater Frame.png"
+                        src="images/bento_images/01-Floater Frame.webp"
                         alt="Canvas"
                         className="w-full h-full object-cover filter brightness-90 contrast-125"
                     />
@@ -276,7 +276,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                     style={{ width: `${sliderPosition}%` }}
                 >
                     <img
-                        src="images/process_images/A/A.png"
+                        src="images/process_images/A/A.webp"
                         alt="Digital"
                         className="w-full h-full object-cover max-w-none"
                         style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100vw' }} // Hack to keep image static while container clips

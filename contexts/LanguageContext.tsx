@@ -120,9 +120,9 @@ const translations: Record<Language, Translations> = {
                     subject: "Eine Poolparty am Genfer See in den 1960ern",
                     tags: ["TYP: FOTOGRAPHIE", "THEMA: VINTAGE", "RATIO: 3:2"],
                     mediums: [
-                        { label: "ANALOG FILM", img: "/images/process_images/A/A-Analog.jpeg", selected: false },
-                        { label: "EDITORIAL", img: "/images/process_images/A/A-Editorial.jpeg", selected: true },
-                        { label: "CINEMATIC", img: "/images/process_images/A/A-Cinematic.jpeg", selected: false }
+                        { label: "ANALOG FILM", img: "/images/process_images/A/A-Analog.webp", selected: false },
+                        { label: "EDITORIAL", img: "/images/process_images/A/A-Editorial.webp", selected: true },
+                        { label: "CINEMATIC", img: "/images/process_images/A/A-Cinematic.webp", selected: false }
                     ],
                     chat: [
                         { role: 'bot', text: "Klassisch. Sollen wir den Look von altem Kodak-Film (warm & gesättigt) oder Fujifilm (kühl & grünlich) simulieren?" },
@@ -132,7 +132,7 @@ const translations: Record<Language, Translations> = {
                         { role: 'bot', text: "Notiert. Sollen wir im Hintergrund eine bestimmte Landschaft integrieren?" },
                         { role: 'user', text: "Ja, Berge und ein Seeufer." }
                     ],
-                    resultImage: "/images/process_images/A/A.png"
+                    resultImage: "/images/process_images/A/A.webp"
                 },
                 B: {
                     id: 'B',
@@ -140,9 +140,9 @@ const translations: Record<Language, Translations> = {
                     subject: "Ein entspannter Tiger am Poolrand eines luxuriösen Resorts, umgeben von tropischen Palmen, symmetrische Komposition.",
                     tags: ["TYP: DIGITAL", "THEMA: SURREAL", "RATIO: 1:1"],
                     mediums: [
-                        { label: "DIGITAL PAINTING", img: "/images/process_images/B/B-Digital Painting.jpeg", selected: false },
-                        { label: "3D RENDER", img: "/images/process_images/B/B-3DRender.jpeg", selected: true },
-                        { label: "COLLAGE", img: "/images/process_images/B/B-Collage.jpeg", selected: false }
+                        { label: "DIGITAL PAINTING", img: "/images/process_images/B/B-Digital Painting.webp", selected: false },
+                        { label: "3D RENDER", img: "/images/process_images/B/B-3DRender.webp", selected: true },
+                        { label: "COLLAGE", img: "/images/process_images/B/B-Collage.webp", selected: false }
                     ],
                     chat: [
                         { role: 'bot', text: "Ein starker Kontrast. Soll die Szene bedrohlich wirken oder eine friedliche 'Traum-Logik' ausstrahlen?" },
@@ -152,7 +152,7 @@ const translations: Record<Language, Translations> = {
                         { role: 'bot', text: "Notiert. Welche Akzentfarben sollen wir für die Sonnenschirme und Möbel nutzen, um das Grün der Palmen zu ergänzen?" },
                         { role: 'user', text: "Gelb-Weiß gestreift für einen sonnigen Resort-Look." }
                     ],
-                    resultImage: "/images/process_images/B/B.png"
+                    resultImage: "/images/process_images/B/B.webp"
                 },
                 C: {
                     id: 'C',
@@ -160,9 +160,9 @@ const translations: Record<Language, Translations> = {
                     subject: "Ein Astronaut betrachtet eine leuchtende Stadt-Silhouette, gemalt im Stil eines alten Meisters, mit sichtbarer Leinwand-Textur und goldenem Licht.",
                     tags: ["TYP: MALEREI", "THEMA: SCI-FI", "RATIO: 3:2"],
                     mediums: [
-                        { label: "GOUACHE", img: "/images/process_images/C/C-Gouache.jpeg", selected: false },
-                        { label: "ÖL AUF LEINWAND", img: "/images/process_images/C/C-Malerei.jpeg", selected: true },
-                        { label: "KREIDEZEICHNUNG", img: "/images/process_images/C/C-Kreidezeichnung.jpeg", selected: false }
+                        { label: "GOUACHE", img: "/images/process_images/C/C-Gouache.webp", selected: false },
+                        { label: "ÖL AUF LEINWAND", img: "/images/process_images/C/C-Malerei.webp", selected: true },
+                        { label: "KREIDEZEICHNUNG", img: "/images/process_images/C/C-Kreidezeichnung.webp", selected: false }
                     ],
                     chat: [
                         { role: 'bot', text: "Ein spannender Kontrast: Hochtechnologie gemalt mit klassischen Mitteln. Sollen wir den Pinselstrich so setzen, dass das Bild wie ein antikes Fundstück aus der Zukunft wirkt?" },
@@ -172,7 +172,7 @@ const translations: Record<Language, Translations> = {
                         { role: 'bot', text: "Verstanden. Soll die Stadt im Hintergrund technologisch detailliert sein oder eher abstrakt wirken, wie Pinselstriche, die Licht reflektieren?" },
                         { role: 'user', text: "Abstrakt, nur Licht und vertikale Strukturen." }
                     ],
-                    resultImage: "/images/process_images/C/C.png"
+                    resultImage: "/images/process_images/C/C.webp"
                 }
             },
             bullets: [

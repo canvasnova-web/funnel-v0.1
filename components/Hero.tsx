@@ -15,23 +15,23 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
     // Define image pairs
     const imagePairs = [
         {
-            before: '/images/hero-empty.jpg',
-            after: '/images/hero-art.jpg',
+            before: '/images/hero-empty.webp',
+            after: '/images/hero-art.webp',
             label: 'Living Room'
         },
         {
-            before: '/images/bedroom-empty.png',
-            after: '/images/bedroom.png',
+            before: '/images/bedroom-empty.webp',
+            after: '/images/bedroom.webp',
             label: 'Bedroom'
         },
         {
-            before: '/images/gym-empty.jpg',
-            after: '/images/gym-art.jpg',
+            before: '/images/gym-empty.webp',
+            after: '/images/gym-art.webp',
             label: 'Home Gym'
         },
         {
-            before: '/images/living-empty.jpg',
-            after: '/images/living-art.jpg',
+            before: '/images/living-empty.webp',
+            after: '/images/living-art.webp',
             label: 'Modern Living'
         }
     ];
