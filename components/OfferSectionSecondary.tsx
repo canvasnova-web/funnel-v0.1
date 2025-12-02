@@ -61,7 +61,7 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
                                     Ihr Unikat wartet.
                                 </h2>
                                 <p className="text-xl md:text-2xl text-zinc-600 font-light leading-relaxed">
-                                    Vom leeren Raum zum Gesprächsstoff in wenigen Klicks. Testen Sie es jetzt risikofrei.
+                                    Schluss mit langweiligen Wänden. Erschaffen Sie in 2 Minuten Kunst, um die man Sie beneiden wird. Kostenlos & Unverbindlich.
                                 </p>
                             </div>
 
