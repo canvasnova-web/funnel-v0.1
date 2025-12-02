@@ -147,7 +147,7 @@ const Card2 = ({ lang }: { lang: Lang }) => {
         },
         {
             name: lang === 'de' ? 'Surreal' : 'Surreal',
-            image: 'public/images/process_images/B/B.webp' // Surreal
+            image: 'images/process_images/B/B.webp' // Surreal
         }
     ];
 
