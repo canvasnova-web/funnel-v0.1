@@ -155,6 +155,8 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                                 src={imagePairs[currentPair].after}
                                 alt="Artistic Room"
                                 className="w-full h-full object-cover saturate-[1.1] contrast-[1.05] transition-opacity duration-500"
+                                width="1200"
+                                height="800"
                             />
                             <div className="absolute bottom-6 right-6 bg-black/60 backdrop-blur-md text-white px-4 py-1.5 rounded-full font-mono text-[10px] tracking-widest uppercase border border-white/10 shadow-sm">
                                 {t.after}
@@ -172,6 +174,8 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                                 alt="Empty Room"
                                 className="w-full h-full object-cover max-w-none grayscale brightness-[0.9] contrast-[1.05] transition-opacity duration-500"
                                 style={{ width: containerRef.current?.offsetWidth || '100vw' }}
+                                width="1200"
+                                height="800"
                             />
                             <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-md text-neutral-900 px-4 py-1.5 rounded-full font-mono text-[10px] tracking-widest uppercase border border-white/40 shadow-sm">
                                 {t.before}

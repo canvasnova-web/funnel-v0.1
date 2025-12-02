@@ -54,7 +54,13 @@ const App = () => {
         <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
           <div className="flex items-center">
             <a href="https://canvasnova.com">
-              <img src="/logo.webp" alt="canvasnova" className="h-8 w-auto" />
+              <img
+                src="/logo.webp"
+                alt="canvasnova"
+                className="h-8 w-auto"
+                width="604"
+                height="108"
+              />
             </a>
           </div>
 
