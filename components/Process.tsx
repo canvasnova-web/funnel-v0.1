@@ -21,13 +21,15 @@ const ScenarioRunner: React.FC<{
     t: any;
     isDesktop: boolean;
     onSwitch: (id: ScenarioId) => void;
-}> = ({ scenarioId, data, t, isDesktop, onSwitch }) => {
+    isVisible: boolean;
+}> = ({ scenarioId, data, t, isDesktop, onSwitch, isVisible }) => {
 
     // -- State --
     const [step, setStep] = useState<ProcessStep>('typing');
     const [typedText, setTypedText] = useState("");
     const [visibleMsgCount, setVisibleMsgCount] = useState(0);
     const [progress, setProgress] = useState(0); // Explicit progress state
+    const [hasStarted, setHasStarted] = useState(false);
     const chatContainerRef = useRef<HTMLDivElement>(null);
 
     // -- Constants --
@@ -38,8 +40,17 @@ const ScenarioRunner: React.FC<{
 
     // -- Sequence Logic --
 
+    // Start when visible
+    useEffect(() => {
+        if (isVisible && !hasStarted) {
+            setHasStarted(true);
+        }
+    }, [isVisible]);
+
     // 1. Typing Effect
     useEffect(() => {
+        if (!hasStarted) return;
+
         let currentText = "";
         const targetText = data.subject;
         let charIndex = 0;
@@ -57,7 +68,7 @@ const ScenarioRunner: React.FC<{
         }, TYPING_SPEED);
 
         return () => clearInterval(interval);
-    }, []); // Run once on mount
+    }, [hasStarted, data.subject]); // Run when started
 
     // 2. Analyzing (Tags & Mediums)
     useEffect(() => {
@@ -254,8 +265,8 @@ const ScenarioRunner: React.FC<{
                                         className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} w-full`}
                                     >
                                         <div className={`text-xs md:text-sm py-3 px-4 shadow-sm leading-relaxed max-w-[85%] relative rounded-2xl ${msg.role === 'bot'
-                                                ? 'bg-white border border-neutral-200 text-neutral-700 rounded-tr-xl rounded-br-xl rounded-bl-xl'
-                                                : 'bg-neutral-900 text-white rounded-tl-xl rounded-bl-xl rounded-br-xl'
+                                            ? 'bg-white border border-neutral-200 text-neutral-700 rounded-tr-xl rounded-br-xl rounded-bl-xl'
+                                            : 'bg-neutral-900 text-white rounded-tl-xl rounded-bl-xl rounded-br-xl'
                                             }`}>
                                             {msg.text}
                                         </div>
@@ -364,8 +375,8 @@ const ScenarioRunner: React.FC<{
                                         key={id}
                                         onClick={() => onSwitch(id)}
                                         className={`w-8 h-8 rounded flex items-center justify-center font-mono text-xs transition-colors ${scenarioId === id
-                                                ? 'bg-intl-orange text-white'
-                                                : 'bg-white/10 text-white hover:bg-white/20'
+                                            ? 'bg-intl-orange text-white'
+                                            : 'bg-black/60 text-white hover:bg-black/80 border border-white/20 backdrop-blur-md'
                                             }`}
                                     >
                                         {id}
@@ -387,6 +398,8 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
     const { t } = useLanguage();
     const [activeScenarioId, setActiveScenarioId] = useState<ScenarioId>('A');
     const [isDesktop, setIsDesktop] = useState(true);
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = useRef<HTMLElement>(null);
 
     // Handle Resize
     useEffect(() => {
@@ -396,8 +409,26 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.disconnect();
+                }
+            },
+            { threshold: 0.3 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <section id="process" className="py-12 md:py-48 bg-white relative">
+        <section ref={sectionRef} id="process" className="py-12 md:py-48 bg-white relative">
             <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
 
                 {/* Header */}
@@ -425,6 +456,7 @@ const Process: React.FC<{ onCtaClick?: () => void }> = ({ onCtaClick }) => {
                         t={t}
                         isDesktop={isDesktop}
                         onSwitch={setActiveScenarioId}
+                        isVisible={isVisible}
                     />
                 </div>
 
