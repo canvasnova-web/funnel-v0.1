@@ -113,7 +113,7 @@ export const CONTENT = {
                 { title: "Vision & Stil", desc: "Definieren Sie Ihren Geschmack. Wählen Sie eine Stilrichtung oder beschreiben Sie Ihren Wunsch. Keine Vorkenntnisse nötig." },
                 { title: "KI-Kreation", desc: "Unsere Engine generiert 3 einzigartige Kunstwerke in höchster Auflösung. Optimiert für Großformat-Druck." },
                 { title: "Kuratieren & Verfeinern", desc: "Wählen Sie Ihren Favoriten. Fordern Sie Anpassungen an oder generieren Sie neue Vorschläge. Sie haben die Kontrolle." },
-                { title: "Material & Rahmen", desc: "Wählen Sie Museumsglas-Acryl, Alu-Dibond oder Canvas. Ergänzen Sie einen handgefertigten Holzrahmen." },
+                { title: "Material & Rahmen", desc: "Wählen Sie Acryl-Glas, Alu-Dibond oder Canvas. Ergänzen Sie einen handgefertigten Holzrahmen." },
                 { title: "Expert Check & Produktion", desc: "Manuelle Qualitätsprüfung durch Print-Experten. Produziert in Deutschland mit 12-Farben-Archivtinte." },
                 { title: "Sichere Lieferung", desc: "Spezialisierte Kunst-Verpackung garantiert sicheren Transport. Sofort aufhängbereit." }
             ]
@@ -124,7 +124,7 @@ export const CONTENT = {
                 right: "Aktivierter Gutschein-Code"
             },
             headline: "Curator-Zugang freigeschaltet.",
-            subheadline: "Testen Sie unsere KI-Kunst-Engine heute kostenlos. Wir übernehmen die API-Gebühren für Sie.",
+            subheadline: "Testen Sie unsere KI-Kunst-Engine heute kostenlos.",
             dealStack: {
                 item1: {
                     label: "Creator-Gebühr",
@@ -282,7 +282,7 @@ export const CONTENT = {
                 { title: "Vision & Style", desc: "Define your taste. Choose a style direction or describe your wish. No prompting skills needed." },
                 { title: "AI Creation", desc: "Our engine generates 3 unique, high-resolution artworks. Optimized for large-scale print." },
                 { title: "Curate & Refine", desc: "Select your favorite. Request adjustments or reroll instantly. You are in control." },
-                { title: "Material & Frame", desc: "Choose Museum-Grade Acrylic, Aluminum Dibond, or Canvas. Add a hand-made wooden frame." },
+                { title: "Material & Frame", desc: "Choose Gallery-Grade Acrylic, Aluminum Dibond, or Canvas. Add a hand-made wooden frame." },
                 { title: "Expert Check & Production", desc: "Manual quality check by print experts. Produced in Germany using 12-color archival inks." },
                 { title: "Secure Delivery", desc: "Specialized art packaging ensures safe arrival. Ready to hang immediately." }
             ]
@@ -293,7 +293,7 @@ export const CONTENT = {
                 right: "Activated Partner Code"
             },
             headline: "Creator Access Unlocked.",
-            subheadline: "Test our AI art engine for free today. We cover the API fees for you.",
+            subheadline: "Test our AI art engine for free today.",
             dealStack: {
                 item1: {
                     label: "Creator Fee",

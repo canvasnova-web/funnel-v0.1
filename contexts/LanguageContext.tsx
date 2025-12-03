@@ -184,7 +184,7 @@ const translations: Record<Language, Translations> = {
         },
         gallery: {
             tag: "Kuratierte Ausstellung.", sub: "\"Eine neue Art der kuratierten Kreativität, für lebendige Sammlungen.\"", archive: "Vollständiges Archiv",
-            frames: { oak: "Massivholz Eiche / Museumsglas", acrylic: "Galerie-Acryl / Rahmenlos", alu: "Alu-Dibond / Matt versiegelt", pass: "Ahorn Weiß / Passepartout" }
+            frames: { oak: "Massivholz Eiche / Acrylglass", acrylic: "Galerie-Acryl / Rahmenlos", alu: "Alu-Dibond / Matt versiegelt", pass: "Ahorn Weiß / Passepartout" }
         },
         access: {
             tag: "KI Kreations-Credit", l1: "STUDIO", l2: "ZUGANG.", sub: "Schalte die generative Engine frei.\nSofort loslegen.",
@@ -285,13 +285,13 @@ const translations: Record<Language, Translations> = {
             bullets: [
                 { title: "Co-Creation, Not Prompting.", desc: "Our AI Curator guides you. Your answers create the perfect prompt." },
                 { title: "Ultra HD Resolution.", desc: "Razor-sharp for large formats. Pixel-perfect upscaling." },
-                { title: "Museum Quality.", desc: "Real physical production, not just pixels. Handmade in Germany." }
+                { title: "Gallery Quality.", desc: "Real physical production, not just pixels. Handmade in Germany." }
             ],
             cta: "Try It Now"
         },
         gallery: {
             tag: "Curated Exhibition.", sub: "\"A new kind of curated creativity, for living collections.\"", archive: "View Full Archive",
-            frames: { oak: "Solid Oak Frame / Museum Glass", acrylic: "Gallery Acrylic / Frameless", alu: "Alu-Dibond / Matte Seal", pass: "White Maple / Passepartout" }
+            frames: { oak: "Solid Oak Frame / Acrylic Glass", acrylic: "Gallery Acrylic / Frameless", alu: "Alu-Dibond / Matte Seal", pass: "White Maple / Passepartout" }
         },
         access: {
             tag: "AI Creation Credit", l1: "STUDIO", l2: "ACCESS.", sub: "Unlock the generative engine.\nStart creating immediately.",
