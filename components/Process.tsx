@@ -280,7 +280,7 @@ const ScenarioRunner: React.FC<{
                     <div className="mt-auto pt-4 pb-20 md:pb-4 flex-shrink-0">
                         <p className="text-[10px] text-neutral-400 flex items-start md:items-center gap-2 font-mono leading-tight">
                             <Info size={12} className="flex-shrink-0 mt-0.5 md:mt-0" />
-                            Hinweis: Dies ist eine vereinfachte Demo. Der echte AI-Kurator analysiert deine Antworten in 12+ Dimensionen.
+                            Hinweis: Dies ist eine vereinfachte Demo. Der echte AI-Kurator analysiert Ihre Antworten in 12+ Dimensionen.
                         </p>
                     </div>
 

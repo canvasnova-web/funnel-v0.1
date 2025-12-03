@@ -282,7 +282,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                         style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100vw' }} // Hack to keep image static while container clips
                     />
                     <div className="absolute bottom-8 left-8 bg-white/90 text-black text-xs font-bold px-3 py-1 rounded">
-                        {lang === 'de' ? 'Dein Entwurf' : 'Your Design'}
+                        {lang === 'de' ? 'Ihr Entwurf' : 'Your Design'}
                     </div>
                 </div>
 
