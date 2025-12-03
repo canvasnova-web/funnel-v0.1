@@ -111,7 +111,7 @@ const translations: Record<Language, Translations> = {
             step1: "BASIS-PARAMETER",
             step2: "MEDIUM WÄHLEN",
             processing: "Synthetisiere High-Res Render...",
-            revealLabel: "DEIN MEISTERWERK",
+            revealLabel: "IHR MEISTERWERK",
             replayLabel: "ANDEREN STIL TESTEN",
             scenarios: {
                 A: {
