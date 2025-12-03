@@ -266,7 +266,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                     />
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/canvas-orange.png')] opacity-40 mix-blend-overlay" />
                     <div className="absolute bottom-8 right-8 bg-black/80 text-white text-xs font-bold px-3 py-1 rounded">
-                        {lang === 'de' ? 'Acrylglas im Floater Frame' : 'Acrylic glass in a Floater Frame'}
+                        {lang === 'de' ? 'Acrylglas im Rahmen: Basel' : 'Acrylic glass in a "Basel" Frame'}
                     </div>
                 </div>
 
