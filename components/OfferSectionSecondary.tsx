@@ -135,7 +135,11 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
                                     <Check className="w-3 h-3 text-white" strokeWidth={2.5} />
                                 </div>
                                 <div>
-                                    <h4 className="font-medium text-zinc-900 mb-1">5€ Startguthaben</h4>
+                                    <h4 className="font-medium text-zinc-900 mb-1">
+                                        {currentVoucher.type === 'percentage'
+                                            ? `${currentVoucher.amount}% Rabatt`
+                                            : `${currentVoucher.amount.toFixed(2).replace('.', ',')} € Startguthaben`}
+                                    </h4>
                                     <p className="text-sm text-zinc-500">Sofort anrechenbar bei Bestellung</p>
                                 </div>
                             </div>

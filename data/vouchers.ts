@@ -41,18 +41,18 @@ export const VOUCHERS: Record<string, VoucherConfig> = {
         displayName: "Launch Special",
         title: "Launch Special Pass",
         type: "percentage",
-        amount: 100,
+        amount: 0,
         validityDays: 30
     },
 
     // Weihnachtskampagne - 25% Rabatt
     christmas: {
-        code: "XMAS-2025",
+        code: "christmas",
         promoId: "christmas",
         displayName: "Christmas Special",
         title: "Christmas Special Pass",
         type: "percentage",
-        amount: 25,
+        amount: 10,
         validUntil: "2025-12-31T23:59:59"
     },
 

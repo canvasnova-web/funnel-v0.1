@@ -84,15 +84,21 @@ const OfferSection = ({ id, lang }: { id: string, lang: Lang }) => {
                                 </div>
                             </div>
 
-                            {/* Item 2: Starting Credit */}
+                            {/* Item 2: Starting Credit / Discount */}
                             <div className="flex items-start gap-3">
                                 <div className="w-5 h-5 rounded-full bg-zinc-900 flex items-center justify-center flex-shrink-0 mt-0.5">
                                     <Check className="w-3 h-3 text-white" strokeWidth={3} />
                                 </div>
                                 <div className="flex-1">
                                     <div className="flex items-baseline gap-2">
-                                        <span className="text-sm text-zinc-500 font-medium">{t.dealStack.item2.label}:</span>
-                                        <span className="text-base font-semibold text-zinc-900">{t.dealStack.item2.value}</span>
+                                        <span className="text-sm text-zinc-500 font-medium">
+                                            {currentVoucher.type === 'percentage' ? 'Rabatt' : t.dealStack.item2.label}:
+                                        </span>
+                                        <span className="text-base font-semibold text-zinc-900">
+                                            {currentVoucher.type === 'percentage'
+                                                ? `${currentVoucher.amount}%`
+                                                : `${currentVoucher.amount.toFixed(2).replace('.', ',')} €`}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
