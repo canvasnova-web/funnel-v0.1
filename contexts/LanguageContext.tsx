@@ -91,8 +91,8 @@ const translations: Record<Language, Translations> = {
         },
         hero: {
             l1: "SCHLUSS MIT", l2: "DEKO VON DER STANGE.",
-            sub: "Erschaffe Wandkunst, die deine Geschichte erzählt. AI-generiert, kuratiert von dir, handgerahmt in Deutschland.",
-            cta: "Jetzt personalisieren", price: "Ab €120 – Dein Unikat", res: "Auflösung 8K+"
+            sub: "Erschaffe Wandkunst, die Ihre Geschichte erzählt. AI-generiert, kuratiert von dir, handgerahmt in Deutschland.",
+            cta: "Jetzt personalisieren", price: "Ab €120 – Ihr Unikat", res: "Auflösung 8K+"
         },
         lab: {
             tag: "Systemarchitektur v2.0", l1: "PRÄZISION", l2: "INGENIEURSKUNST.",
@@ -107,7 +107,7 @@ const translations: Record<Language, Translations> = {
             tag: "Wie es funktioniert",
             l1: "VOM GEDANKEN",
             l2: "ZUM MEISTERWERK.",
-            step0: "DEINE EINGABE",
+            step0: "IHRE EINGABE",
             step1: "BASIS-PARAMETER",
             step2: "MEDIUM WÄHLEN",
             processing: "Synthetisiere High-Res Render...",
