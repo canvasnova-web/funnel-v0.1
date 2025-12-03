@@ -8,6 +8,8 @@ interface CookiePreferences {
     analytics: boolean;
 }
 
+import { initFacebookPixel } from '../utils/analytics';
+
 // Helper function to initialize analytics based on granular consent
 export const initAnalytics = () => {
     const consent = localStorage.getItem('cookie-consent') as ConsentType;
@@ -15,26 +17,20 @@ export const initAnalytics = () => {
 
     if (consent === 'all') {
         // Initialize all analytics
-        // Example: Google Analytics
-        // window.gtag('config', 'GA_MEASUREMENT_ID');
-
-        // Example: Facebook Pixel
-        // window.fbq('init', 'YOUR_PIXEL_ID');
-
+        initFacebookPixel();
         console.log('All analytics initialized with user consent');
     } else if (consent === 'custom' && preferences) {
         const prefs: CookiePreferences = JSON.parse(preferences);
 
         // Initialize analytics based on granular preferences
         if (prefs.analytics) {
-            // Google Analytics
-            // window.gtag('config', 'GA_MEASUREMENT_ID');
+            // Google Analytics would go here
             console.log('Analytics cookies enabled');
         }
 
         if (prefs.marketing) {
-            // Facebook Pixel, Google Ads, etc.
-            // window.fbq('init', 'YOUR_PIXEL_ID');
+            // Facebook Pixel
+            initFacebookPixel();
             console.log('Marketing cookies enabled');
         }
     }

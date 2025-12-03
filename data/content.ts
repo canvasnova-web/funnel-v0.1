@@ -29,7 +29,7 @@ export const CONTENT = {
                 price: "Preismodell"
             },
             col1: { title: "Massenware", sub: "Poster & Drucke", val1: "Endlose Kopien", val2: "Dünnes Poster-Papier", val3: "Von der Stange", val4: "Wegwerf-Deko", price: "~ €19-60", impact: "Billig" },
-            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Galerie-Qualität (Fineart-Acryl/Papier/Alu/Canvas)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €39", impact: "Fair", cta: "Kuratieren" },
+            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Galerie-Standard (Fineart-Acryl/Papier/Alu/Canvas)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €39", impact: "Fair", cta: "Kuratieren" },
             col3: { title: "Galerie", sub: "Traditionell", val1: "Original / Abzug", val2: "Leinwand / Öl / Acryl", val3: "Exklusiver Zugang nötig", val4: "Kapitalanlage", price: "€3.000+", impact: "Überteuert" }
         },
         scanner: {

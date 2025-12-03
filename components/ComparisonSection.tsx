@@ -241,9 +241,9 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
 
                                             {/* Star Ratings Comparison */}
                                             <div className="space-y-1.5">
-                                                {/* Poster */}
+                                                {/* Poster-Shop */}
                                                 <div className="flex items-center justify-between">
-                                                    <span className="text-[11px] text-neutral-500">Poster</span>
+                                                    <span className="text-[11px] text-neutral-500">Poster-Shop</span>
                                                     {renderStars(f.ratings.mass)}
                                                 </div>
                                                 {/* canvasnova */}
@@ -278,7 +278,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                                                 {/* Industrie-Poster */}
                                                 <div className="px-4 py-2">
                                                     <div className="flex justify-between items-start mb-1">
-                                                        <span className="text-xs font-bold text-neutral-500 uppercase tracking-wide">Poster</span>
+                                                        <span className="text-xs font-bold text-neutral-500 uppercase tracking-wide">Poster-Shop</span>
                                                     </div>
                                                     <p className="text-sm text-neutral-600 leading-relaxed">{f.mass}</p>
                                                 </div>
