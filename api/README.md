@@ -70,7 +70,7 @@ const response = await getVoucherFromBackend('vip');
 | Promo-Code | Code | Type | Discount Value |
 |------------|------|------|----------------|
 | default | ART-LAUNCH | percentage | 100 |
-| christmas | christmas10 | percentage | 10 |
+| christmas | christmas | percentage | 10 |
 | newyear | NEWYEAR25 | fixed | 25 |
 | instagram | INSTA15 | percentage | 15 |
 | facebook | FB5 | fixed | 5 |

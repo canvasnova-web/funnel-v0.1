@@ -29,7 +29,7 @@ export const getVoucherFromBackend = async (promoParam: string): Promise<Voucher
             discountValue: 100
         },
         christmas: {
-            code: 'christmas10',
+            code: 'christmas',
             type: 'percentage',
             discountValue: 10
         },
