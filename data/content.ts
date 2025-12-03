@@ -28,8 +28,8 @@ export const CONTENT = {
                 acquisition: "Erwerb",
                 price: "Preismodell"
             },
-            col1: { title: "Massenware", sub: "Poster & Drucke", val1: "Endlose Kopien", val2: "Dünnes Poster-Papier", val3: "Von der Stange", val4: "Wegwerf-Deko", price: "~ €40", impact: "Billig" },
-            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Galerie-Qualität (Fineart-Acryl/Papier/Alu/Canvas)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €140", impact: "Fair", cta: "Kuratieren" },
+            col1: { title: "Massenware", sub: "Poster & Drucke", val1: "Endlose Kopien", val2: "Dünnes Poster-Papier", val3: "Von der Stange", val4: "Wegwerf-Deko", price: "~ €19-60", impact: "Billig" },
+            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Empfehlung", val1: "Echtes Unikat (1 von 1)", val2: "Galerie-Qualität (Fineart-Acryl/Papier/Alu/Canvas)", val3: "Von Ihnen erschaffen", val4: "Design-Statement", price: "ab €39", impact: "Fair", cta: "Kuratieren" },
             col3: { title: "Galerie", sub: "Traditionell", val1: "Original / Abzug", val2: "Leinwand / Öl / Acryl", val3: "Exklusiver Zugang nötig", val4: "Kapitalanlage", price: "€3.000+", impact: "Überteuert" }
         },
         scanner: {
@@ -198,7 +198,7 @@ export const CONTENT = {
                 price: "Price Model"
             },
             col1: { title: "Mass Market", sub: "Posters & Prints", val1: "1 of 1,000,000", val2: "Poster Paper", val3: "Instant", val4: "Depreciating", price: "€50", impact: "Low Impact" },
-            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Recommended", val1: "1 of 1 (Original)", val2: "Gallerie-Niveau", val3: "Curated (5 Days)", val4: "Accessible Luxury", price: "€140", impact: "Avg. Price / Unique Piece", cta: "Start Curating" },
+            col2: { title: "canvasnova", sub: "Smart Luxury", badge: "Recommended", val1: "1 of 1 (Original)", val2: "Gallerie-Niveau", val3: "Curated (5 Days)", val4: "Accessible Luxury", price: "€39", impact: "Avg. Price / Unique Piece", cta: "Start Curating" },
             col3: { title: "Traditional Gallery", sub: "Traditional", val1: "1 of 1 (Original)", val2: "Canvas / Oil", val3: "Negotiated (3 Mo+)", val4: "Investment Only", price: "€3,000+", impact: "High Barrier" }
         },
         scanner: {

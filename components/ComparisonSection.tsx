@@ -318,7 +318,7 @@ const ComparisonSection = ({ id, lang, onCtaClick }: ComparisonSectionProps) => 
                         <div className="absolute inset-0 bg-gradient-to-tr from-orange-500/10 to-transparent opacity-50" />
 
                         <div className="relative z-10">
-                            <h3 className="text-3xl font-semibold text-white mb-2">ab €140</h3>
+                            <h3 className="text-3xl font-semibold text-white mb-2">ab €39</h3>
                             <p className="text-xs text-white/60 uppercase tracking-[0.25em] mb-8">
                                 Galerie-Qualität ohne Galeriepreis
                             </p>

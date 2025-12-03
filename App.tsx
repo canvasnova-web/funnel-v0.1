@@ -9,6 +9,7 @@ import ComparisonSection from './components/ComparisonSection';
 import Process from './components/Process';
 import CuratorQuiz from './components/CuratorQuiz';
 import Timeline from './components/Timeline';
+import MarqueeTestimonials from './components/MarqueeTestimonials';
 import OfferSection from './components/OfferSection';
 import OfferSectionSecondary from './components/OfferSectionSecondary';
 import FAQ from './components/FAQ';
@@ -66,6 +67,7 @@ const App = () => {
       <OfferSection id="ticket" lang={lang} />
       <ComparisonSection id="comparison" lang={lang} onCtaClick={handleCtaClick} />
       <Timeline lang={lang} />
+      <MarqueeTestimonials />
       <CuratorQuiz id="quiz" lang={lang} onCtaClick={handleCtaClick} />
       <OfferSectionSecondary lang={lang} />
       <FAQ lang={lang} />
