@@ -18,7 +18,7 @@ interface TestimonialItem {
 const items: TestimonialItem[] = [
     {
         type: 'quote',
-        name: "Korbinian H.",
+        name: "Tobias B.",
         content: "Endlich passt das Bild zum Sofa. Mit dem Kurator hatte ich es in 3 Minuten.",
         specs: "Canvas • 120x80cm • Schattenfuge Eiche",
         icon: Frame,
@@ -72,7 +72,7 @@ const items: TestimonialItem[] = [
     },
     {
         type: 'quote',
-        name: "Stella, München",
+        name: "Benedikt H., München",
         content: "Ich habe drei Anläufe gebraucht, bis es perfekt war. Aber dass ich unbegrenzt testen konnte, war der Gamechanger.",
         specs: "Acrylglas • 120x80cm • Schattenfuge Weiß",
         icon: Layers,

@@ -149,7 +149,7 @@ export const CONTENT = {
             copyArea: {
                 copiedToast: "Code kopiert!"
             },
-            cta: "Account erstellen & loslegen →",
+            cta: "Loslegen →",
             ctaLoading: "Wird aktiviert..."
         },
         secondary_offer: {
@@ -318,7 +318,7 @@ export const CONTENT = {
             copyArea: {
                 copiedToast: "Code copied!"
             },
-            cta: "Create Account & Start →",
+            cta: "Start →",
             ctaLoading: "Activating..."
         },
         secondary_offer: {

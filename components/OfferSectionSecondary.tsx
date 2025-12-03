@@ -91,7 +91,7 @@ const OfferSectionSecondary = ({ lang }: { lang: Lang }) => {
                                             animate={{ opacity: 1 }}
                                             exit={{ opacity: 0 }}
                                         >
-                                            Account erstellen & loslegen →
+                                            Jetzt loslegen →
                                         </motion.span>
                                     ) : (
                                         <motion.span
