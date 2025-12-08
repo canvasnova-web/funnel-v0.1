@@ -8,38 +8,25 @@
   <meta name="description"
     content="Gestalte einzigartige Wandbilder mit KI. Dein persönliches Kunstwerk in Galerie-Qualität: Acrylglas, Alu-Dibond oder Fine Art. Jetzt in 2 Minuten kostenlos testen." />
   <title>canvasnova | Individuelle KI-Wandbilder & Premium AI Art gestalten</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Preload critical hero images for LCP -->
+  <link rel="preload" as="image" href="/images/hero-pool-art-mobile.webp" type="image/webp"
+    media="(max-width: 768px)" />
+  <link rel="preload" as="image" href="/images/hero-pool-art.webp" type="image/webp" media="(min-width: 769px)" />
+
+  <!-- Fonts - async loading with media trick -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@200;300;400;500;600;700&display=swap">
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@200;300;400;500;600;700&display=swap"
-    rel="stylesheet">
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            serif: ['"Syne"', 'sans-serif'],
-            sans: ['"Inter"', 'sans-serif'],
-          },
-          colors: {
-            'gallery-black': '#121212',
-            'gallery-white': '#FAFAFA',
-            'int-orange': '#FF4F00',
-            'int-orange-hover': '#CC3F00',
-            'stone-gray': '#F2F2F2',
-          },
-          boxShadow: {
-            'ambient': '0 20px 40px -10px rgba(0, 0, 0, 0.05), 0 0 20px -5px rgba(0, 0, 0, 0.02)',
-            'sharp': '8px 8px 0px 0px rgba(0,0,0,1)',
-          },
-          backgroundImage: {
-            'grain': "url('https://grainy-gradients.vercel.app/noise.svg')",
-          }
-        }
-      }
-    }
-  </script>
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@200;300;400;500;600;700&display=swap">
+  </noscript>
+
   <link rel="stylesheet" href="/styles/tokens.css">
   <link rel="stylesheet" href="/styles/components.css">
 

@@ -167,6 +167,8 @@ const Card2 = ({ lang }: { lang: Lang }) => {
                         key={index}
                         src={styles[index].image}
                         alt={styles[index].name}
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 66vw"
                         initial={{ opacity: 0, scale: 1.1 }}
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0 }}
@@ -262,6 +264,8 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                     <img
                         src="images/bento_images/01-Floater Frame.webp"
                         alt="Canvas"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 100vw"
                         className="w-full h-full object-cover filter brightness-90 contrast-125"
                     />
                     <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/canvas-orange.png')] opacity-40 mix-blend-overlay" />
@@ -278,8 +282,10 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                     <img
                         src="images/process_images/A/A.webp"
                         alt="Digital"
+                        loading="lazy"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                         className="w-full h-full object-cover max-w-none"
-                        style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100vw' }} // Hack to keep image static while container clips
+                        style={{ width: containerRef.current ? containerRef.current.offsetWidth : '100vw' }}
                     />
                     <div className="absolute bottom-8 left-8 bg-white/90 text-black text-xs font-bold px-3 py-1 rounded">
                         {lang === 'de' ? 'Ihr Entwurf' : 'Your Design'}

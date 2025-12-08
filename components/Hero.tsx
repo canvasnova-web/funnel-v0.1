@@ -12,31 +12,41 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
     // Image pair state
     const [currentPair, setCurrentPair] = useState(0);
 
-    // Define image pairs
+    // Define image pairs with mobile versions
     const imagePairs = [
         {
             before: '/images/hero-pool-empty.webp',
+            beforeMobile: '/images/hero-pool-empty-mobile.webp',
             after: '/images/hero-pool-art.webp',
+            afterMobile: '/images/hero-pool-art-mobile.webp',
             label: 'Pool'
         },
         {
             before: '/images/hero-bedroom-empty.webp',
+            beforeMobile: '/images/hero-bedroom-empty-mobile.webp',
             after: '/images/hero-bedroom-art.webp',
+            afterMobile: '/images/hero-bedroom-art-mobile.webp',
             label: 'Bedroom'
         },
         {
             before: '/images/hero-gym-empty.webp',
+            beforeMobile: '/images/hero-gym-empty-mobile.webp',
             after: '/images/hero-gym-art.webp',
+            afterMobile: '/images/hero-gym-art-mobile.webp',
             label: 'Home Gym'
         },
         {
             before: '/images/hero-living-empty.webp',
+            beforeMobile: '/images/hero-living-empty-mobile.webp',
             after: '/images/hero-living-art.webp',
+            afterMobile: '/images/hero-living-art-mobile.webp',
             label: 'Living Room'
         },
         {
             before: '/images/hero-office-empty.webp',
+            beforeMobile: '/images/hero-office-empty-mobile.webp',
             after: '/images/hero-office-art.webp',
+            afterMobile: '/images/hero-office-art-mobile.webp',
             label: 'Office'
         }
     ];
@@ -153,7 +163,10 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                             <img
                                 key={`after-${currentPair}`}
                                 src={imagePairs[currentPair].after}
+                                srcSet={`${imagePairs[currentPair].afterMobile} 768w, ${imagePairs[currentPair].after} 1200w`}
                                 alt="Artistic Room"
+                                fetchPriority="high"
+                                sizes="(max-width: 768px) 100vw, 1200px"
                                 className="w-full h-full object-cover saturate-[1.1] contrast-[1.05] transition-opacity duration-500"
                             />
                             <div className="absolute bottom-6 right-6 bg-black/60 backdrop-blur-md text-white px-4 py-1.5 rounded-full font-mono text-[10px] tracking-widest uppercase border border-white/10 shadow-sm">
@@ -169,7 +182,10 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                             <img
                                 key={`before-${currentPair}`}
                                 src={imagePairs[currentPair].before}
+                                srcSet={`${imagePairs[currentPair].beforeMobile} 768w, ${imagePairs[currentPair].before} 1200w`}
                                 alt="Empty Room"
+                                fetchPriority="high"
+                                sizes="(max-width: 768px) 100vw, 1200px"
                                 className="w-full h-full object-cover max-w-none grayscale brightness-[0.9] contrast-[1.05] transition-opacity duration-500"
                                 style={{ width: containerRef.current?.offsetWidth || '100vw' }}
                             />

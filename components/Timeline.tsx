@@ -76,6 +76,8 @@ const TimelineStep: React.FC<TimelineStepProps> = ({ step, index, isLast }) => {
                                 <img
                                     src={step.image}
                                     alt={step.title}
+                                    loading="lazy"
+                                    sizes="(max-width: 768px) 100vw, 400px"
                                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                                 />
                                 <div className="absolute inset-0 ring-1 ring-inset ring-black/5 rounded-2xl" />

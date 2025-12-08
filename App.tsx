@@ -71,8 +71,6 @@ const App = () => {
       <CuratorQuiz id="quiz" lang={lang} onCtaClick={handleCtaClick} />
       <OfferSectionSecondary lang={lang} />
       <FAQ lang={lang} />
-
-      {/* Cookie Consent Banner */}
       <CookieConsent />
 
       {/* Footer */}

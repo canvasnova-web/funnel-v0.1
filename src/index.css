@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+/* Custom theme for canvasnova */
+@theme {
+  /* Fonts - serif for headlines (Syne), sans for body (Inter) */
+  --font-family-serif: "Syne", ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Colors */
+  --color-gallery-black: #121212;
+  --color-gallery-white: #FAFAFA;
+  --color-int-orange: #FF4F00;
+  --color-int-orange-hover: #CC3F00;
+  --color-stone-gray: #F2F2F2;
+
+  /* Shadows */
+  --shadow-ambient: 0 20px 40px -10px rgba(0, 0, 0, 0.05), 0 0 20px -5px rgba(0, 0, 0, 0.02);
+  --shadow-sharp: 8px 8px 0px 0px rgba(0, 0, 0, 1);
+}
+
+/* Ensure font-serif uses Syne */
+.font-serif {
+  font-family: "Syne", ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/* Ensure font-sans uses Inter */
+.font-sans {
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif !important;
+}
+
+/* Custom utility for masked linear fade */
+.mask-linear-fade {
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.mask-image-gradient {
+  mask-image: linear-gradient(to bottom, black, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent);
+}

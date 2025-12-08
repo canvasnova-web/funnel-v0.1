@@ -235,7 +235,7 @@ const ScenarioRunner: React.FC<{
                                                     animate={{ scale: m.selected ? 1.05 : 0.9, opacity: 1 }}
                                                     transition={{ delay: 0.5 + (i * 0.1) }}
                                                 >
-                                                    <img src={m.img} alt={m.label} className="w-full h-full object-cover" />
+                                                    <img src={m.img} alt={m.label} loading="lazy" sizes="80px" className="w-full h-full object-cover" />
                                                     {m.selected && (
                                                         <div className="absolute inset-0 bg-black/10 flex items-center justify-center">
                                                             <CheckCircle2 className="text-white drop-shadow-md" size={20} />
