@@ -263,6 +263,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                 <div className="absolute inset-0">
                     <img
                         src="images/bento_images/01-Floater Frame.webp"
+                        srcSet="images/bento_images/01-Floater Frame-mobile.webp 768w, images/bento_images/01-Floater Frame.webp 1200w"
                         alt="Canvas"
                         loading="lazy"
                         sizes="(max-width: 768px) 100vw, 100vw"
@@ -281,6 +282,7 @@ const Card3 = ({ lang }: { lang: Lang }) => {
                 >
                     <img
                         src="images/process_images/A/A.webp"
+                        srcSet="images/process_images/A/A-mobile.webp 768w, images/process_images/A/A.webp 1200w"
                         alt="Digital"
                         loading="lazy"
                         sizes="(max-width: 768px) 100vw, 50vw"

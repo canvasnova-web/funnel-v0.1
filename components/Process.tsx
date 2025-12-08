@@ -174,6 +174,7 @@ const ScenarioRunner: React.FC<{
                         <div className="relative">
                             <input
                                 type="text"
+                                aria-label={t.process.step0}
                                 value={typedText}
                                 readOnly
                                 className="w-full bg-white border-b-2 border-neutral-200 py-2 text-lg md:text-xl font-serif text-ink focus:outline-none"

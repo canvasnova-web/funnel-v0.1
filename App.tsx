@@ -76,8 +76,8 @@ const App = () => {
       {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 text-center border-t border-white/10">
         <div className="max-w-7xl mx-auto flex flex-col items-center gap-6">
-          <h4 className="font-serif text-2xl">canvasnova</h4>
-          <p className="text-gray-500 text-sm max-w-sm">
+          <div className="font-serif text-2xl">canvasnova</div>
+          <p className="text-gray-400 text-sm max-w-sm">
             {CONTENT[lang].footer.desc}
           </p>
           <div className="flex gap-4">
@@ -92,13 +92,13 @@ const App = () => {
                 href={social.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-xs text-gray-400 hover:text-white uppercase tracking-widest transition-colors"
+                className="text-xs text-gray-400 hover:text-white uppercase tracking-widest transition-colors p-3"
               >
                 {social.name}
               </a>
             ))}
           </div>
-          <p className="text-gray-700 text-xs mt-8">{CONTENT[lang].footer.rights}</p>
+          <p className="text-zinc-400 text-xs mt-8">{CONTENT[lang].footer.rights}</p>
         </div>
       </footer>
     </main>

@@ -12,7 +12,9 @@ const heroImages = [
     'hero-living-art.webp',
     'hero-living-empty.webp',
     'hero-office-art.webp',
-    'hero-office-empty.webp'
+    'hero-office-empty.webp',
+    'process_images/A/A.webp',
+    'bento_images/01-Floater Frame.webp'
 ];
 
 const imagesDir = './public/images';

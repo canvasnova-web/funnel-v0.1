@@ -175,9 +175,10 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                         </div>
 
                         {/* Before Image (Left Side) */}
+                        {/* Before Image (Left Side) */}
                         <div
-                            className="absolute inset-0 border-r border-white/60 overflow-hidden bg-neutral-100 transition-opacity duration-500"
-                            style={{ width: `${sliderPosition}%` }}
+                            className="absolute inset-0 border-r border-white/60 bg-neutral-100 transition-opacity duration-500"
+                            style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
                         >
                             <img
                                 key={`before-${currentPair}`}
@@ -186,8 +187,7 @@ const Hero = ({ onAnalyzeClick, lang }: { onAnalyzeClick: () => void, lang: Lang
                                 alt="Empty Room"
                                 fetchPriority="high"
                                 sizes="(max-width: 768px) 100vw, 1200px"
-                                className="w-full h-full object-cover max-w-none grayscale brightness-[0.9] contrast-[1.05] transition-opacity duration-500"
-                                style={{ width: containerRef.current?.offsetWidth || '100vw' }}
+                                className="w-full h-full object-cover grayscale brightness-[0.9] contrast-[1.05] transition-opacity duration-500"
                             />
                             <div className="absolute bottom-6 left-6 bg-white/80 backdrop-blur-md text-neutral-900 px-4 py-1.5 rounded-full font-mono text-[10px] tracking-widest uppercase border border-white/40 shadow-sm">
                                 {t.before}
